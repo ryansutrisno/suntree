@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santri.ID — Interactive Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #0A7C6B;
+    --teal-dark: #065A4D;
+    --teal-light: #E6F4F1;
+    --teal-mid: #B2D8D2;
+    --gold: #C8973A;
+    --gold-light: #FBF3E3;
+    --cream: #FAF8F4;
+    --dark: #1A1A1A;
+    --mid: #4A4A4A;
+    --light: #8A8A8A;
+    --border: #E8E4DC;
+    --white: #FFFFFF;
+    --red: #D94F3B;
+    --green: #2D8A5F;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #F0EDE8;
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ─── NAVIGATION BAR ─── */
+  .nav-bar {
+    background: #1A1A1A;
+    padding: 12px 24px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+
+  .nav-label {
+    color: #888;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-right: 8px;
+  }
+
+  .nav-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: transparent;
+    color: #AAA;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  .nav-btn:hover { background: #333; color: #FFF; }
+  .nav-btn.active { background: var(--teal); color: #FFF; border-color: var(--teal); }
+
+  .nav-divider { width: 1px; height: 20px; background: #333; margin: 0 8px; }
+
+  .nav-info {
+    margin-left: auto;
+    color: #555;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+
+  /* ─── SCREEN WRAPPER ─── */
+  .screen {
+    display: none;
+    animation: fadeIn 0.35s ease;
+  }
+
+  .screen.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SCREEN: HOMEPAGE ─── */
+  #screen-home {
+    background: var(--cream);
+    min-height: 100vh;
+  }
+
+  /* Platform Top Nav */
+  .platform-nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    height: 64px;
+    gap: 32px;
+    position: sticky;
+    top: 48px;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--teal-dark);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--gold); }
+
+  .platform-nav-links {
+    display: flex;
+    gap: 0;
+    margin-left: 8px;
+  }
+
+  .pnl {
+    padding: 0 16px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    font-size: 13.5px;
+    color: var(--mid);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .pnl:hover { color: var(--teal); }
+  .pnl.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+  .platform-nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-ghost {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--mid);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+
+  .btn-primary {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
+    background: var(--teal);
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--white);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
+
+  /* Hero Section */
+  .hero {
+    padding: 64px 48px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-light);
+    border: 1px solid #E8D5A8;
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .hero-badge::before {
+    content: '✦';
+    font-size: 10px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    line-height: 1.15;
+    font-weight: 900;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: var(--mid);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .btn-hero {
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: none;
+    background: var(--teal);
+    color: var(--white);
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.2px;
+  }
+
+  .btn-hero:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(10,124,107,0.3); }
+
+  .btn-hero-outline {
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    background: transparent;
+    color: var(--mid);
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-hero-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-item { display: flex; flex-direction: column; gap: 2px; }
+  .stat-num { font-size: 22px; font-weight: 800; color: var(--dark); }
+  .stat-label { font-size: 12px; color: var(--light); font-weight: 500; }
+
+  /* Hero Visual: Program Cards Preview */
+  .hero-visual {
+    position: relative;
+  }
+
+  .hero-card-stack {
+    position: relative;
+    height: 400px;
+  }
+
+  .hero-card {
+    position: absolute;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .hero-card:nth-child(1) { top: 0; right: 0; width: 280px; transform: rotate(3deg); opacity: 0.6; }
+  .hero-card:nth-child(2) { top: 40px; right: 20px; width: 300px; transform: rotate(-1deg); z-index: 2; }
+  .hero-card:nth-child(3) { top: 20px; right: 60px; width: 260px; transform: rotate(-4deg); opacity: 0.5; z-index: 1; }
+
+  .hcard-header {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .ustad-avatar-sm {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--teal-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    border: 2px solid var(--teal-mid);
+  }
+
+  .hcard-title { font-size: 13px; font-weight: 700; color: var(--dark); line-height: 1.3; }
+  .hcard-ustad { font-size: 11px; color: var(--light); margin-top: 2px; }
+
+  .hcard-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .hcard-tag {
+    padding: 3px 8px;
+    background: var(--teal-light);
+    color: var(--teal);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .hcard-progress {
+    margin-bottom: 10px;
+  }
+
+  .hcard-slots {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+
+  .slots-label { color: var(--light); }
+  .slots-count { color: var(--red); font-weight: 700; }
+
+  .progress-bar {
+    height: 6px;
+    background: #EEE;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--teal-dark));
+    border-radius: 3px;
+  }
+
+  .hcard-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .price-amount { font-size: 15px; font-weight: 800; color: var(--teal); }
+  .price-per { font-size: 11px; color: var(--light); }
+
+  /* Search & Filter Bar */
+  .search-section {
+    padding: 0 48px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .search-bar {
+    display: flex;
+    gap: 10px;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-family: inherit;
+    padding: 8px 12px;
+    color: var(--dark);
+    background: transparent;
+  }
+
+  .search-bar input::placeholder { color: var(--light); }
+
+  .search-divider { width: 1px; background: var(--border); margin: 4px 0; }
+
+  .filter-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    color: var(--mid);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .filter-pill.active { color: var(--teal); }
+
+  .search-btn {
+    padding: 8px 24px;
+    background: var(--teal);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  /* Program Listing */
+  .listing-section {
+    padding: 0 48px 64px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .section-sub { font-size: 13px; color: var(--light); margin-top: 2px; }
+
+  .program-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .program-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .program-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    border-color: var(--teal-mid);
+  }
+
+  .card-top {
+    padding: 20px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .level-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .level-pemula { background: #E8F5E9; color: #2D8A5F; }
+  .level-menengah { background: #FFF3E0; color: #E67E22; }
+  .level-lanjutan { background: #EDE7F6; color: #7B1FA2; }
+
+  .wishlist-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+
+  .wishlist-btn:hover { border-color: var(--red); transform: scale(1.1); }
+  .wishlist-btn.active { border-color: var(--red); background: #FFF0EE; }
+
+  .card-body {
+    padding: 16px 20px;
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .card-ustad-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .ustad-ava {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--teal-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    border: 1.5px solid var(--teal-mid);
+  }
+
+  .ustad-name { font-size: 12.5px; color: var(--mid); font-weight: 600; }
+  .ustad-verified { font-size: 10px; margin-left: 2px; }
+
+  .card-meta-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--light);
+  }
+
+  .meta-icon { font-size: 12px; }
+
+  .card-slot-bar { margin-bottom: 8px; }
+
+  .slot-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11.5px;
+    margin-bottom: 5px;
+  }
+
+  .slot-label { color: var(--light); }
+  .slot-urgent { color: var(--red); font-weight: 700; }
+  .slot-ok { color: var(--green); font-weight: 600; }
+
+  .card-footer {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FAFAF8;
+  }
+
+  .price-main { font-size: 17px; font-weight: 800; color: var(--teal); }
+  .price-sub { font-size: 11px; color: var(--light); }
+
+  .btn-enroll {
+    padding: 8px 18px;
+    background: var(--teal);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-enroll:hover { background: var(--teal-dark); }
+
+  /* Stars */
+  .stars { color: #F5A623; font-size: 11px; letter-spacing: 1px; }
+
+  /* ─── SCREEN: PROGRAM DETAIL ─── */
+  #screen-detail {
+    background: var(--cream);
+    min-height: 100vh;
+  }
+
+  .detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 48px 64px;
+  }
+
+  .detail-main {}
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--light);
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-btn:hover { color: var(--teal); }
+
+  .detail-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+
+  .detail-meta-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .detail-badge {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .ustad-profile-box {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .ustad-avatar-lg {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--teal-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    border: 3px solid var(--teal-mid);
+    flex-shrink: 0;
+  }
+
+  .ustad-detail-name { font-size: 17px; font-weight: 800; color: var(--dark); }
+  .ustad-detail-title { font-size: 13px; color: var(--light); margin-bottom: 8px; }
+  .ustad-detail-bio { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+  .ustad-creds {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  .cred-item { display: flex; flex-direction: column; align-items: center; }
+  .cred-val { font-size: 16px; font-weight: 800; color: var(--teal); }
+  .cred-label { font-size: 11px; color: var(--light); }
+
+  .detail-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+    gap: 0;
+  }
+
+  .detail-tab {
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--light);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .detail-tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+  .detail-tab:hover { color: var(--teal); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .kurikulum-list { list-style: none; }
+
+  .kur-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .kur-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--teal-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+
+  .kur-title { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 3px; }
+  .kur-sub { font-size: 12px; color: var(--light); }
+
+  .review-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .review-header { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .reviewer-ava { width: 36px; height: 36px; border-radius: 50%; background: var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .reviewer-name { font-size: 13px; font-weight: 700; color: var(--dark); }
+  .reviewer-date { font-size: 11px; color: var(--light); }
+  .review-text { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+  /* Sidebar Enrollment Card */
+  .enroll-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: sticky;
+    top: 100px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+
+  .enroll-card-header {
+    padding: 20px;
+    background: var(--teal);
+    color: var(--white);
+  }
+
+  .enroll-price { font-size: 28px; font-weight: 800; }
+  .enroll-price-label { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+
+  .enroll-body { padding: 20px; }
+
+  .batch-selector { margin-bottom: 20px; }
+
+  .batch-label { font-size: 12px; font-weight: 700; color: var(--light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+
+  .batch-option {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .batch-option:hover { border-color: var(--teal); }
+  .batch-option.selected { border-color: var(--teal); background: var(--teal-light); }
+
+  .batch-option-row { display: flex; justify-content: space-between; align-items: flex-start; }
+  .batch-name { font-size: 13px; font-weight: 700; color: var(--dark); }
+  .batch-dates { font-size: 12px; color: var(--light); margin-top: 2px; }
+  .batch-slot-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+  .batch-open { background: #E8F5E9; color: var(--green); }
+  .batch-urgent { background: #FFF0EE; color: var(--red); }
+
+  .enroll-details { margin-bottom: 20px; }
+
+  .enroll-detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .enroll-detail-row:last-child { border: none; }
+  .ed-label { color: var(--light); }
+  .ed-val { font-weight: 600; color: var(--dark); }
+
+  .btn-enroll-big {
+    width: 100%;
+    padding: 14px;
+    background: var(--teal);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-enroll-big:hover { background: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(10,124,107,0.3); }
+
+  .enroll-guarantee {
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--light);
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  /* ─── SCREEN: USTAD DASHBOARD ─── */
+  #screen-dashboard {
+    background: #F5F3EF;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+  }
+
+  .sidebar {
+    background: var(--dark);
+    padding: 24px 0;
+    min-height: 100vh;
+  }
+
+  .sidebar-logo {
+    padding: 0 20px 24px;
+    border-bottom: 1px solid #2A2A2A;
+    margin-bottom: 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--white);
+  }
+
+  .sidebar-logo span { color: var(--gold); }
+
+  .sidebar-section {
+    padding: 8px 12px 0;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 4px;
+    margin-top: 16px;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+    font-weight: 500;
+  }
+
+  .sidebar-item:hover { color: var(--white); background: rgba(255,255,255,0.04); }
+  .sidebar-item.active { color: var(--white); background: rgba(10,124,107,0.15); border-left-color: var(--teal); }
+  .sidebar-icon { font-size: 14px; width: 18px; text-align: center; }
+
+  .sidebar-badge {
+    margin-left: auto;
+    background: var(--teal);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+  }
+
+  .dash-content {
+    padding: 28px 36px;
+    overflow-y: auto;
+  }
+
+  .dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+
+  .dash-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--dark); }
+  .dash-sub { font-size: 13px; color: var(--light); margin-top: 3px; }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .metric-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .metric-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--teal);
+  }
+
+  .metric-card.gold::after { background: var(--gold); }
+
+  .metric-val { font-size: 28px; font-weight: 800; color: var(--dark); margin-bottom: 4px; }
+  .metric-label { font-size: 12px; color: var(--light); font-weight: 500; }
+  .metric-change { font-size: 11px; color: var(--green); font-weight: 700; margin-top: 6px; }
+
+  .dash-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  .dash-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid var(--border);
+  }
+
+  .dash-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dash-card-link { font-size: 12px; color: var(--teal); font-weight: 600; cursor: pointer; }
+
+  .batch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .batch-row:last-child { border: none; padding-bottom: 0; }
+
+  .batch-row-name { font-size: 13px; font-weight: 600; color: var(--dark); }
+  .batch-row-meta { font-size: 11.5px; color: var(--light); margin-top: 2px; }
+
+  .batch-status {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .status-ongoing { background: var(--teal-light); color: var(--teal); }
+  .status-open { background: var(--gold-light); color: var(--gold); }
+  .status-full { background: #F3E8FF; color: #7B1FA2; }
+
+  .santri-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .santri-row:last-child { border: none; }
+
+  .santri-ava { width: 34px; height: 34px; border-radius: 50%; background: var(--teal-light); display: flex; align-items: center; justify-content: center; font-size: 15px; }
+  .santri-name { font-size: 13px; font-weight: 600; color: var(--dark); }
+  .santri-batch { font-size: 11px; color: var(--light); }
+  .santri-progress-bar { flex: 1; height: 4px; background: #EEE; border-radius: 2px; overflow: hidden; }
+  .santri-progress-fill { height: 100%; background: var(--teal); border-radius: 2px; }
+  .santri-pct { font-size: 11px; font-weight: 700; color: var(--teal); }
+
+  /* Create Program Modal Style */
+  .create-program-banner {
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    border-radius: 14px;
+    padding: 24px;
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .cpb-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .cpb-sub { font-size: 13px; opacity: 0.8; }
+
+  .btn-white {
+    padding: 10px 22px;
+    background: var(--white);
+    color: var(--teal);
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-white:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+  /* Earnings Chart Mock */
+  .earnings-chart {
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding-top: 8px;
+  }
+
+  .chart-bar {
+    flex: 1;
+    border-radius: 4px 4px 0 0;
+    background: var(--teal-light);
+    position: relative;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .chart-bar:hover { background: var(--teal-mid); }
+  .chart-bar.highlight { background: var(--teal); }
+
+  .chart-labels {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .chart-label { flex: 1; text-align: center; font-size: 10px; color: var(--light); }
+
+  /* ─── SCREEN: CREATE PROGRAM ─── */
+  #screen-create {
+    background: var(--cream);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+  }
+
+  .create-layout {
+    padding: 28px 48px;
+  }
+
+  .create-steps {
+    display: flex;
+    gap: 0;
+    margin-bottom: 32px;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .create-step {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--light);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .create-step.active { background: var(--teal); color: var(--white); }
+  .create-step.done { color: var(--teal); }
+
+  .create-step-num { font-size: 10px; opacity: 0.7; display: block; margin-bottom: 2px; }
+
+  .form-section {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .form-section-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+  .form-section-sub { font-size: 12px; color: var(--light); margin-bottom: 20px; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field.full { grid-column: 1 / -1; }
+
+  .form-label { font-size: 12px; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 0.4px; }
+
+  .form-input {
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-family: inherit;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--white);
+  }
+
+  .form-input:focus { border-color: var(--teal); }
+
+  .form-textarea {
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-family: inherit;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+    min-height: 80px;
+  }
+
+  .form-textarea:focus { border-color: var(--teal); }
+
+  .form-select {
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-family: inherit;
+    color: var(--dark);
+    outline: none;
+    background: var(--white);
+    cursor: pointer;
+  }
+
+  .quota-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .quota-btn {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--white);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .quota-btn:hover { border-color: var(--teal); color: var(--teal); }
+
+  .quota-display {
+    width: 64px;
+    text-align: center;
+    padding: 8px;
+    border: 1.5px solid var(--teal);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--teal);
+  }
+
+  .batch-time-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  .preview-pane {
+    position: sticky;
+    top: 100px;
+  }
+
+  .preview-card {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1.5px dashed var(--teal-mid);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .preview-header {
+    background: var(--teal-light);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--teal);
+    border-bottom: 1px dashed var(--teal-mid);
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+
+  /* Tooltip dots */
+  .online-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    display: inline-block;
+    margin-right: 4px;
+    box-shadow: 0 0 0 2px rgba(45,138,95,0.2);
+  }
+
+  /* ─── RESPONSIVE NOTES ─── */
+  .annotation {
+    position: absolute;
+    background: #FFEC80;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #5A4A00;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 50;
+    border: 1px solid #FFD700;
+  }
+
+  .annotation::before {
+    content: '↑';
+    display: block;
+    font-size: 10px;
+  }
+
+  /* Pulse animation for key elements */
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(10,124,107,0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(10,124,107,0); }
+    100% { box-shadow: 0 0 0 0 rgba(10,124,107,0); }
+  }
+
+  .pulse { animation: pulse-ring 2s infinite; }
+
+</style>
+</head>
+<body>
+
+<!-- ─── NAVBAR PROTOTYPE ─── -->
+<nav class="nav-bar">
+  <span class="nav-label">Santri.ID Mockup</span>
+  <button class="nav-btn active" onclick="showScreen('home')">🏠 Homepage</button>
+  <button class="nav-btn" onclick="showScreen('detail')">📖 Detail Program</button>
+  <button class="nav-btn" onclick="showScreen('dashboard')">📊 Ustad Dashboard</button>
+  <button class="nav-btn" onclick="showScreen('create')">✏️ Buat Program</button>
+  <div class="nav-divider"></div>
+  <div class="nav-info">
+    <div class="dot"></div>
+    Interactive Prototype · 4 Screens
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     SCREEN 1: HOMEPAGE — SANTRI BROWSE
+════════════════════════════════════════ -->
+<div id="screen-home" class="screen active">
+
+  <!-- Platform Navbar -->
+  <nav class="platform-nav">
+    <a class="logo" href="#">Santri<span>.ID</span></a>
+    <div class="platform-nav-links">
+      <div class="pnl active">Cari Program</div>
+      <div class="pnl">Ustadz</div>
+      <div class="pnl">Metode</div>
+      <div class="pnl">Tentang</div>
+    </div>
+    <div class="platform-nav-right">
+      <button class="btn-ghost">Masuk</button>
+      <button class="btn-primary" onclick="showScreen('dashboard')">Jadi Ustadz →</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <div class="hero-badge">✦ Platform Ngaji Pertama Berbasis Batch</div>
+      <h1>Temukan <em>ustadz</em><br>yang tepat,<br>mulai ngaji hari ini</h1>
+      <p>Browse ratusan program ngaji terstruktur. Lihat profil ustadz, kuota santri, jadwal batch — sebelum kamu daftar.</p>
+      <div class="hero-actions">
+        <button class="btn-hero" onclick="document.getElementById('listing').scrollIntoView({behavior:'smooth'})">Jelajahi Program</button>
+        <button class="btn-hero-outline" onclick="showScreen('dashboard')">Saya seorang Ustadz</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">340+</span>
+          <span class="stat-label">Program Aktif</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">128</span>
+          <span class="stat-label">Ustadz Terverifikasi</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">12.400</span>
+          <span class="stat-label">Santri Lulus</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="hero-card">
+          <div class="hcard-header">
+            <div class="ustad-avatar-sm">🧑‍🏫</div>
+            <div>
+              <div class="hcard-title">Tajwid Intensif 30 Hari</div>
+              <div class="hcard-ustad">Ust. Ahmad Fauzi</div>
+            </div>
+          </div>
+          <div class="hcard-meta">
+            <span class="hcard-tag">TAJWID</span>
+            <span class="hcard-tag">MENENGAH</span>
+          </div>
+          <div class="hcard-price">
+            <span class="price-amount">Rp 350.000</span>
+            <span style="font-size:11px;color:var(--light)">/ santri</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hcard-header">
+            <div class="ustad-avatar-sm">👳</div>
+            <div>
+              <div class="hcard-title">Iqra untuk Dewasa — Batch 7</div>
+              <div class="hcard-ustad">Ust. Hasan Al-Banna</div>
+            </div>
+          </div>
+          <div class="hcard-meta">
+            <span class="hcard-tag">IQRA</span>
+            <span class="hcard-tag">PEMULA</span>
+          </div>
+          <div class="hcard-progress">
+            <div class="hcard-slots">
+              <span class="slots-label">Sisa slot</span>
+              <span class="slots-count">3 dari 15</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+          </div>
+          <div class="hcard-price">
+            <span class="price-amount">Rp 250.000</span>
+            <span style="font-size:11px;color:var(--light)">/ santri</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hcard-header">
+            <div class="ustad-avatar-sm">📖</div>
+            <div>
+              <div class="hcard-title">Tahsin Al-Quran 3 Bulan</div>
+              <div class="hcard-ustad">Ust. Yusuf Mansur</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search & Filter -->
+  <section class="search-section">
+    <div class="search-bar">
+      <span style="font-size:16px;padding:8px 4px 8px 8px;color:var(--light)">🔍</span>
+      <input type="text" placeholder="Cari program, ustadz, atau metode...">
+      <div class="search-divider"></div>
+      <button class="filter-pill active">📚 Semua</button>
+      <button class="filter-pill">🔤 Iqra</button>
+      <button class="filter-pill">📖 Tajwid</button>
+      <button class="filter-pill">🕌 Tahsin</button>
+      <button class="filter-pill">📿 Tahfidz</button>
+      <div class="search-divider"></div>
+      <button class="filter-pill">⚙️ Filter</button>
+      <button class="search-btn">Cari</button>
+    </div>
+  </section>
+
+  <!-- Program Listing -->
+  <section class="listing-section" id="listing">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Program Ngaji Terpopuler</div>
+        <div class="section-sub">128 program tersedia · Diurutkan: Paling Diminati</div>
+      </div>
+      <button class="btn-ghost">Lihat Semua →</button>
+    </div>
+
+    <div class="program-grid">
+
+      <!-- Card 1 -->
+      <div class="program-card" onclick="showScreen('detail')">
+        <div class="card-top">
+          <span class="level-badge level-pemula">PEMULA</span>
+          <button class="wishlist-btn active" onclick="event.stopPropagation()">❤️</button>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Iqra untuk Dewasa — Dari Nol sampai Lancar</div>
+          <div class="card-ustad-row">
+            <div class="ustad-ava">👳</div>
+            <span class="ustad-name">Ust. Hasan Al-Banna <span class="ustad-verified">✅</span></span>
+          </div>
+          <div class="card-meta-row">
+            <span class="meta-item"><span class="meta-icon">📅</span> 8 minggu</span>
+            <span class="meta-item"><span class="meta-icon">🎯</span> 16 sesi</span>
+            <span class="meta-item"><span class="meta-icon">⏱</span> 60 menit</span>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div style="font-size:11px;color:var(--light);margin-top:3px">4.9 · 87 ulasan</div>
+          <div class="card-slot-bar" style="margin-top:12px">
+            <div class="slot-row">
+              <span class="slot-label">Slot Batch 8</span>
+              <span class="slot-urgent">⚡ Sisa 3 dari 15</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div>
+            <div class="price-main">Rp 250.000</div>
+            <div class="price-sub">per santri / batch</div>
+          </div>
+          <button class="btn-enroll pulse" onclick="event.stopPropagation(); showScreen('detail')">Daftar Sekarang</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="program-card" onclick="showScreen('detail')">
+        <div class="card-top">
+          <span class="level-badge level-menengah">MENENGAH</span>
+          <button class="wishlist-btn" onclick="event.stopPropagation()">🤍</button>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Tajwid Intensif 30 Hari — Belajar Sesuai Kaidah</div>
+          <div class="card-ustad-row">
+            <div class="ustad-ava">🧑‍🏫</div>
+            <span class="ustad-name">Ust. Ahmad Fauzi <span class="ustad-verified">✅</span></span>
+          </div>
+          <div class="card-meta-row">
+            <span class="meta-item"><span class="meta-icon">📅</span> 4 minggu</span>
+            <span class="meta-item"><span class="meta-icon">🎯</span> 12 sesi</span>
+            <span class="meta-item"><span class="meta-icon">⏱</span> 90 menit</span>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div style="font-size:11px;color:var(--light);margin-top:3px">4.8 · 63 ulasan</div>
+          <div class="card-slot-bar" style="margin-top:12px">
+            <div class="slot-row">
+              <span class="slot-label">Slot Batch 5</span>
+              <span class="slot-ok">✓ 8 dari 20 terisi</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div>
+            <div class="price-main">Rp 350.000</div>
+            <div class="price-sub">per santri / batch</div>
+          </div>
+          <button class="btn-enroll" onclick="event.stopPropagation(); showScreen('detail')">Daftar Sekarang</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="program-card" onclick="showScreen('detail')">
+        <div class="card-top">
+          <span class="level-badge level-lanjutan">LANJUTAN</span>
+          <button class="wishlist-btn" onclick="event.stopPropagation()">🤍</button>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Tahsin Al-Quran 3 Bulan — Perbaiki Bacaan</div>
+          <div class="card-ustad-row">
+            <div class="ustad-ava">📖</div>
+            <span class="ustad-name">Ust. Yusuf Mansur <span class="ustad-verified">✅</span></span>
+          </div>
+          <div class="card-meta-row">
+            <span class="meta-item"><span class="meta-icon">📅</span> 12 minggu</span>
+            <span class="meta-item"><span class="meta-icon">🎯</span> 24 sesi</span>
+            <span class="meta-item"><span class="meta-icon">⏱</span> 90 menit</span>
+          </div>
+          <div class="stars">★★★★☆</div>
+          <div style="font-size:11px;color:var(--light);margin-top:3px">4.7 · 41 ulasan</div>
+          <div class="card-slot-bar" style="margin-top:12px">
+            <div class="slot-row">
+              <span class="slot-label">Slot Batch 3</span>
+              <span class="slot-ok">✓ 5 dari 10 terisi</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div>
+            <div class="price-main">Rp 750.000</div>
+            <div class="price-sub">per santri / batch</div>
+          </div>
+          <button class="btn-enroll" onclick="event.stopPropagation(); showScreen('detail')">Daftar Sekarang</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════
+     SCREEN 2: PROGRAM DETAIL PAGE
+════════════════════════════════════════ -->
+<div id="screen-detail" class="screen">
+  <nav class="platform-nav">
+    <a class="logo" href="#">Santri<span>.ID</span></a>
+    <div class="platform-nav-links">
+      <div class="pnl" onclick="showScreen('home')">← Kembali ke Listing</div>
+    </div>
+    <div class="platform-nav-right">
+      <button class="btn-ghost">Masuk</button>
+      <button class="btn-primary">Daftar</button>
+    </div>
+  </nav>
+
+  <div class="detail-layout">
+    <!-- Main Content -->
+    <div class="detail-main">
+      <div class="back-btn" onclick="showScreen('home')">← Semua Program</div>
+
+      <div class="detail-meta-row">
+        <span class="level-badge level-pemula">PEMULA</span>
+        <span class="stars">★★★★★</span>
+        <span style="font-size:12px;color:var(--light)">4.9 · 87 ulasan</span>
+        <span style="font-size:12px;color:var(--light)">·</span>
+        <span style="font-size:12px;color:var(--teal);font-weight:600">📋 Batch 8 — Buka Sekarang</span>
+      </div>
+
+      <h1 class="detail-title">Iqra untuk Dewasa —<br>Dari Nol sampai Lancar</h1>
+
+      <!-- Ustad Profile -->
+      <div class="ustad-profile-box">
+        <div class="ustad-avatar-lg">👳</div>
+        <div style="flex:1">
+          <div class="ustad-detail-name">Ust. Hasan Al-Banna ✅</div>
+          <div class="ustad-detail-title">Pengajar Al-Quran · Alumni Ma'had Tahfidz Ciamis · 8 tahun mengajar</div>
+          <div class="ustad-detail-bio">Spesialis mengajar orang dewasa yang belajar ngaji dari awal. Metode sabar, terstruktur, dengan pendekatan psikologi belajar orang dewasa.</div>
+          <div class="ustad-creds">
+            <div class="cred-item"><span class="cred-val">87</span><span class="cred-label">Ulasan</span></div>
+            <div class="cred-item"><span class="cred-val">8</span><span class="cred-label">Batch Lulus</span></div>
+            <div class="cred-item"><span class="cred-val">120+</span><span class="cred-label">Santri</span></div>
+            <div class="cred-item"><span class="cred-val">98%</span><span class="cred-label">Selesai</span></div>
+          </div>
+        </div>
+        <button class="btn-ghost" style="align-self:flex-start">Lihat Profil Lengkap</button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="detail-tabs">
+        <div class="detail-tab active" onclick="switchTab('overview')">Overview</div>
+        <div class="detail-tab" onclick="switchTab('kurikulum')">Kurikulum</div>
+        <div class="detail-tab" onclick="switchTab('jadwal')">Jadwal Sesi</div>
+        <div class="detail-tab" onclick="switchTab('ulasan')">Ulasan (87)</div>
+      </div>
+
+      <!-- Tab: Overview -->
+      <div id="tab-overview" class="tab-content active">
+        <p style="font-size:14px;color:var(--mid);line-height:1.8;margin-bottom:16px">
+          Program ini dirancang khusus untuk orang dewasa yang ingin belajar membaca Al-Quran dari dasar. Dengan metode Iqra yang telah terbukti, Anda akan dibimbing dari mengenal huruf hijaiyah hingga mampu membaca Al-Quran dengan lancar dalam 8 minggu.
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+          <div style="background:var(--teal-light);border-radius:10px;padding:14px;border:1px solid var(--teal-mid)">
+            <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:6px">✓ Yang akan dipelajari</div>
+            <div style="font-size:12.5px;color:var(--mid);line-height:1.8">• Huruf hijaiyah & tanda baca<br>• Makhorijul huruf dasar<br>• Membaca ayat pendek<br>• Tajwid dasar: mad & waqaf<br>• Bacaan Al-Fatihah & Juz Amma</div>
+          </div>
+          <div style="background:var(--gold-light);border-radius:10px;padding:14px;border:1px solid #E8D5A8">
+            <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:6px">📌 Prasyarat</div>
+            <div style="font-size:12.5px;color:var(--mid);line-height:1.8">• Tidak ada prasyarat khusus<br>• Cocok untuk pemula total<br>• Usia 18+ (program dewasa)<br>• Komitmen hadir 2x/minggu<br>• Akses internet stabil</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Kurikulum -->
+      <div id="tab-kurikulum" class="tab-content">
+        <ul class="kurikulum-list">
+          <li class="kur-item"><div class="kur-num">1</div><div><div class="kur-title">Perkenalan Huruf Hijaiyah (Jilid 1)</div><div class="kur-sub">Sesi 1-2 · Huruf alif sampai ya, pengenalan harakat</div></div></li>
+          <li class="kur-item"><div class="kur-num">2</div><div><div class="kur-title">Makhorijul Huruf Dasar (Jilid 2)</div><div class="kur-sub">Sesi 3-4 · Tempat keluarnya huruf, latihan pelafalan</div></div></li>
+          <li class="kur-item"><div class="kur-num">3</div><div><div class="kur-title">Sambung Huruf & Tanwin (Jilid 3)</div><div class="kur-sub">Sesi 5-7 · Membaca kata, kalimat sederhana</div></div></li>
+          <li class="kur-item"><div class="kur-num">4</div><div><div class="kur-title">Tajwid Dasar — Mad & Waqaf (Jilid 4)</div><div class="kur-sub">Sesi 8-10 · Hukum nun sukun, mad thobi'i</div></div></li>
+          <li class="kur-item"><div class="kur-num">5</div><div><div class="kur-title">Membaca Juz Amma (Jilid 5-6)</div><div class="kur-sub">Sesi 11-14 · Surat-surat pendek, hafalan Al-Fatihah</div></div></li>
+          <li class="kur-item"><div class="kur-num">6</div><div><div class="kur-title">Evaluasi & Sertifikasi</div><div class="kur-sub">Sesi 15-16 · Ujian akhir, pemberian sertifikat</div></div></li>
+        </ul>
+      </div>
+
+      <!-- Tab: Jadwal -->
+      <div id="tab-jadwal" class="tab-content">
+        <div style="background:var(--teal-light);border-radius:10px;padding:14px 16px;border:1px solid var(--teal-mid);margin-bottom:16px;font-size:13px;color:var(--teal);font-weight:600">
+          🗓 Batch 8 · Mulai: 1 April 2026 · Selesai: 26 Mei 2026
+        </div>
+        <div style="display:grid;gap:8px">
+          <div style="display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--white);padding:12px 16px;border-radius:8px;border:1px solid var(--border)">
+            <div style="font-size:12px;font-weight:700;color:var(--teal);width:80px">Rabu, 1 Apr</div>
+            <div><div style="font-size:13px;font-weight:600;color:var(--dark)">Sesi 1 — Pengenalan Huruf Hijaiyah</div><div style="font-size:11px;color:var(--light)">19.30 – 21.00 WIB · via Video Call</div></div>
+            <span style="background:var(--teal-light);color:var(--teal);font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px">AKAN DATANG</span>
+          </div>
+          <div style="display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--white);padding:12px 16px;border-radius:8px;border:1px solid var(--border)">
+            <div style="font-size:12px;font-weight:700;color:var(--teal);width:80px">Sabtu, 4 Apr</div>
+            <div><div style="font-size:13px;font-weight:600;color:var(--dark)">Sesi 2 — Makhorijul Huruf</div><div style="font-size:11px;color:var(--light)">19.30 – 21.00 WIB · via Video Call</div></div>
+            <span style="background:var(--teal-light);color:var(--teal);font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px">AKAN DATANG</span>
+          </div>
+          <div style="display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:#FAFAF8;padding:12px 16px;border-radius:8px;border:1px dashed var(--border)">
+            <div style="font-size:12px;font-weight:700;color:var(--light);width:80px">... dan seterusnya</div>
+            <div style="font-size:12px;color:var(--light)">Total 16 sesi · Setiap Rabu & Sabtu malam</div>
+            <span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Ulasan -->
+      <div id="tab-ulasan" class="tab-content">
+        <div style="display:flex;gap:24px;align-items:center;margin-bottom:20px;background:var(--white);border-radius:12px;padding:16px;border:1px solid var(--border)">
+          <div style="text-align:center">
+            <div style="font-size:48px;font-weight:900;color:var(--dark)">4.9</div>
+            <div class="stars" style="font-size:16px">★★★★★</div>
+            <div style="font-size:11px;color:var(--light);margin-top:4px">87 ulasan</div>
+          </div>
+          <div style="flex:1">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px"><span style="font-size:11px;color:var(--light);width:20px">5★</span><div class="progress-bar" style="flex:1"><div class="progress-fill" style="width:88%"></div></div><span style="font-size:11px;color:var(--light);width:24px">88%</span></div>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px"><span style="font-size:11px;color:var(--light);width:20px">4★</span><div class="progress-bar" style="flex:1"><div class="progress-fill" style="width:9%"></div></div><span style="font-size:11px;color:var(--light);width:24px">9%</span></div>
+            <div style="display:flex;gap:8px;align-items:center"><span style="font-size:11px;color:var(--light);width:20px">3★</span><div class="progress-bar" style="flex:1"><div class="progress-fill" style="width:3%"></div></div><span style="font-size:11px;color:var(--light);width:24px">3%</span></div>
+          </div>
+        </div>
+        <div class="review-item">
+          <div class="review-header">
+            <div class="reviewer-ava">🧕</div>
+            <div><div class="reviewer-name">Siti Rahmawati</div><div class="reviewer-date">Batch 6 · Februari 2026</div></div>
+            <div class="stars" style="margin-left:auto">★★★★★</div>
+          </div>
+          <div class="review-text">Alhamdulillah, setelah 40 tahun akhirnya bisa baca Al-Quran. Ustadz Hasan sangat sabar dan tidak pernah membuat saya merasa malu sebagai pemula. Metodenya sangat terstruktur dan mudah diikuti.</div>
+        </div>
+        <div class="review-item">
+          <div class="review-header">
+            <div class="reviewer-ava">👨</div>
+            <div><div class="reviewer-name">Budi Santoso</div><div class="reviewer-date">Batch 7 · Maret 2026</div></div>
+            <div class="stars" style="margin-left:auto">★★★★★</div>
+          </div>
+          <div class="review-text">Sistem batch ini bagus banget. Semua mulai bareng, progress bareng, jadi ada semangat saling mendukung sama teman satu batch. Beda banget sama kursus online biasa.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enrollment Sidebar -->
+    <div>
+      <div class="enroll-card">
+        <div class="enroll-card-header">
+          <div class="enroll-price">Rp 250.000</div>
+          <div class="enroll-price-label">per santri / per batch</div>
+        </div>
+        <div class="enroll-body">
+          <div class="batch-selector">
+            <div class="batch-label">Pilih Batch</div>
+
+            <div class="batch-option selected">
+              <div class="batch-option-row">
+                <div>
+                  <div class="batch-name">Batch 8 (Segera Mulai)</div>
+                  <div class="batch-dates">1 Apr – 26 Mei 2026 · 8 minggu</div>
+                </div>
+                <span class="batch-slot-badge batch-urgent">⚡ 3 slot</span>
+              </div>
+            </div>
+
+            <div class="batch-option">
+              <div class="batch-option-row">
+                <div>
+                  <div class="batch-name">Batch 9</div>
+                  <div class="batch-dates">2 Jun – 28 Jul 2026 · 8 minggu</div>
+                </div>
+                <span class="batch-slot-badge batch-open">✓ 15 slot</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="enroll-details">
+            <div class="enroll-detail-row">
+              <span class="ed-label">Durasi</span>
+              <span class="ed-val">8 minggu · 16 sesi</span>
+            </div>
+            <div class="enroll-detail-row">
+              <span class="ed-label">Jadwal</span>
+              <span class="ed-val">Rabu & Sabtu, 19.30</span>
+            </div>
+            <div class="enroll-detail-row">
+              <span class="ed-label">Maks. Santri</span>
+              <span class="ed-val">15 orang / batch</span>
+            </div>
+            <div class="enroll-detail-row">
+              <span class="ed-label">Sertifikat</span>
+              <span class="ed-val">✓ Terverifikasi</span>
+            </div>
+            <div class="enroll-detail-row">
+              <span class="ed-label">Rekaman Sesi</span>
+              <span class="ed-val">✓ 7 hari akses</span>
+            </div>
+          </div>
+
+          <button class="btn-enroll-big pulse">Daftar Sekarang — Rp 250.000</button>
+          <div class="enroll-guarantee">🔒 Pembayaran aman via Xendit</div>
+
+          <div style="margin-top:16px;padding:12px;background:var(--gold-light);border-radius:8px;border:1px solid #E8D5A8">
+            <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:4px">⏰ Segera Habis</div>
+            <div style="font-size:12px;color:var(--mid)">Hanya tersisa 3 slot untuk Batch 8. Batch berikutnya buka 2 Juni.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SCREEN 3: USTAD DASHBOARD
+════════════════════════════════════════ -->
+<div id="screen-dashboard" class="screen">
+  <div class="sidebar">
+    <div class="sidebar-logo">Santri<span>.ID</span></div>
+    <div class="sidebar-item active"><span class="sidebar-icon">📊</span> Dashboard</div>
+    <div class="sidebar-section">Program</div>
+    <div class="sidebar-item" onclick="showScreen('create')"><span class="sidebar-icon">✏️</span> Buat Program</div>
+    <div class="sidebar-item"><span class="sidebar-icon">📦</span> Program Saya <span class="sidebar-badge">4</span></div>
+    <div class="sidebar-item"><span class="sidebar-icon">🔄</span> Kelola Batch</div>
+    <div class="sidebar-section">Santri</div>
+    <div class="sidebar-item"><span class="sidebar-icon">👥</span> Daftar Santri <span class="sidebar-badge">47</span></div>
+    <div class="sidebar-item"><span class="sidebar-icon">📝</span> Absensi & Progress</div>
+    <div class="sidebar-item"><span class="sidebar-icon">💬</span> Pesan <span class="sidebar-badge">3</span></div>
+    <div class="sidebar-section">Keuangan</div>
+    <div class="sidebar-item"><span class="sidebar-icon">💰</span> Pendapatan</div>
+    <div class="sidebar-item"><span class="sidebar-icon">🏦</span> Cairkan Dana</div>
+    <div class="sidebar-section">Akun</div>
+    <div class="sidebar-item"><span class="sidebar-icon">👤</span> Profil Publik</div>
+    <div class="sidebar-item"><span class="sidebar-icon">⚙️</span> Pengaturan</div>
+  </div>
+
+  <div class="dash-content">
+    <div class="dash-header">
+      <div>
+        <div class="dash-title">Assalamu'alaikum, Ust. Hasan 👋</div>
+        <div class="dash-sub"><span class="online-dot"></span>Profil Anda aktif dan dapat ditemukan santri · Rabu, 12 Maret 2026</div>
+      </div>
+      <button class="btn-primary" onclick="showScreen('create')">+ Buat Program Baru</button>
+    </div>
+
+    <!-- Metrics -->
+    <div class="metrics-grid">
+      <div class="metric-card gold">
+        <div class="metric-val">Rp 4,2 Jt</div>
+        <div class="metric-label">Pendapatan Bulan Ini</div>
+        <div class="metric-change">↑ +18% dari bulan lalu</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">47</div>
+        <div class="metric-label">Santri Aktif</div>
+        <div class="metric-change">↑ 12 santri baru</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">4</div>
+        <div class="metric-label">Batch Berjalan</div>
+        <div class="metric-change">2 batch baru bulan ini</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">4.9</div>
+        <div class="metric-label">Rating Rata-rata</div>
+        <div class="metric-change">87 ulasan total</div>
+      </div>
+    </div>
+
+    <!-- Create Banner -->
+    <div class="create-program-banner">
+      <div>
+        <div class="cpb-title">Ramadan 2026 semakin dekat!</div>
+        <div class="cpb-sub">Buat program ngaji khusus Ramadan dan raih ratusan santri baru. Peak season terbesar untuk belajar ngaji.</div>
+      </div>
+      <button class="btn-white" onclick="showScreen('create')">Buat Program Ramadan →</button>
+    </div>
+
+    <!-- Dash Grid -->
+    <div class="dash-grid">
+      <!-- Batch List -->
+      <div class="dash-card">
+        <div class="dash-card-title">Batch Aktif & Mendatang <span class="dash-card-link">Lihat Semua</span></div>
+        <div class="batch-row">
+          <div>
+            <div class="batch-row-name">Iqra Dewasa · Batch 8</div>
+            <div class="batch-row-meta">12/15 santri · Mulai 1 Apr</div>
+          </div>
+          <span class="batch-status status-open">Pendaftaran Buka</span>
+        </div>
+        <div class="batch-row">
+          <div>
+            <div class="batch-row-name">Iqra Dewasa · Batch 7</div>
+            <div class="batch-row-meta">15/15 santri · Sesi 10/16</div>
+          </div>
+          <span class="batch-status status-ongoing">Sedang Berjalan</span>
+        </div>
+        <div class="batch-row">
+          <div>
+            <div class="batch-row-name">Tajwid Intensif · Batch 4</div>
+            <div class="batch-row-meta">18/20 santri · Mulai 15 Apr</div>
+          </div>
+          <span class="batch-status status-open">Pendaftaran Buka</span>
+        </div>
+        <div class="batch-row">
+          <div>
+            <div class="batch-row-name">Tahsin Lanjutan · Batch 2</div>
+            <div class="batch-row-meta">10/10 santri · Sesi 5/24</div>
+          </div>
+          <span class="batch-status status-full">Penuh</span>
+        </div>
+      </div>
+
+      <!-- Earnings Chart -->
+      <div class="dash-card">
+        <div class="dash-card-title">Pendapatan 6 Bulan Terakhir <span class="dash-card-link">Detail →</span></div>
+        <div style="font-size:22px;font-weight:800;color:var(--teal);margin-bottom:4px">Rp 22,4 Jt</div>
+        <div style="font-size:12px;color:var(--light);margin-bottom:12px">Total 6 bulan · <span style="color:var(--green);font-weight:700">↑ 34% growth</span></div>
+        <div class="earnings-chart">
+          <div class="chart-bar" style="height:40%"></div>
+          <div class="chart-bar" style="height:55%"></div>
+          <div class="chart-bar" style="height:48%"></div>
+          <div class="chart-bar" style="height:62%"></div>
+          <div class="chart-bar" style="height:70%"></div>
+          <div class="chart-bar highlight" style="height:85%"></div>
+        </div>
+        <div class="chart-labels">
+          <div class="chart-label">Okt</div>
+          <div class="chart-label">Nov</div>
+          <div class="chart-label">Des</div>
+          <div class="chart-label">Jan</div>
+          <div class="chart-label">Feb</div>
+          <div class="chart-label" style="color:var(--teal);font-weight:700">Mar</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Santri Progress -->
+    <div class="dash-card">
+      <div class="dash-card-title">Progress Santri — Batch 7 (Iqra Dewasa) <span class="dash-card-link">Lihat Semua</span></div>
+      <div style="display:grid;gap:4px">
+        <div class="santri-row">
+          <div class="santri-ava">🧕</div>
+          <div style="min-width:120px"><div class="santri-name">Siti Rahmawati</div><div class="santri-batch">Batch 7 · Sesi 13/16</div></div>
+          <div class="santri-progress-bar"><div class="santri-progress-fill" style="width:81%"></div></div>
+          <div class="santri-pct">81%</div>
+          <button style="margin-left:12px;padding:5px 10px;background:var(--teal-light);color:var(--teal);border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">Beri Catatan</button>
+        </div>
+        <div class="santri-row">
+          <div class="santri-ava">👨</div>
+          <div style="min-width:120px"><div class="santri-name">Budi Santoso</div><div class="santri-batch">Batch 7 · Sesi 12/16</div></div>
+          <div class="santri-progress-bar"><div class="santri-progress-fill" style="width:75%"></div></div>
+          <div class="santri-pct">75%</div>
+          <button style="margin-left:12px;padding:5px 10px;background:var(--teal-light);color:var(--teal);border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">Beri Catatan</button>
+        </div>
+        <div class="santri-row">
+          <div class="santri-ava">👩</div>
+          <div style="min-width:120px"><div class="santri-name">Dewi Lestari</div><div class="santri-batch">Batch 7 · Sesi 13/16</div></div>
+          <div class="santri-progress-bar"><div class="santri-progress-fill" style="width:81%"></div></div>
+          <div class="santri-pct">81%</div>
+          <button style="margin-left:12px;padding:5px 10px;background:var(--teal-light);color:var(--teal);border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">Beri Catatan</button>
+        </div>
+        <div class="santri-row">
+          <div class="santri-ava">🧔</div>
+          <div style="min-width:120px"><div class="santri-name">Ahmad Hidayat</div><div class="santri-batch">Batch 7 · Sesi 10/16</div></div>
+          <div class="santri-progress-bar"><div class="santri-progress-fill" style="width:62%"></div></div>
+          <div class="santri-pct" style="color:var(--gold)">62%</div>
+          <button style="margin-left:12px;padding:5px 10px;background:var(--gold-light);color:var(--gold);border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer">⚠ Perlu Perhatian</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SCREEN 4: CREATE PROGRAM
+════════════════════════════════════════ -->
+<div id="screen-create" class="screen">
+  <div class="sidebar">
+    <div class="sidebar-logo">Santri<span>.ID</span></div>
+    <div class="sidebar-item" onclick="showScreen('dashboard')"><span class="sidebar-icon">📊</span> Dashboard</div>
+    <div class="sidebar-section">Program</div>
+    <div class="sidebar-item active"><span class="sidebar-icon">✏️</span> Buat Program</div>
+    <div class="sidebar-item"><span class="sidebar-icon">📦</span> Program Saya</div>
+    <div class="sidebar-item"><span class="sidebar-icon">🔄</span> Kelola Batch</div>
+    <div class="sidebar-section">Santri</div>
+    <div class="sidebar-item"><span class="sidebar-icon">👥</span> Daftar Santri</div>
+    <div class="sidebar-item"><span class="sidebar-icon">📝</span> Absensi & Progress</div>
+    <div class="sidebar-item"><span class="sidebar-icon">💬</span> Pesan</div>
+    <div class="sidebar-section">Keuangan</div>
+    <div class="sidebar-item"><span class="sidebar-icon">💰</span> Pendapatan</div>
+    <div class="sidebar-item"><span class="sidebar-icon">🏦</span> Cairkan Dana</div>
+  </div>
+
+  <div class="create-layout">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--dark)">Buat Program Baru</div>
+        <div style="font-size:13px;color:var(--light);margin-top:3px">Isi detail program, set kuota & jadwal batch, lalu publikasikan</div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn-ghost" onclick="showScreen('dashboard')">Batalkan</button>
+        <button class="btn-primary">Simpan Draft</button>
+      </div>
+    </div>
+
+    <!-- Step Indicator -->
+    <div class="create-steps">
+      <div class="create-step active"><span class="create-step-num">LANGKAH 1</span>Info Dasar</div>
+      <div class="create-step"><span class="create-step-num">LANGKAH 2</span>Kurikulum</div>
+      <div class="create-step"><span class="create-step-num">LANGKAH 3</span>Batch & Jadwal</div>
+      <div class="create-step"><span class="create-step-num">LANGKAH 4</span>Harga & Publish</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:24px">
+      <!-- Form -->
+      <div>
+        <!-- Info Dasar -->
+        <div class="form-section">
+          <div class="form-section-title">Informasi Dasar Program</div>
+          <div class="form-section-sub">Nama dan deskripsi yang menarik akan membantu santri menemukan program Anda</div>
+          <div class="form-grid" style="margin-bottom:16px">
+            <div class="form-field full">
+              <label class="form-label">Nama Program *</label>
+              <input class="form-input" type="text" placeholder="cth: Iqra untuk Dewasa — Dari Nol sampai Lancar" value="Iqra untuk Dewasa — Dari Nol sampai Lancar">
+            </div>
+            <div class="form-field">
+              <label class="form-label">Kategori *</label>
+              <select class="form-select">
+                <option>Iqra / Dasar</option>
+                <option>Tajwid</option>
+                <option>Tahsin</option>
+                <option>Tahfidz</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Level *</label>
+              <select class="form-select">
+                <option>Pemula</option>
+                <option>Menengah</option>
+                <option>Lanjutan</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label class="form-label">Deskripsi Program *</label>
+              <textarea class="form-textarea" placeholder="Ceritakan tentang program ini — apa yang akan dipelajari, untuk siapa, dan apa yang membuat program ini berbeda...">Program ini dirancang khusus untuk orang dewasa yang ingin belajar membaca Al-Quran dari dasar.</textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kuota & Batch -->
+        <div class="form-section">
+          <div class="form-section-title">Kuota & Kapasitas Batch</div>
+          <div class="form-section-sub">Set jumlah maksimal santri per batch — ini yang membedakan program Anda dari kursus biasa</div>
+          <div class="form-grid-3" style="margin-bottom:16px">
+            <div class="form-field">
+              <label class="form-label">Maks. Santri / Batch *</label>
+              <div class="quota-input-row">
+                <button class="quota-btn" onclick="changeQuota(-1)">−</button>
+                <div class="quota-display" id="quota-val">15</div>
+                <button class="quota-btn" onclick="changeQuota(1)">+</button>
+              </div>
+              <span style="font-size:11px;color:var(--light);margin-top:4px">Rekomendasi: 10-20 untuk kualitas optimal</span>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Durasi per Sesi</label>
+              <select class="form-select">
+                <option>60 menit</option>
+                <option selected>90 menit</option>
+                <option>120 menit</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Total Sesi / Batch</label>
+              <input class="form-input" type="number" value="16">
+            </div>
+          </div>
+        </div>
+
+        <!-- Jadwal -->
+        <div class="form-section">
+          <div class="form-section-title">Jadwal Batch Pertama</div>
+          <div class="form-section-sub">Anda bisa menambah batch baru kapan saja setelah program dipublikasikan</div>
+          <div class="form-grid" style="margin-bottom:16px">
+            <div class="form-field">
+              <label class="form-label">Tanggal Mulai *</label>
+              <input class="form-input" type="date" value="2026-04-01">
+            </div>
+            <div class="form-field">
+              <label class="form-label">Tanggal Selesai *</label>
+              <input class="form-input" type="date" value="2026-05-26">
+            </div>
+            <div class="form-field">
+              <label class="form-label">Hari Sesi *</label>
+              <select class="form-select">
+                <option selected>Rabu & Sabtu</option>
+                <option>Senin & Kamis</option>
+                <option>Setiap Hari</option>
+                <option>Custom</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Jam Mulai *</label>
+              <input class="form-input" type="time" value="19:30">
+            </div>
+          </div>
+        </div>
+
+        <!-- Harga -->
+        <div class="form-section">
+          <div class="form-section-title">Harga per Santri</div>
+          <div class="form-section-sub">Platform mengambil 10% sebagai biaya layanan. Anda menerima 90%.</div>
+          <div class="form-grid" style="margin-bottom:16px">
+            <div class="form-field">
+              <label class="form-label">Harga per Santri / Batch *</label>
+              <div style="position:relative">
+                <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--light);font-weight:600">Rp</span>
+                <input class="form-input" type="text" value="250.000" style="padding-left:36px" id="price-input" oninput="updatePriceCalc()">
+              </div>
+            </div>
+            <div class="form-field">
+              <label class="form-label">Estimasi Pendapatan / Batch</label>
+              <div style="padding:10px 14px;background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:8px;font-size:15px;font-weight:800;color:var(--teal)" id="earn-calc">
+                Rp 3.375.000
+              </div>
+              <span style="font-size:11px;color:var(--light);margin-top:4px" id="earn-sub">15 santri × Rp 250.000 × 90% = Rp 3.375.000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-ghost">Simpan Draft</button>
+          <button class="btn-primary" style="padding:10px 28px" onclick="showScreen('dashboard')">Publikasikan Program →</button>
+        </div>
+      </div>
+
+      <!-- Live Preview -->
+      <div class="preview-pane">
+        <div class="preview-card">
+          <div class="preview-header">
+            👁 Preview Kartu Program
+          </div>
+          <div style="padding:16px">
+            <!-- Preview card matches listing card style -->
+            <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+              <span class="level-badge level-pemula">PEMULA</span>
+              <button class="wishlist-btn">🤍</button>
+            </div>
+            <div style="font-size:14px;font-weight:700;color:var(--dark);line-height:1.4;margin-bottom:8px">Iqra untuk Dewasa — Dari Nol sampai Lancar</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
+              <div class="ustad-ava">👳</div>
+              <span style="font-size:12px;color:var(--mid);font-weight:600">Ust. Hasan Al-Banna ✅</span>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+              <span class="meta-item"><span class="meta-icon">📅</span><span style="font-size:11px;color:var(--light)"> 8 minggu</span></span>
+              <span class="meta-item"><span class="meta-icon">🎯</span><span style="font-size:11px;color:var(--light)"> 16 sesi</span></span>
+            </div>
+            <div style="margin-bottom:8px">
+              <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px">
+                <span style="color:var(--light)">Slot Batch 1</span>
+                <span style="color:var(--green);font-weight:700">✓ 0 dari 15 terisi</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#FAFAF8;border-radius:8px;margin-top:8px;border:1px solid var(--border)">
+              <div>
+                <div style="font-size:15px;font-weight:800;color:var(--teal)">Rp 250.000</div>
+                <div style="font-size:10px;color:var(--light)">per santri / batch</div>
+              </div>
+              <button class="btn-enroll" style="font-size:11px;padding:6px 12px">Daftar</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--gold-light);border:1px solid #E8D5A8;border-radius:10px;padding:14px;margin-top:16px">
+          <div style="font-size:12px;font-weight:700;color:var(--gold);margin-bottom:6px">💡 Tips Publikasi</div>
+          <div style="font-size:12px;color:var(--mid);line-height:1.7">
+            • Program dengan foto ustad konversi 3x lebih tinggi<br>
+            • Kuota 10-15 santri terisi paling cepat<br>
+            • Harga Rp 200-400rb paling banyak diminati<br>
+            • Buka batch Ramadan 2 minggu sebelumnya
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    const map = { home: 0, detail: 1, dashboard: 2, create: 3 };
+    document.querySelectorAll('.nav-btn')[map[id]]?.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    document.getElementById('tab-' + tab)?.classList.add('active');
+  }
+
+  let quota = 15;
+  function changeQuota(delta) {
+    quota = Math.max(5, Math.min(50, quota + delta));
+    document.getElementById('quota-val').textContent = quota;
+    updatePriceCalc();
+  }
+
+  function updatePriceCalc() {
+    const raw = (document.getElementById('price-input')?.value || '250000').replace(/\./g, '').replace(/[^0-9]/g, '');
+    const price = parseInt(raw) || 250000;
+    const earn = Math.round(price * quota * 0.9);
+    const fmt = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    if (document.getElementById('earn-calc')) {
+      document.getElementById('earn-calc').textContent = 'Rp ' + fmt(earn);
+      document.getElementById('earn-sub').textContent = quota + ' santri × Rp ' + fmt(price) + ' × 90% = Rp ' + fmt(earn);
+    }
+  }
+
+  // Wishlist toggle
+  document.querySelectorAll('.wishlist-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (this.classList.contains('active')) {
+        this.classList.remove('active');
+        this.textContent = '🤍';
+      } else {
+        this.classList.add('active');
+        this.textContent = '❤️';
+      }
+    });
+  });
+
+  // Batch selector
+  document.querySelectorAll('.batch-option').forEach(opt => {
+    opt.addEventListener('click', function() {
+      document.querySelectorAll('.batch-option').forEach(o => o.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+</script>
+</body>
+</html>

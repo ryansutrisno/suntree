@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Santri.ID — User Flow Diagram</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --teal:#0A7C6B; --teal-d:#065A4D; --teal-l:#E6F4F1; --teal-m:#B2D8D2;
+  --gold:#C8973A; --gold-l:#FBF3E3;
+  --purple:#6B4EAA; --purple-l:#F0EBFF;
+  --red:#D94F3B; --red-l:#FFF0EE;
+  --green:#2D8A5F; --green-l:#E8F5E9;
+  --blue:#2563EB; --blue-l:#EFF6FF;
+  --dark:#1A1A1A; --mid:#4A4A4A; --light:#8A8A8A;
+  --border:#E2DDD5; --bg:#F5F2EC; --white:#FFFFFF;
+}
+
+body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--dark); overflow-x:hidden; }
+
+/* ── TOP BAR ── */
+.topbar {
+  position:sticky; top:0; z-index:200;
+  background:var(--dark); padding:0 24px;
+  display:flex; align-items:center; gap:0; height:52px;
+  box-shadow:0 2px 16px rgba(0,0,0,.4);
+}
+
+.tb-logo { font-family:'Playfair Display',serif; font-size:17px; font-weight:900; color:#fff; margin-right:24px; }
+.tb-logo span { color:var(--gold); }
+
+.tb-tab {
+  height:52px; padding:0 18px; display:flex; align-items:center;
+  font-size:12.5px; font-weight:600; color:#888; cursor:pointer;
+  border-bottom:2px solid transparent; transition:all .2s; white-space:nowrap;
+}
+.tb-tab:hover { color:#fff; }
+.tb-tab.active { color:var(--teal); border-bottom-color:var(--teal); }
+
+.tb-right { margin-left:auto; display:flex; align-items:center; gap:12px; }
+.tb-hint { font-size:11px; color:#555; }
+
+/* ── LEGEND ── */
+.legend {
+  display:flex; gap:0; padding:10px 24px; background:var(--white);
+  border-bottom:1px solid var(--border); flex-wrap:wrap; gap:16px;
+  align-items:center;
+}
+.legend-title { font-size:11px; font-weight:700; color:var(--light); text-transform:uppercase; letter-spacing:.8px; margin-right:4px; }
+.leg-item { display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--mid); font-weight:500; }
+.leg-swatch { width:14px; height:14px; border-radius:3px; }
+
+/* ── CANVAS AREA ── */
+.flow-canvas {
+  position:relative; overflow:auto; cursor:grab;
+  min-height:calc(100vh - 100px);
+}
+.flow-canvas:active { cursor:grabbing; }
+
+.flow-board {
+  position:relative; min-width:1800px; min-height:1600px; padding:40px;
+}
+
+/* SVG arrows */
+.arrows-svg { position:absolute; top:0; left:0; pointer-events:none; }
+
+/* ── SWIM LANE ── */
+.swimlane {
+  position:absolute; border-radius:12px; pointer-events:none;
+  border:1.5px dashed;
+}
+
+.lane-label {
+  position:absolute; top:0; left:0;
+  display:flex; align-items:center; gap:8px;
+  font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px;
+  padding:6px 14px 6px 10px; border-radius:10px 0 8px 0; pointer-events:none;
+}
+
+/* ── NODE BASE ── */
+.node {
+  position:absolute; border-radius:10px; cursor:pointer;
+  transition:box-shadow .2s, transform .2s;
+  user-select:none; border:1.5px solid transparent;
+}
+.node:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.15)!important; }
+.node.highlighted { border-color:var(--gold)!important; box-shadow:0 0 0 3px rgba(200,151,58,.3)!important; }
+
+/* Node types */
+.node-start, .node-end {
+  width:120px; height:40px; border-radius:20px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:800; letter-spacing:.3px; color:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);
+}
+.node-start { background:var(--dark); }
+.node-end { background:var(--teal-d); }
+
+.node-step {
+  width:180px; min-height:64px; padding:10px 14px;
+  display:flex; flex-direction:column; justify-content:center;
+  background:var(--white); box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.node-decision {
+  width:160px; height:160px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--white);
+  clip-path:polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow:0 2px 12px rgba(0,0,0,.1);
+  border:none!important;
+}
+
+.node-decision-wrap {
+  position:absolute;
+  width:160px; height:160px;
+  cursor:pointer;
+  transition:transform .2s;
+}
+.node-decision-wrap:hover { transform:translateY(-2px) scale(1.03); }
+
+.node-action {
+  width:172px; min-height:56px; padding:10px 14px;
+  display:flex; flex-direction:column; justify-content:center;
+  background:var(--white); box-shadow:0 2px 10px rgba(0,0,0,.08);
+  border-radius:8px;
+}
+
+.node-system {
+  width:172px; min-height:52px; padding:8px 12px;
+  display:flex; flex-direction:column; justify-content:center;
+  border-radius:6px; border-style:dashed!important;
+}
+
+.node-icon { font-size:16px; margin-bottom:3px; }
+.node-title { font-size:12px; font-weight:700; color:var(--dark); line-height:1.35; }
+.node-sub { font-size:10.5px; color:var(--light); margin-top:3px; line-height:1.4; }
+
+/* Color variants */
+.c-teal { background:var(--teal-l)!important; border-color:var(--teal-m)!important; }
+.c-teal .node-title { color:var(--teal-d); }
+.c-gold { background:var(--gold-l)!important; border-color:#E8D5A8!important; }
+.c-gold .node-title { color:#8A5E00; }
+.c-purple { background:var(--purple-l)!important; border-color:#C4B5E8!important; }
+.c-purple .node-title { color:var(--purple); }
+.c-red { background:var(--red-l)!important; border-color:#F5C4BC!important; }
+.c-red .node-title { color:var(--red); }
+.c-green { background:var(--green-l)!important; border-color:#A8D8BE!important; }
+.c-green .node-title { color:var(--green); }
+.c-blue { background:var(--blue-l)!important; border-color:#BFDBFE!important; }
+.c-blue .node-title { color:var(--blue); }
+.c-gray { background:#F5F5F5!important; border-color:#DDD!important; }
+.c-gray .node-title { color:#555; }
+
+/* ── TOOLTIP ── */
+.tooltip {
+  position:fixed; background:var(--dark); color:#fff; border-radius:8px;
+  padding:10px 14px; font-size:12px; max-width:240px; z-index:500;
+  pointer-events:none; opacity:0; transition:opacity .15s;
+  box-shadow:0 8px 24px rgba(0,0,0,.3); line-height:1.5;
+}
+.tooltip.show { opacity:1; }
+.tooltip-title { font-weight:700; margin-bottom:4px; color:var(--gold); }
+
+/* ── PANEL ── */
+.detail-panel {
+  position:fixed; right:0; top:52px; bottom:0; width:300px;
+  background:var(--white); border-left:1px solid var(--border);
+  transform:translateX(100%); transition:transform .3s;
+  z-index:100; overflow-y:auto; padding:24px;
+}
+.detail-panel.open { transform:translateX(0); }
+.dp-close { position:absolute; top:16px; right:16px; cursor:pointer; font-size:18px; color:var(--light); }
+.dp-icon { font-size:28px; margin-bottom:8px; }
+.dp-title { font-size:16px; font-weight:800; color:var(--dark); margin-bottom:4px; }
+.dp-actor { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--light); margin-bottom:12px; }
+.dp-desc { font-size:13px; color:var(--mid); line-height:1.7; margin-bottom:16px; }
+.dp-section { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--light); margin-bottom:8px; margin-top:16px; }
+.dp-item { display:flex; gap:8px; font-size:12.5px; color:var(--mid); margin-bottom:6px; line-height:1.5; }
+.dp-item::before { content:'→'; color:var(--teal); font-weight:700; flex-shrink:0; }
+.dp-tag { display:inline-block; padding:3px 9px; border-radius:10px; font-size:11px; font-weight:600; margin-right:4px; margin-bottom:4px; }
+
+/* ── FLOW TABS ── */
+.flow-section { display:none; }
+.flow-section.active { display:block; }
+
+/* ── MINI MAP ── */
+.minimap {
+  position:fixed; bottom:20px; right:20px;
+  width:140px; height:80px; background:rgba(255,255,255,.9);
+  border:1px solid var(--border); border-radius:8px;
+  z-index:150; overflow:hidden;
+  box-shadow:0 4px 16px rgba(0,0,0,.1);
+}
+.minimap-label { font-size:9px; font-weight:700; color:var(--light); text-transform:uppercase; padding:3px 6px; }
+
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tb-logo">Santri<span>.ID</span></div>
+  <div class="tb-tab active" onclick="switchFlow('santri',this)">🧕 Santri Flow</div>
+  <div class="tb-tab" onclick="switchFlow('ustad',this)">👳 Ustad Flow</div>
+  <div class="tb-tab" onclick="switchFlow('batch',this)">🔄 Batch Lifecycle</div>
+  <div class="tb-tab" onclick="switchFlow('payment',this)">💳 Payment Flow</div>
+  <div class="tb-tab" onclick="switchFlow('full',this)">🗺 Full System</div>
+  <div class="tb-right">
+    <span class="tb-hint">Klik node untuk detail · Hover untuk tooltip</span>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span class="legend-title">Legenda:</span>
+  <div class="leg-item"><div class="leg-swatch" style="background:var(--teal-l);border:1.5px solid var(--teal-m)"></div> Aksi Santri</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:var(--gold-l);border:1.5px solid #E8D5A8"></div> Aksi Ustad</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:var(--purple-l);border:1.5px solid #C4B5E8"></div> Sistem Platform</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:var(--blue-l);border:1.5px solid #BFDBFE"></div> Payment Gateway</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:var(--green-l);border:1.5px solid #A8D8BE"></div> Sukses / Selesai</div>
+  <div class="leg-item"><div class="leg-swatch" style="background:var(--red-l);border:1.5px solid #F5C4BC"></div> Error / Gagal</div>
+  <div class="leg-item">◇ Decision Point &nbsp; → Arrow = Normal Flow &nbsp; ⟶ Dashed = System Trigger</div>
+</div>
+
+<!-- TOOLTIP -->
+<div class="tooltip" id="tooltip"></div>
+
+<!-- DETAIL PANEL -->
+<div class="detail-panel" id="detailPanel">
+  <span class="dp-close" onclick="closePanel()">✕</span>
+  <div id="panelContent"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FLOW 1: SANTRI
+══════════════════════════════════════ -->
+<div class="flow-section active" id="flow-santri">
+<div class="flow-canvas" id="canvas-santri">
+<div class="flow-board" style="min-width:2000px;min-height:1400px">
+
+<svg class="arrows-svg" width="2000" height="1400">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#999"/>
+    </marker>
+    <marker id="arr-teal" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#0A7C6B"/>
+    </marker>
+    <marker id="arr-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#D94F3B"/>
+    </marker>
+    <marker id="arr-gold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#C8973A"/>
+    </marker>
+  </defs>
+
+  <!-- DISCOVERY -->
+  <!-- Start → Landing -->
+  <line x1="100" y1="100" x2="180" y2="100" stroke="#999" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- Landing → Search -->
+  <line x1="360" y1="100" x2="440" y2="100" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <!-- Search → Browse -->
+  <line x1="620" y1="100" x2="700" y2="100" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <!-- Browse → Filter -->
+  <line x1="880" y1="100" x2="960" y2="100" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <!-- Filter → Program Found? -->
+  <line x1="1140" y1="100" x2="1220" y2="100" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+
+  <!-- Program Found? YES → Detail -->
+  <line x1="1380" y1="100" x2="1460" y2="100" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <text x1="1400" y="90" font-size="10" fill="#2D8A5F" font-family="Plus Jakarta Sans" font-weight="700">YA</text>
+
+  <!-- Program Found? NO → Refine -->
+  <line x1="1300" y1="180" x2="1300" y2="260" stroke="#D94F3B" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <text x="1308" y="226" font-size="10" fill="#D94F3B" font-family="Plus Jakarta Sans" font-weight="700">TIDAK</text>
+  <!-- Refine → Browse again -->
+  <path d="M 1220 290 Q 900 340 880 130" stroke="#D94F3B" stroke-width="1.5" fill="none" marker-end="url(#arr-red)" stroke-dasharray="5,3"/>
+
+  <!-- EXPLORATION ROW 2 y=360 -->
+  <!-- Detail → View Ustad -->
+  <line x1="1640" y1="100" x2="1640" y2="240" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <!-- View Ustad → Compare -->
+  <line x1="1640" y1="310" x2="1640" y2="360" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <!-- Compare decision -->
+  <line x1="1560" y1="440" x2="1460" y2="440" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr-gold)" stroke-dasharray="4,3"/>
+  <text x="1480" y="433" font-size="10" fill="#C8973A" font-family="Plus Jakarta Sans" font-weight="700">COMPARE</text>
+
+  <!-- → Choose Batch y=440 -->
+  <line x1="1720" y1="440" x2="1800" y2="440" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <text x="1732" y="433" font-size="10" fill="#2D8A5F" font-family="Plus Jakarta Sans" font-weight="700">PILIH</text>
+
+  <!-- Choose Batch → Slot Available? -->
+  <line x1="1980" y1="440" x2="1980" y2="560" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+
+  <!-- Slot Available YES → Checkout y=620 -->
+  <line x1="1900" y1="640" x2="1800" y2="640" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <text x="1828" y="632" font-size="10" fill="#2D8A5F" font-family="Plus Jakarta Sans" font-weight="700">TERSEDIA</text>
+  <!-- Slot Full → Waitlist -->
+  <line x1="1980" y1="720" x2="1980" y2="780" stroke="#D94F3B" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <text x="1988" y="758" font-size="10" fill="#D94F3B" font-family="Plus Jakarta Sans" font-weight="700">PENUH</text>
+
+  <!-- Checkout → Pay -->
+  <line x1="1620" y1="640" x2="1540" y2="640" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <!-- Pay → Payment OK? -->
+  <line x1="1360" y1="640" x2="1280" y2="640" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+
+  <!-- Pay OK YES → Confirmation -->
+  <line x1="1120" y1="640" x2="1040" y2="640" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <text x="1052" y="632" font-size="10" fill="#2D8A5F" font-family="Plus Jakarta Sans" font-weight="700">SUKSES</text>
+  <!-- Pay FAIL → Retry -->
+  <line x1="1200" y1="720" x2="1200" y2="780" stroke="#D94F3B" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <text x="1208" y="758" font-size="10" fill="#D94F3B" font-family="Plus Jakarta Sans" font-weight="700">GAGAL</text>
+  <path d="M 1120 810 Q 1000 860 940 700" stroke="#D94F3B" stroke-width="1.5" fill="none" marker-end="url(#arr-red)" stroke-dasharray="5,3"/>
+
+  <!-- Confirmation → Access Batch -->
+  <line x1="860" y1="640" x2="780" y2="640" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+
+  <!-- LEARNING ROW -->
+  <!-- Access Batch → Join Session -->
+  <line x1="600" y1="640" x2="520" y2="640" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <!-- Join Session → Complete? -->
+  <line x1="340" y1="640" x2="260" y2="640" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+
+  <!-- Complete? NO → Next Session -->
+  <line x1="200" y1="720" x2="200" y2="820" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr-gold)"/>
+  <text x="208" y="778" font-size="10" fill="#C8973A" font-family="Plus Jakarta Sans" font-weight="700">LANJUT</text>
+  <!-- Next Session loop back -->
+  <path d="M 200 900 Q 200 960 420 960 Q 420 680 340 660" stroke="#C8973A" stroke-width="1.5" fill="none" marker-end="url(#arr-gold)" stroke-dasharray="5,3"/>
+
+  <!-- Complete? YES → Certificate -->
+  <line x1="140" y1="640" x2="60" y2="640" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <text x="68" y="632" font-size="10" fill="#2D8A5F" font-family="Plus Jakarta Sans" font-weight="700">LULUS</text>
+
+  <!-- Certificate → Review -->
+  <line x1="60" y1="690" x2="60" y2="780" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+  <!-- Review → End -->
+  <line x1="60" y1="860" x2="60" y2="940" stroke="#999" stroke-width="1.5" marker-end="url(#arr)"/>
+</svg>
+
+<!-- ROW 1: Discovery (y=70) -->
+<div class="node node-start" style="left:40px;top:80px" data-id="s-start">MULAI</div>
+
+<div class="node node-step c-teal" style="left:180px;top:68px" data-id="s-landing"
+  data-tip="Santri membuka santri.id — melihat homepage dengan featured programs, hero section, dan stats platform">
+  <div class="node-icon">🏠</div>
+  <div class="node-title">Buka Landing Page</div>
+  <div class="node-sub">Homepage & featured</div>
+</div>
+
+<div class="node node-step c-teal" style="left:440px;top:68px" data-id="s-search"
+  data-tip="Santri mengetik keyword (iqra, tajwid, nama ustad) atau browse kategori di search bar">
+  <div class="node-icon">🔍</div>
+  <div class="node-title">Search / Browse</div>
+  <div class="node-sub">Keyword, kategori</div>
+</div>
+
+<div class="node node-step c-teal" style="left:700px;top:68px" data-id="s-browse"
+  data-tip="Sistem menampilkan grid program cards dengan: nama program, foto ustad, level, rating, sisa slot, dan harga">
+  <div class="node-icon">📋</div>
+  <div class="node-title">Lihat Program Listing</div>
+  <div class="node-sub">Grid cards + rating</div>
+</div>
+
+<div class="node node-step c-teal" style="left:960px;top:68px" data-id="s-filter"
+  data-tip="Filter tersedia: Level (pemula/menengah/lanjutan), Kategori (iqra/tajwid/tahsin/tahfidz), Harga, Jadwal, Rating minimum">
+  <div class="node-icon">⚙️</div>
+  <div class="node-title">Apply Filter</div>
+  <div class="node-sub">Level, harga, jadwal</div>
+</div>
+
+<!-- Decision: Program Found? -->
+<div class="node-decision-wrap" style="left:1220px;top:20px" data-id="s-found"
+  data-tip="Apakah santri menemukan program yang sesuai kriterianya?">
+  <div class="node-decision c-gold">
+    <div style="text-align:center;padding:20px">
+      <div style="font-size:12px;font-weight:700;color:#8A5E00;line-height:1.4">Program<br>Sesuai?</div>
+    </div>
+  </div>
+</div>
+<text style="position:absolute;left:1226px;top:190px;font-size:10px;color:#D94F3B;font-weight:700">TIDAK ↓</text>
+
+<div class="node node-step c-red" style="left:1220px;top:260px" data-id="s-refine"
+  data-tip="Santri memperluas atau mengubah filter pencarian untuk menemukan program yang lebih sesuai">
+  <div class="node-icon">🔄</div>
+  <div class="node-title">Perluas / Ubah Filter</div>
+  <div class="node-sub">Kembali ke listing</div>
+</div>
+
+<!-- Detail page -->
+<div class="node node-step c-teal" style="left:1460px;top:68px" data-id="s-detail"
+  data-tip="Halaman detail program: bio ustad lengkap, kurikulum per sesi, jadwal batch tersedia, review alumni, dan syarat prasyarat">
+  <div class="node-icon">📖</div>
+  <div class="node-title">Lihat Detail Program</div>
+  <div class="node-sub">Bio ustad, kurikulum</div>
+</div>
+
+<!-- ROW 2: Exploration (y=240-440) -->
+<div class="node node-step c-gold" style="left:1550px;top:240px" data-id="s-ustad"
+  data-tip="Santri melihat profil lengkap ustad: pengalaman, sertifikasi, jumlah alumni lulus, rata-rata rating, video perkenalan">
+  <div class="node-icon">👳</div>
+  <div class="node-title">Lihat Profil Ustad</div>
+  <div class="node-sub">Sertifikasi, alumni</div>
+</div>
+
+<!-- Decision: Compare -->
+<div class="node-decision-wrap" style="left:1560px;top:360px" data-id="s-compare"
+  data-tip="Santri bisa memilih untuk membandingkan 2-3 program sebelum memutuskan, atau langsung memilih batch">
+  <div class="node-decision c-gold">
+    <div style="text-align:center;padding:18px">
+      <div style="font-size:11px;font-weight:700;color:#8A5E00;line-height:1.4">Bandingkan<br>Program<br>Lain?</div>
+    </div>
+  </div>
+</div>
+
+<!-- Compare action -->
+<div class="node node-step c-gold" style="left:1280px;top:400px" data-id="s-comparepage"
+  data-tip="Halaman compare side-by-side: harga, durasi, metode, rating ustad, jumlah sesi, metode mengajar">
+  <div class="node-icon">⚖️</div>
+  <div class="node-title">Compare Side-by-Side</div>
+  <div class="node-sub">Max 3 program</div>
+</div>
+
+<!-- Choose Batch -->
+<div class="node node-step c-teal" style="left:1800px;top:408px" data-id="s-batch"
+  data-tip="Santri memilih batch yang ingin diikuti dari daftar batch yang tersedia. Setiap batch menampilkan: tanggal mulai, sisa slot, jadwal sesi">
+  <div class="node-icon">📅</div>
+  <div class="node-title">Pilih Batch</div>
+  <div class="node-sub">Tanggal, slot, jadwal</div>
+</div>
+
+<!-- Decision: Slot Available -->
+<div class="node-decision-wrap" style="left:1900px;top:560px" data-id="s-slot"
+  data-tip="Sistem mengecek apakah masih ada slot yang tersedia di batch yang dipilih santri">
+  <div class="node-decision c-gold">
+    <div style="text-align:center;padding:16px">
+      <div style="font-size:11px;font-weight:700;color:#8A5E00;line-height:1.4">Slot<br>Tersedia?</div>
+    </div>
+  </div>
+</div>
+
+<!-- Waitlist -->
+<div class="node node-step c-red" style="left:1900px;top:780px" data-id="s-waitlist"
+  data-tip="Santri bisa join waitlist. Sistem akan notifikasi otomatis via WhatsApp/email jika ada slot terbuka atau batch baru dibuka">
+  <div class="node-icon">📋</div>
+  <div class="node-title">Join Waitlist</div>
+  <div class="node-sub">Notif jika slot buka</div>
+</div>
+
+<!-- ROW 3: Checkout (y=608) -->
+<div class="node node-step c-teal" style="left:1620px;top:608px" data-id="s-checkout"
+  data-tip="Halaman checkout: ringkasan program, batch yang dipilih, harga, pilihan metode pembayaran (Transfer VA, QRIS, GoPay, OVO)">
+  <div class="node-icon">🛒</div>
+  <div class="node-title">Checkout</div>
+  <div class="node-sub">Ringkasan + metode bayar</div>
+</div>
+
+<div class="node node-step c-blue" style="left:1360px;top:608px" data-id="s-pay"
+  data-tip="Payment via Xendit: Virtual Account (BCA, BRI, Mandiri), QRIS, GoPay, OVO, Dana. Expired dalam 24 jam.">
+  <div class="node-icon">💳</div>
+  <div class="node-title">Proses Pembayaran</div>
+  <div class="node-sub">VA, QRIS, e-wallet</div>
+</div>
+
+<!-- Decision: Payment OK -->
+<div class="node-decision-wrap" style="left:1200px;top:560px" data-id="s-payok"
+  data-tip="Xendit melaporkan status pembayaran ke sistem Santri.ID">
+  <div class="node-decision c-gold">
+    <div style="text-align:center;padding:16px">
+      <div style="font-size:11px;font-weight:700;color:#8A5E00;line-height:1.4">Bayar<br>Sukses?</div>
+    </div>
+  </div>
+</div>
+
+<!-- Pay Retry -->
+<div class="node node-step c-red" style="left:1120px;top:780px" data-id="s-retry"
+  data-tip="Jika pembayaran gagal/expired, santri bisa memilih metode pembayaran lain atau ulangi proses">
+  <div class="node-icon">🔁</div>
+  <div class="node-title">Ganti Metode Bayar</div>
+  <div class="node-sub">Coba lagi / metode lain</div>
+</div>
+
+<div class="node node-step c-green" style="left:860px;top:608px" data-id="s-confirm"
+  data-tip="Sistem mengirim konfirmasi: email + WhatsApp. Slot otomatis berkurang. Santri masuk grup batch. Kalender tersinkronisasi.">
+  <div class="node-icon">✅</div>
+  <div class="node-title">Konfirmasi Enrollment</div>
+  <div class="node-sub">Email + WA + grup batch</div>
+</div>
+
+<!-- ROW 4: Learning (y=608 cont.) -->
+<div class="node node-step c-teal" style="left:600px;top:608px" data-id="s-access"
+  data-tip="Santri mengakses dashboard batch: jadwal sesi, materi pre-belajar, daftar teman satu batch, dan link sesi">
+  <div class="node-icon">🎓</div>
+  <div class="node-title">Akses Dashboard Batch</div>
+  <div class="node-sub">Jadwal, materi, teman</div>
+</div>
+
+<div class="node node-step c-teal" style="left:340px;top:608px" data-id="s-join"
+  data-tip="Santri join sesi live via video call yang terintegrasi di platform. Absensi otomatis tercatat.">
+  <div class="node-icon">📹</div>
+  <div class="node-title">Ikuti Sesi Live</div>
+  <div class="node-sub">Video call + absensi</div>
+</div>
+
+<!-- Decision: All Sessions Done -->
+<div class="node-decision-wrap" style="left:120px;top:560px" data-id="s-alldone"
+  data-tip="Apakah santri sudah menyelesaikan semua sesi yang diperlukan dalam batch?">
+  <div class="node-decision c-gold">
+    <div style="text-align:center;padding:16px">
+      <div style="font-size:11px;font-weight:700;color:#8A5E00;line-height:1.4">Semua<br>Sesi<br>Selesai?</div>
+    </div>
+  </div>
+</div>
+
+<!-- Next Session -->
+<div class="node node-step c-gold" style="left:120px;top:820px" data-id="s-nextsession"
+  data-tip="Santri menunggu dan mempersiapkan sesi berikutnya. Sistem mengirim reminder H-1 dan H-0 via WA.">
+  <div class="node-icon">⏰</div>
+  <div class="node-title">Tunggu Sesi Berikutnya</div>
+  <div class="node-sub">Reminder H-1 via WA</div>
+</div>
+
+<!-- Certificate -->
+<div class="node node-step c-green" style="left:-10px;top:608px" data-id="s-cert"
+  data-tip="Sistem menerbitkan sertifikat digital terverifikasi dengan QR code. Bisa dibagikan ke LinkedIn, Instagram, atau didownload PDF.">
+  <div class="node-icon">🏅</div>
+  <div class="node-title">Terima Sertifikat</div>
+  <div class="node-sub">Digital + QR verifikasi</div>
+</div>
+
+<div class="node node-step c-green" style="left:-10px;top:760px" data-id="s-review"
+  data-tip="Santri diminta memberikan ulasan: rating bintang, testimoni teks, dan feedback untuk ustad. Ulasan akan terlihat di halaman program.">
+  <div class="node-icon">⭐</div>
+  <div class="node-title">Beri Ulasan</div>
+  <div class="node-sub">Rating + testimoni</div>
+</div>
+
+<div class="node node-end" style="left:20px;top:940px" data-id="s-end">SELESAI</div>
+
+<!-- Lane labels -->
+<div style="position:absolute;left:30px;top:30px;font-size:10px;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:1px;opacity:.5">① DISCOVERY</div>
+<div style="position:absolute;left:440px;top:380px;font-size:10px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:1px;opacity:.5">② EKSPLORASI & COMPARE</div>
+<div style="position:absolute;left:860px;top:570px;font-size:10px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:1px;opacity:.5">③ ENROLLMENT & PAYMENT</div>
+<div style="position:absolute;left:30px;top:570px;font-size:10px;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:1px;opacity:.5">④ LEARNING & COMPLETION</div>
+
+</div><!-- flow-board -->
+</div><!-- canvas -->
+</div><!-- flow-santri -->
+
+
+<!-- ══════════════════════════════════════
+     FLOW 2: USTAD
+══════════════════════════════════════ -->
+<div class="flow-section" id="flow-ustad">
+<div class="flow-canvas" id="canvas-ustad">
+<div class="flow-board" style="min-width:1800px;min-height:1200px">
+
+<svg class="arrows-svg" width="1800" height="1200">
+  <defs>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#999"/></marker>
+    <marker id="arr2-gold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#C8973A"/></marker>
+    <marker id="arr2-teal" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#0A7C6B"/></marker>
+    <marker id="arr2-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#D94F3B"/></marker>
+    <marker id="arr2-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2D8A5F"/></marker>
+  </defs>
+
+  <!-- Onboarding row y=100 -->
+  <line x1="100" y1="100" x2="180" y2="100" stroke="#999" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="360" y1="100" x2="440" y2="100" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <line x1="620" y1="100" x2="700" y2="100" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <!-- Verif decision -->
+  <line x1="880" y1="100" x2="960" y2="100" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <!-- Verif OK -->
+  <line x1="1120" y1="100" x2="1200" y2="100" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr2-green)"/>
+  <text x="1128" y="92" font-size="10" fill="#2D8A5F" font-family="Plus Jakarta Sans" font-weight="700">VERIFIED ✓</text>
+  <!-- Verif REJECT -->
+  <line x1="1040" y1="180" x2="1040" y2="260" stroke="#D94F3B" stroke-width="1.5" marker-end="url(#arr2-red)"/>
+  <text x="1048" y="228" font-size="10" fill="#D94F3B" font-family="Plus Jakarta Sans" font-weight="700">DITOLAK</text>
+  <path d="M 960 290 Q 800 340 700 130" stroke="#D94F3B" stroke-width="1.5" fill="none" marker-end="url(#arr2-red)" stroke-dasharray="5,3"/>
+
+  <!-- Create program row y=100 cont -->
+  <line x1="1380" y1="100" x2="1460" y2="100" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <line x1="1640" y1="100" x2="1640" y2="200" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+
+  <!-- Setup rows -->
+  <line x1="1640" y1="270" x2="1640" y2="360" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <line x1="1640" y1="430" x2="1640" y2="520" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+
+  <!-- Publish -->
+  <line x1="1640" y1="590" x2="1640" y2="680" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+
+  <!-- Live + manage -->
+  <line x1="1560" y1="740" x2="1460" y2="740" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr2-green)"/>
+  <text x="1470" y="732" font-size="10" fill="#2D8A5F" font-family="Plus Jakarta Sans" font-weight="700">LIVE</text>
+  <line x1="1280" y1="740" x2="1200" y2="740" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <line x1="1020" y1="740" x2="940" y2="740" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <line x1="760" y1="740" x2="680" y2="740" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+
+  <!-- Batch full? -->
+  <line x1="500" y1="740" x2="420" y2="740" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+
+  <!-- Batch FULL → Run session -->
+  <line x1="260" y1="820" x2="260" y2="900" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr2-green)"/>
+  <text x="268" y="868" font-size="10" fill="#2D8A5F" font-family="Plus Jakarta Sans" font-weight="700">PENUH / MULAI</text>
+
+  <!-- Still open → Open new batch -->
+  <line x1="340" y1="740" x2="180" y2="740" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)" stroke-dasharray="4,3"/>
+  <text x="200" y="732" font-size="10" fill="#C8973A" font-family="Plus Jakarta Sans" font-weight="700">MASIH BUKA</text>
+
+  <!-- Run sessions row -->
+  <line x1="350" y1="940" x2="440" y2="940" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <line x1="620" y1="940" x2="700" y2="940" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <line x1="880" y1="940" x2="960" y2="940" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+
+  <!-- All sessions done? -->
+  <line x1="1120" y1="940" x2="1200" y2="940" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <!-- YES →  -->
+  <line x1="1360" y1="940" x2="1440" y2="940" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr2-green)"/>
+  <text x="1368" y="932" font-size="10" fill="#2D8A5F" font-family="Plus Jakarta Sans" font-weight="700">SELESAI</text>
+  <!-- NO loop -->
+  <line x1="1280" y1="1020" x2="1280" y2="1060" stroke="#C8973A" stroke-width="1.5" marker-end="url(#arr2-gold)"/>
+  <path d="M 1200 1080 Q 800 1120 760 970" stroke="#C8973A" stroke-width="1.5" fill="none" marker-end="url(#arr2-gold)" stroke-dasharray="5,3"/>
+  <text x="900" y="1110" font-size="10" fill="#C8973A" font-family="Plus Jakarta Sans" font-weight="700">SESI BERIKUTNYA</text>
+
+  <!-- Payout row -->
+  <line x1="1620" y1="940" x2="1700" y2="940" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr2-green)"/>
+  <line x1="1700" y1="940" x2="1700" y2="1060" stroke="#2D8A5F" stroke-width="1.5"/>
+  <line x1="1700" y1="1060" x2="1620" y2="1060" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr2-green)"/>
+  <line x1="1440" y1="1060" x2="1360" y2="1060" stroke="#999" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+</svg>
+
+<!-- ONBOARDING ROW y=68 -->
+<div class="node node-start" style="left:40px;top:80px">MULAI</div>
+
+<div class="node node-step c-gold" style="left:180px;top:68px" data-id="u-register"
+  data-tip="Ustad mendaftar: nama lengkap, email, nomor WA, pilih role sebagai 'Pengajar'">
+  <div class="node-icon">📝</div>
+  <div class="node-title">Daftar Akun Ustad</div>
+  <div class="node-sub">Email / Google OAuth</div>
+</div>
+
+<div class="node node-step c-gold" style="left:440px;top:68px" data-id="u-profile"
+  data-tip="Ustad mengisi profil: foto, bio, spesialisasi, metode mengajar, pengalaman, dan upload dokumen sertifikasi">
+  <div class="node-icon">👤</div>
+  <div class="node-title">Lengkapi Profil</div>
+  <div class="node-sub">Foto, bio, sertifikasi</div>
+</div>
+
+<div class="node node-step c-gold" style="left:700px;top:68px" data-id="u-upload"
+  data-tip="Upload dokumen: ijazah pesantren/madrasah, sertifikat mengaji, KTP. Admin platform akan review dalam 1-3 hari kerja.">
+  <div class="node-icon">📄</div>
+  <div class="node-title">Upload Dokumen</div>
+  <div class="node-sub">Ijazah, sertifikat, KTP</div>
+</div>
+
+<!-- Verif Decision -->
+<div class="node-decision-wrap" style="left:960px;top:20px" data-id="u-verif"
+  data-tip="Admin Santri.ID mereview dokumen ustad. Proses 1-3 hari kerja. Ustad mendapat notifikasi hasil via email.">
+  <div class="node-decision c-gold">
+    <div style="text-align:center;padding:16px">
+      <div style="font-size:11px;font-weight:700;color:#8A5E00;line-height:1.4">Admin<br>Verifikasi?</div>
+    </div>
+  </div>
+</div>
+
+<div class="node node-step c-red" style="left:960px;top:260px" data-id="u-revise"
+  data-tip="Ustad mendapat notifikasi alasan penolakan dan diminta melengkapi/mengganti dokumen yang kurang">
+  <div class="node-icon">🔄</div>
+  <div class="node-title">Revisi Dokumen</div>
+  <div class="node-sub">Lengkapi yang kurang</div>
+</div>
+
+<div class="node node-step c-green" style="left:1200px;top:68px" data-id="u-verified"
+  data-tip="Ustad mendapat badge 'Verified ✅' di profil. Akun aktif dan bisa membuat program.">
+  <div class="node-icon">✅</div>
+  <div class="node-title">Akun Terverifikasi</div>
+  <div class="node-sub">Badge ✅ aktif</div>
+</div>
+
+<!-- CREATE PROGRAM ROW -->
+<div class="node node-step c-gold" style="left:1460px;top:68px" data-id="u-create"
+  data-tip="Ustad mengisi form program: nama, kategori, level, deskripsi, prasyarat, metode mengajar, dan target lulusan">
+  <div class="node-icon">✏️</div>
+  <div class="node-title">Buat Program Baru</div>
+  <div class="node-sub">Form detail program</div>
+</div>
+
+<div class="node node-step c-gold" style="left:1550px;top:200px" data-id="u-curriculum"
+  data-tip="Ustad input kurikulum per sesi: judul sesi, materi yang dibahas, durasi, dan materi pre-reading yang perlu disiapkan santri">
+  <div class="node-icon">📚</div>
+  <div class="node-title">Buat Kurikulum</div>
+  <div class="node-sub">Per sesi & materi</div>
+</div>
+
+<div class="node node-step c-gold" style="left:1550px;top:360px" data-id="u-quota"
+  data-tip="Ustad set: maksimal santri per batch (5-50), harga per santri, apakah ada trial gratis, dan kebijakan refund">
+  <div class="node-icon">👥</div>
+  <div class="node-title">Set Kuota & Harga</div>
+  <div class="node-sub">Maks santri, pricing</div>
+</div>
+
+<div class="node node-step c-gold" style="left:1550px;top:520px" data-id="u-schedule"
+  data-tip="Ustad set jadwal batch pertama: tanggal mulai, tanggal selesai, hari sesi per minggu, jam sesi, dan link video call">
+  <div class="node-icon">📅</div>
+  <div class="node-title">Set Jadwal Batch</div>
+  <div class="node-sub">Tanggal, hari, jam</div>
+</div>
+
+<div class="node node-step c-purple" style="left:1550px;top:680px" data-id="u-publish"
+  data-tip="Sistem auto-review konten program. Jika lolos, program langsung live dan bisa ditemukan santri di listing.">
+  <div class="node-icon">🚀</div>
+  <div class="node-title">Publikasikan Program</div>
+  <div class="node-sub">Auto-review, live</div>
+</div>
+
+<!-- MANAGE BATCH ROW y=708 -->
+<div class="node node-step c-green" style="left:1280px;top:708px" data-id="u-live"
+  data-tip="Program santri.id sudah bisa ditemukan di listing. Ustad bisa share link program ke media sosial untuk promosi.">
+  <div class="node-icon">📡</div>
+  <div class="node-title">Program Live</div>
+  <div class="node-sub">Terlihat di listing</div>
+</div>
+
+<div class="node node-step c-gold" style="left:1020px;top:708px" data-id="u-promote"
+  data-tip="Ustad share link program di WhatsApp, Instagram, TikTok. Platform juga membantu distribusi via featured listing.">
+  <div class="node-icon">📢</div>
+  <div class="node-title">Promosi Program</div>
+  <div class="node-sub">Share link, socmed</div>
+</div>
+
+<div class="node node-step c-gold" style="left:760px;top:708px" data-id="u-enrollwatch"
+  data-tip="Ustad memantau dashboard: siapa saja yang sudah enroll, total pendapatan pending, dan notifikasi enrollee baru">
+  <div class="node-icon">👀</div>
+  <div class="node-title">Pantau Pendaftaran</div>
+  <div class="node-sub">Dashboard real-time</div>
+</div>
+
+<div class="node node-step c-gold" style="left:500px;top:708px" data-id="u-welcome"
+  data-tip="Ustad mengirim pesan selamat datang ke semua santri yang sudah enroll, dan memastikan mereka siap untuk sesi pertama">
+  <div class="node-icon">👋</div>
+  <div class="node-title">Welcome Santri</div>
+  <div class="node-sub">Broadcast pesan</div>
+</div>
+
+<!-- Batch Full Decision -->
+<div class="node-decision-wrap" style="left:260px;top:660px" data-id="u-batchfull"
+  data-tip="Apakah batch sudah penuh atau sudah saatnya memulai kelas?">
+  <div class="node-decision c-gold">
+    <div style="text-align:center;padding:16px">
+      <div style="font-size:11px;font-weight:700;color:#8A5E00;line-height:1.4">Mulai<br>Batch?</div>
+    </div>
+  </div>
+</div>
+
+<!-- Open new batch (loop) -->
+<div class="node node-step c-gold" style="left:40px;top:708px" data-id="u-newbatch"
+  data-tip="Ustad buka batch baru dengan jadwal berbeda untuk menampung santri yang belum bisa join batch saat ini">
+  <div class="node-icon">➕</div>
+  <div class="node-title">Buka Batch Baru</div>
+  <div class="node-sub">Jadwal baru</div>
+</div>
+
+<!-- RUN SESSION ROW y=908 -->
+<div class="node node-step c-gold" style="left:170px;top:908px" data-id="u-session"
+  data-tip="Ustad memulai sesi live: join video call, share screen, whiteboard. Absensi santri otomatis tercatat sistem.">
+  <div class="node-icon">🎙</div>
+  <div class="node-title">Jalankan Sesi Live</div>
+  <div class="node-sub">Video call, whiteboard</div>
+</div>
+
+<div class="node node-step c-gold" style="left:440px;top:908px" data-id="u-feedback"
+  data-tip="Setelah sesi, ustad mengisi catatan per santri: progress tajwid, kesalahan yang perlu dikoreksi, dan rekomendasi latihan">
+  <div class="node-icon">📋</div>
+  <div class="node-title">Beri Feedback Santri</div>
+  <div class="node-sub">Catatan per santri</div>
+</div>
+
+<div class="node node-step c-gold" style="left:700px;top:908px" data-id="u-absen"
+  data-tip="Ustad konfirmasi absensi, tandai santri yang tidak hadir, dan atur jadwal penggantian jika ada sesi yang terlewat">
+  <div class="node-icon">✔️</div>
+  <div class="node-title">Konfirmasi Absensi</div>
+  <div class="node-sub">Tandai hadir/tidak</div>
+</div>
+
+<!-- Decision: All Done? -->
+<div class="node-decision-wrap" style="left:960px;top:860px" data-id="u-alldone"
+  data-tip="Apakah semua sesi dalam batch sudah selesai dijalankan?">
+  <div class="node-decision c-gold">
+    <div style="text-align:center;padding:16px">
+      <div style="font-size:11px;font-weight:700;color:#8A5E00;line-height:1.4">Semua<br>Sesi<br>Selesai?</div>
+    </div>
+  </div>
+</div>
+
+<div class="node node-step c-green" style="left:1200px;top:908px" data-id="u-certissue"
+  data-tip="Ustad konfirmasi kelulusan santri. Sistem otomatis menerbitkan sertifikat digital untuk santri yang memenuhi syarat kehadiran minimum.">
+  <div class="node-icon">🎓</div>
+  <div class="node-title">Terbitkan Sertifikat</div>
+  <div class="node-sub">Konfirmasi kelulusan</div>
+</div>
+
+<div class="node node-step c-green" style="left:1440px;top:908px" data-id="u-payout"
+  data-tip="Platform menghitung pendapatan ustad (90% dari total pembayaran santri) dan mentransfer ke rekening bank ustad dalam 3-5 hari kerja.">
+  <div class="node-icon">💰</div>
+  <div class="node-title">Terima Payout</div>
+  <div class="node-sub">90% → rekening bank</div>
+</div>
+
+<div class="node node-step c-gold" style="left:1440px;top:1040px" data-id="u-repeat"
+  data-tip="Ustad bisa langsung membuka batch baru dari program yang sama, atau membuat program baru di level lebih tinggi">
+  <div class="node-icon">🔁</div>
+  <div class="node-title">Buka Batch Baru / Program Baru</div>
+  <div class="node-sub">Repeat & scale</div>
+</div>
+
+<div class="node node-end" style="left:1200px;top:1040px">LANJUT</div>
+
+</div></div></div>
+
+
+<!-- ══════════════════════════════════════
+     FLOW 3: BATCH LIFECYCLE
+══════════════════════════════════════ -->
+<div class="flow-section" id="flow-batch">
+<div class="flow-canvas">
+<div class="flow-board" style="min-width:1400px;min-height:900px">
+<svg class="arrows-svg" width="1400" height="900">
+  <defs>
+    <marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#999"/></marker>
+    <marker id="arr3-t" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#0A7C6B"/></marker>
+  </defs>
+  <line x1="180" y1="100" x2="260" y2="100" stroke="#999" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <line x1="440" y1="100" x2="520" y2="100" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="700" y1="100" x2="780" y2="100" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="960" y1="100" x2="1040" y2="100" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="1220" y1="100" x2="1300" y2="100" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+
+  <!-- Row 2 -->
+  <line x1="1360" y1="180" x2="1360" y2="300" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="1280" y1="380" x2="1200" y2="380" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="1020" y1="380" x2="940" y2="380" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="760" y1="380" x2="680" y2="380" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="500" y1="380" x2="420" y2="380" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="240" y1="380" x2="160" y2="380" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+
+  <!-- Row 3 -->
+  <line x1="100" y1="460" x2="100" y2="560" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="180" y1="620" x2="260" y2="620" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="440" y1="620" x2="520" y2="620" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="700" y1="620" x2="780" y2="620" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="960" y1="620" x2="1040" y2="620" stroke="#0A7C6B" stroke-width="1.5" marker-end="url(#arr3-t)"/>
+  <line x1="1220" y1="620" x2="1300" y2="620" stroke="#999" stroke-width="1.5" marker-end="url(#arr3)"/>
+</svg>
+
+<!-- STATUS TRACK -->
+<div style="position:absolute;top:30px;left:40px;font-size:11px;font-weight:800;color:var(--light);text-transform:uppercase;letter-spacing:1px">Status Lifecycle Batch →</div>
+
+<div class="node node-start" style="left:40px;top:80px">DIBUAT</div>
+
+<div class="node node-step c-gold" style="left:260px;top:68px" data-id="bl-draft"
+  data-tip="Batch baru dibuat ustad. Status: DRAFT. Belum terlihat oleh santri. Ustad masih bisa edit semua detail.">
+  <div class="node-icon">📝</div>
+  <div class="node-title">Status: DRAFT</div>
+  <div class="node-sub">Belum publik, bisa edit</div>
+</div>
+
+<div class="node node-step c-purple" style="left:520px;top:68px" data-id="bl-review"
+  data-tip="Ustad submit untuk review. Sistem auto-check: konten, harga, jadwal valid. Review selesai dalam menit.">
+  <div class="node-icon">🔍</div>
+  <div class="node-title">Status: REVIEW</div>
+  <div class="node-sub">Auto-check sistem</div>
+</div>
+
+<div class="node node-step c-teal" style="left:780px;top:68px" data-id="bl-open"
+  data-tip="Batch live dan terbuka untuk pendaftaran. Santri bisa melihat dan mendaftar. Slot counter aktif.">
+  <div class="node-icon">🟢</div>
+  <div class="node-title">Status: OPEN</div>
+  <div class="node-sub">Pendaftaran buka</div>
+</div>
+
+<div class="node node-step c-red" style="left:1040px;top:68px" data-id="bl-full"
+  data-tip="Semua slot terisi. Santri baru masuk waitlist otomatis. Ustad bisa buka batch baru kapan saja.">
+  <div class="node-icon">🔴</div>
+  <div class="node-title">Status: FULL</div>
+  <div class="node-sub">Slot habis, waitlist</div>
+</div>
+
+<div class="node node-step c-gold" style="left:1300px;top:68px" data-id="bl-locked"
+  data-tip="H-1 sebelum mulai. Pendaftaran ditutup. Ustad dan santri menerima reminder final dan link sesi pertama.">
+  <div class="node-icon">🔒</div>
+  <div class="node-title">Status: LOCKED</div>
+  <div class="node-sub">H-1 mulai, ditutup</div>
+</div>
+
+<!-- Row 2 -->
+<div class="node node-step c-teal" style="left:1280px;top:300px" data-id="bl-ongoing"
+  data-tip="Batch sedang berjalan. Sesi berlangsung sesuai jadwal. Santri dan ustad aktif berinteraksi.">
+  <div class="node-icon">▶️</div>
+  <div class="node-title">Status: ONGOING</div>
+  <div class="node-sub">Sesi aktif berjalan</div>
+</div>
+
+<div class="node node-step c-purple" style="left:1020px;top:348px" data-id="bl-s1"
+  data-tip="Sesi 1 dari N sesi dalam batch. Absensi otomatis, rekaman dimulai (jika aktif), dan notifikasi dikirim ke yang absen.">
+  <div class="node-icon">📹</div>
+  <div class="node-title">Sesi 1 / N</div>
+  <div class="node-sub">Absensi + rekam</div>
+</div>
+
+<div class="node node-step c-purple" style="left:760px;top:348px" data-id="bl-sn"
+  data-tip="Proses sesi berulang: ustad mengajar, absensi tercatat, progress santri diupdate setelah setiap sesi.">
+  <div class="node-icon">📹</div>
+  <div class="node-title">Sesi 2...N</div>
+  <div class="node-sub">Berulang per jadwal</div>
+</div>
+
+<div class="node node-step c-gold" style="left:500px;top:348px" data-id="bl-progress"
+  data-tip="Setelah setiap sesi, progress santri diupdate: % sesi selesai, catatan ustad, dan status kehadiran.">
+  <div class="node-icon">📊</div>
+  <div class="node-title">Update Progress</div>
+  <div class="node-sub">% selesai, catatan</div>
+</div>
+
+<div class="node node-step c-teal" style="left:240px;top:348px" data-id="bl-lastsession"
+  data-tip="Sesi terakhir batch. Ustad melakukan evaluasi akhir dan menentukan santri yang lulus.">
+  <div class="node-icon">🎯</div>
+  <div class="node-title">Sesi Terakhir</div>
+  <div class="node-sub">Evaluasi akhir</div>
+</div>
+
+<div class="node node-step c-green" style="left:40px;top:348px" data-id="bl-eval"
+  data-tip="Ustad menandai setiap santri: LULUS atau PERLU PENGULANGAN. Santri yang lulus memenuhi syarat dapat sertifikat.">
+  <div class="node-icon">✅</div>
+  <div class="node-title">Evaluasi Kelulusan</div>
+  <div class="node-sub">Ustad tandai lulus</div>
+</div>
+
+<!-- Row 3 -->
+<div class="node node-step c-green" style="left:40px;top:560px" data-id="bl-complete"
+  data-tip="Batch resmi selesai. Status berubah menjadi COMPLETED. Tidak ada lagi aktivitas sesi.">
+  <div class="node-icon">🏁</div>
+  <div class="node-title">Status: COMPLETED</div>
+  <div class="node-sub">Batch resmi selesai</div>
+</div>
+
+<div class="node node-step c-green" style="left:260px;top:608px" data-id="bl-certout"
+  data-tip="Sistem otomatis menerbitkan sertifikat digital untuk santri yang lulus. Dikirim via email dan tersedia di dashboard.">
+  <div class="node-icon">🏅</div>
+  <div class="node-title">Terbitkan Sertifikat</div>
+  <div class="node-sub">Otomatis via sistem</div>
+</div>
+
+<div class="node node-step c-blue" style="left:520px;top:608px" data-id="bl-payoutprocess"
+  data-tip="Platform menghitung pendapatan: total bayar × 90% untuk ustad. Proses transfer T+3 hari kerja setelah batch COMPLETED.">
+  <div class="node-icon">💳</div>
+  <div class="node-title">Proses Payout Ustad</div>
+  <div class="node-sub">T+3 hari kerja</div>
+</div>
+
+<div class="node node-step c-gold" style="left:780px;top:608px" data-id="bl-reviewreq"
+  data-tip="Sistem mengirim request ulasan ke semua santri yang telah menyelesaikan batch. Deadline 7 hari.">
+  <div class="node-icon">⭐</div>
+  <div class="node-title">Minta Ulasan Santri</div>
+  <div class="node-sub">Email + WA request</div>
+</div>
+
+<div class="node node-step c-purple" style="left:1040px;top:608px" data-id="bl-analytics"
+  data-tip="Sistem generate laporan batch: completion rate, rata-rata kehadiran, rating yang diterima, dan revenue untuk ustad.">
+  <div class="node-icon">📈</div>
+  <div class="node-title">Generate Laporan</div>
+  <div class="node-sub">Analytics batch</div>
+</div>
+
+<div class="node node-end" style="left:1300px;top:600px">ARCHIVED</div>
+
+</div></div></div>
+
+
+<!-- ══════════════════════════════════════
+     FLOW 4: PAYMENT
+══════════════════════════════════════ -->
+<div class="flow-section" id="flow-payment">
+<div class="flow-canvas">
+<div class="flow-board" style="min-width:1600px;min-height:900px">
+<svg class="arrows-svg" width="1600" height="900">
+  <defs>
+    <marker id="arr4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#999"/></marker>
+    <marker id="arr4-b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2563EB"/></marker>
+    <marker id="arr4-g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#2D8A5F"/></marker>
+    <marker id="arr4-r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#D94F3B"/></marker>
+  </defs>
+  <line x1="160" y1="100" x2="240" y2="100" stroke="#999" stroke-width="1.5" marker-end="url(#arr4)"/>
+  <line x1="420" y1="100" x2="500" y2="100" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr4-b)"/>
+  <line x1="680" y1="100" x2="760" y2="100" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr4-b)"/>
+
+  <!-- method split -->
+  <line x1="920" y1="100" x2="920" y2="200" stroke="#2563EB" stroke-width="1.5"/>
+  <line x1="920" y1="200" x2="700" y2="200" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr4-b)"/>
+  <line x1="920" y1="200" x2="960" y2="200" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr4-b)"/>
+  <line x1="920" y1="200" x2="1200" y2="200" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr4-b)"/>
+
+  <!-- converge to webhook -->
+  <line x1="620" y1="280" x2="620" y2="400" stroke="#2563EB" stroke-width="1.5"/>
+  <line x1="1060" y1="280" x2="1060" y2="400" stroke="#2563EB" stroke-width="1.5"/>
+  <line x1="1320" y1="280" x2="1320" y2="400" stroke="#2563EB" stroke-width="1.5"/>
+  <line x1="620" y1="400" x2="960" y2="400" stroke="#2563EB" stroke-width="1.5"/>
+  <line x1="1320" y1="400" x2="960" y2="400" stroke="#2563EB" stroke-width="1.5"/>
+  <line x1="960" y1="400" x2="960" y2="440" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr4-b)"/>
+
+  <!-- Webhook → decision -->
+  <line x1="960" y1="520" x2="960" y2="580" stroke="#2563EB" stroke-width="1.5" marker-end="url(#arr4-b)"/>
+
+  <!-- decision split -->
+  <line x1="880" y1="660" x2="760" y2="660" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr4-g)"/>
+  <text x="796" y="652" font-size="10" fill="#2D8A5F" font-family="Plus Jakarta Sans" font-weight="700">SUKSES</text>
+  <line x1="1040" y1="660" x2="1160" y2="660" stroke="#D94F3B" stroke-width="1.5" marker-end="url(#arr4-r)"/>
+  <text x="1068" y="652" font-size="10" fill="#D94F3B" font-family="Plus Jakarta Sans" font-weight="700">GAGAL</text>
+
+  <!-- success flow -->
+  <line x1="580" y1="660" x2="500" y2="660" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr4-g)"/>
+  <line x1="320" y1="660" x2="240" y2="660" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr4-g)"/>
+  <line x1="60" y1="660" x2="60" y2="780" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr4-g)"/>
+  <line x1="60" y1="860" x2="140" y2="860" stroke="#999" stroke-width="1.5" marker-end="url(#arr4)"/>
+
+  <!-- fail flow -->
+  <line x1="1360" y1="660" x2="1360" y2="780" stroke="#D94F3B" stroke-width="1.5" marker-end="url(#arr4-r)"/>
+  <path d="M 1280 810 Q 1100 850 900 750" stroke="#D94F3B" stroke-width="1.5" fill="none" marker-end="url(#arr4-r)" stroke-dasharray="5,3"/>
+
+  <!-- Payout schedule -->
+  <line x1="60" y1="860" x2="60" y2="940" stroke="#2D8A5F" stroke-width="1.5" marker-end="url(#arr4-g)"/>
+</svg>
+
+<div style="position:absolute;top:30px;left:40px;font-size:11px;font-weight:800;color:var(--light);text-transform:uppercase;letter-spacing:1px">Payment Flow — Powered by Xendit</div>
+
+<!-- Initiate -->
+<div class="node node-start" style="left:40px;top:80px">CHECKOUT</div>
+
+<div class="node node-step c-teal" style="left:240px;top:68px" data-id="p-order"
+  data-tip="Sistem membuat order record dengan: enrollment_id, batch_id, amount, santri_id, timestamp, dan expired_at (24 jam)">
+  <div class="node-icon">🧾</div>
+  <div class="node-title">Buat Order Record</div>
+  <div class="node-sub">Expired 24 jam</div>
+</div>
+
+<div class="node node-step c-blue" style="left:500px;top:68px" data-id="p-xendit"
+  data-tip="Sistem memanggil Xendit API untuk membuat payment request. Xendit generate payment ID dan instruksi bayar.">
+  <div class="node-icon">⚡</div>
+  <div class="node-title">Request ke Xendit</div>
+  <div class="node-sub">Create payment ID</div>
+</div>
+
+<div class="node node-step c-blue" style="left:760px;top:68px" data-id="p-method"
+  data-tip="Xendit menampilkan pilihan metode bayar yang tersedia sesuai konfigurasi platform">
+  <div class="node-icon">💳</div>
+  <div class="node-title">Pilih Metode Bayar</div>
+  <div class="node-sub">VA / QRIS / e-wallet</div>
+</div>
+
+<!-- Method nodes -->
+<div class="node node-step c-blue" style="left:500px;top:188px" data-id="p-va"
+  data-tip="Virtual Account: BCA, BRI, Mandiri, BNI. Bayar via ATM, M-Banking, atau Internet Banking. Expired 24 jam.">
+  <div class="node-icon">🏦</div>
+  <div class="node-title">Virtual Account</div>
+  <div class="node-sub">BCA, BRI, Mandiri</div>
+</div>
+
+<div class="node node-step c-blue" style="left:760px;top:188px" data-id="p-qris"
+  data-tip="QRIS: Scan QR dengan aplikasi apapun yang support QRIS. Real-time konfirmasi.">
+  <div class="node-icon">📱</div>
+  <div class="node-title">QRIS</div>
+  <div class="node-sub">GoPay, OVO, Dana, dll</div>
+</div>
+
+<div class="node node-step c-blue" style="left:1020px;top:188px" data-id="p-ewallet"
+  data-tip="E-wallet langsung: GoPay, OVO, Dana, ShopeePay. Redirect ke app e-wallet untuk konfirmasi.">
+  <div class="node-icon">👛</div>
+  <div class="node-title">E-Wallet Langsung</div>
+  <div class="node-sub">Redirect ke app</div>
+</div>
+
+<!-- Webhook -->
+<div class="node node-step c-purple" style="left:760px;top:440px" data-id="p-webhook"
+  data-tip="Xendit mengirim webhook ke Santri.ID server dengan status pembayaran. Sistem memvalidasi signature webhook untuk keamanan.">
+  <div class="node-icon">🔔</div>
+  <div class="node-title">Xendit Webhook</div>
+  <div class="node-sub">Notif status ke server</div>
+</div>
+
+<!-- Decision -->
+<div class="node-decision-wrap" style="left:880px;top:580px" data-id="p-check"
+  data-tip="Server Santri.ID memvalidasi status pembayaran dari Xendit webhook">
+  <div class="node-decision c-gold">
+    <div style="text-align:center;padding:16px">
+      <div style="font-size:11px;font-weight:700;color:#8A5E00;line-height:1.4">Bayar<br>Verified?</div>
+    </div>
+  </div>
+</div>
+
+<!-- Success path -->
+<div class="node node-step c-green" style="left:580px;top:628px" data-id="p-activate"
+  data-tip="Enrollment diaktivasi: slot berkurang, santri masuk grup batch, akses dashboard dibuka">
+  <div class="node-icon">✅</div>
+  <div class="node-title">Aktifkan Enrollment</div>
+  <div class="node-sub">Slot -1, akses buka</div>
+</div>
+
+<div class="node node-step c-green" style="left:320px;top:628px" data-id="p-notif"
+  data-tip="Notifikasi otomatis: Email konfirmasi + WhatsApp message + Push notification ke app santri">
+  <div class="node-icon">📨</div>
+  <div class="node-title">Kirim Notifikasi</div>
+  <div class="node-sub">Email + WA + Push</div>
+</div>
+
+<div class="node node-step c-green" style="left:40px;top:628px" data-id="p-ledger"
+  data-tip="Sistem mencatat transaksi di ledger: amount, timestamp, payment_method, xendit_id, enrollment_id. Pembayaran pending settlement.">
+  <div class="node-icon">📒</div>
+  <div class="node-title">Catat di Ledger</div>
+  <div class="node-sub">Transaksi tercatat</div>
+</div>
+
+<!-- Fail path -->
+<div class="node node-step c-red" style="left:1160px;top:628px" data-id="p-fail"
+  data-tip="Pembayaran gagal/expired. Sistem mengirim notifikasi ke santri dan memberi opsi untuk mencoba lagi dengan metode berbeda.">
+  <div class="node-icon">❌</div>
+  <div class="node-title">Bayar Gagal / Expired</div>
+  <div class="node-sub">Notif ke santri</div>
+</div>
+
+<!-- Payout section -->
+<div class="node node-step c-blue" style="left:40px;top:760px" data-id="p-settlement"
+  data-tip="Xendit melakukan settlement harian ke rekening escrow Santri.ID. Dana dari semua transaksi hari itu dikumpulkan.">
+  <div class="node-icon">🏦</div>
+  <div class="node-title">Xendit Settlement</div>
+  <div class="node-sub">Harian ke escrow</div>
+</div>
+
+<div class="node node-step c-gold" style="left:40px;top:920px" data-id="p-ustadpayout"
+  data-tip="Setelah batch COMPLETED, sistem otomatis menghitung 90% untuk ustad dan mentransfer ke rekening bank ustad T+3.">
+  <div class="node-icon">💰</div>
+  <div class="node-title">Payout ke Ustad (90%)</div>
+  <div class="node-sub">T+3 setelah batch selesai</div>
+</div>
+
+<div class="node node-end" style="left:260px;top:840px">DONE</div>
+
+</div></div></div>
+
+
+<!-- ══════════════════════════════════════
+     FLOW 5: FULL SYSTEM MAP
+══════════════════════════════════════ -->
+<div class="flow-section" id="flow-full">
+<div class="flow-canvas">
+<div class="flow-board" style="min-width:1600px;min-height:1000px">
+<svg class="arrows-svg" width="1600" height="1000">
+  <defs>
+    <marker id="arr5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#999"/></marker>
+    <marker id="arr5-t" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#0A7C6B"/></marker>
+  </defs>
+  <!-- main connections -->
+  <line x1="180" y1="120" x2="240" y2="200" stroke="#C8973A" stroke-width="2" marker-end="url(#arr5)"/>
+  <line x1="180" y1="160" x2="240" y2="400" stroke="#0A7C6B" stroke-width="2" marker-end="url(#arr5-t)"/>
+  <line x1="420" y1="240" x2="500" y2="240" stroke="#C8973A" stroke-width="2" marker-end="url(#arr5)"/>
+  <line x1="420" y1="440" x2="500" y2="440" stroke="#0A7C6B" stroke-width="2" marker-end="url(#arr5-t)"/>
+  <line x1="680" y1="240" x2="760" y2="240" stroke="#C8973A" stroke-width="2" marker-end="url(#arr5)"/>
+  <line x1="680" y1="440" x2="760" y2="440" stroke="#0A7C6B" stroke-width="2" marker-end="url(#arr5-t)"/>
+
+  <!-- Center platform -->
+  <line x1="940" y1="240" x2="1020" y2="240" stroke="#6B4EAA" stroke-width="2" marker-end="url(#arr5)"/>
+  <line x1="940" y1="440" x2="1020" y2="440" stroke="#6B4EAA" stroke-width="2" marker-end="url(#arr5)"/>
+
+  <!-- Batch connect -->
+  <line x1="960" y1="300" x2="960" y2="360" stroke="#6B4EAA" stroke-width="2" marker-end="url(#arr5)"/>
+
+  <!-- External services -->
+  <line x1="1200" y1="240" x2="1300" y2="240" stroke="#6B4EAA" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr5)"/>
+  <line x1="1200" y1="440" x2="1300" y2="440" stroke="#6B4EAA" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr5)"/>
+  <line x1="1200" y1="340" x2="1300" y2="340" stroke="#6B4EAA" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arr5)"/>
+</svg>
+
+<!-- Actors -->
+<div style="position:absolute;left:40px;top:80px;text-align:center">
+  <div style="width:120px;height:120px;border-radius:50%;background:var(--gold-l);border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 8px">👳</div>
+  <div style="font-size:13px;font-weight:800;color:var(--dark)">USTAD</div>
+  <div style="font-size:11px;color:var(--light)">Supply Side</div>
+</div>
+
+<div style="position:absolute;left:40px;top:340px;text-align:center">
+  <div style="width:120px;height:120px;border-radius:50%;background:var(--teal-l);border:3px solid var(--teal-m);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 8px">🧕</div>
+  <div style="font-size:13px;font-weight:800;color:var(--dark)">SANTRI</div>
+  <div style="font-size:11px;color:var(--light)">Demand Side</div>
+</div>
+
+<!-- Platform Modules -->
+<div class="node node-step c-gold" style="left:240px;top:180px" data-id="f-uregistration">
+  <div class="node-icon">📝</div>
+  <div class="node-title">Ustad Registration & Verification</div>
+</div>
+
+<div class="node node-step c-teal" style="left:240px;top:380px" data-id="f-sdiscovery">
+  <div class="node-icon">🔍</div>
+  <div class="node-title">Santri Discovery & Enrollment</div>
+</div>
+
+<div class="node node-step c-gold" style="left:500px;top:180px" data-id="f-programmgmt">
+  <div class="node-icon">📦</div>
+  <div class="node-title">Program & Batch Management</div>
+</div>
+
+<div class="node node-step c-teal" style="left:500px;top:380px" data-id="f-payment">
+  <div class="node-icon">💳</div>
+  <div class="node-title">Payment & Checkout</div>
+</div>
+
+<div class="node node-step c-gold" style="left:760px;top:180px" data-id="f-sessions">
+  <div class="node-icon">📹</div>
+  <div class="node-title">Session Management</div>
+</div>
+
+<div class="node node-step c-teal" style="left:760px;top:380px" data-id="f-learning">
+  <div class="node-icon">🎓</div>
+  <div class="node-title">Learning & Progress Tracking</div>
+</div>
+
+<!-- Core Platform -->
+<div style="position:absolute;left:920px;top:160px;background:var(--purple-l);border:2px solid var(--purple);border-radius:12px;padding:16px;width:300px">
+  <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin-bottom:10px">⚙️ PLATFORM CORE</div>
+  <div style="font-size:12px;color:var(--mid);line-height:1.9">
+    🗄 PostgreSQL Database<br>
+    🔐 Auth & Role Management<br>
+    📊 Analytics Engine<br>
+    🔔 Notification Service<br>
+    🏅 Certificate Generator<br>
+    💹 Revenue Ledger
+  </div>
+</div>
+
+<!-- External Services -->
+<div style="position:absolute;left:1300px;top:180px;display:flex;flex-direction:column;gap:12px">
+  <div class="node node-step c-blue" data-id="f-xendit" style="position:relative;left:0;top:0">
+    <div class="node-icon">⚡</div>
+    <div class="node-title">Xendit Payment</div>
+    <div class="node-sub">VA, QRIS, eWallet</div>
+  </div>
+  <div class="node node-step c-blue" data-id="f-wa" style="position:relative;left:0;top:0">
+    <div class="node-icon">💬</div>
+    <div class="node-title">WhatsApp API</div>
+    <div class="node-sub">Notifikasi & reminder</div>
+  </div>
+  <div class="node node-step c-blue" data-id="f-video" style="position:relative;left:0;top:0">
+    <div class="node-icon">📹</div>
+    <div class="node-title">Video Call API</div>
+    <div class="node-sub">Daily.co / Jitsi</div>
+  </div>
+  <div class="node node-step c-blue" data-id="f-storage" style="position:relative;left:0;top:0">
+    <div class="node-icon">☁️</div>
+    <div class="node-title">Cloud Storage</div>
+    <div class="node-sub">Rekaman, media</div>
+  </div>
+</div>
+
+</div></div></div>
+
+<script>
+// ── Flow Tabs ──
+function switchFlow(id, el) {
+  document.querySelectorAll('.flow-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tb-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('flow-' + id).classList.add('active');
+  el.classList.add('active');
+}
+
+// ── Node data ──
+const nodeData = {
+  's-start': { title:'Mulai — Santri', actor:'Santri', desc:'Santri membuka platform Santri.ID untuk pertama kali.', inputs:[], outputs:['Membuka landing page'] },
+  's-landing': { title:'Buka Landing Page', actor:'Santri', desc:'Santri melihat homepage: featured programs, hero banner, statistik platform, dan CTA utama. Tujuan: membangun kepercayaan awal.', inputs:['Browser / Mobile app'], outputs:['Scroll ke listing','Klik CTA search'] },
+  's-search': { title:'Search / Browse', actor:'Santri', desc:'Santri mencari program menggunakan search bar dengan keyword (nama program, ustadz, metode), atau browse berdasarkan kategori.', inputs:['Keyword input','Kategori click'], outputs:['Hasil pencarian tampil'] },
+  's-browse': { title:'Lihat Program Listing', actor:'Santri + Sistem', desc:'Sistem menampilkan grid program cards. Setiap card menampilkan: nama program, foto ustad, level, rating ⭐, sisa slot (dengan urgency indicator), harga, dan kategori.', inputs:['Query parameter','Filter aktif'], outputs:['Program cards rendered','Slot count real-time'] },
+  's-filter': { title:'Apply Filter', actor:'Santri', desc:'Filter tersedia: Level (pemula/menengah/lanjutan), Kategori (iqra/tajwid/tahsin/tahfidz), Rentang harga, Hari tersedia, Rating minimum, dan Status batch (buka/segera mulai).', inputs:['Filter selection'], outputs:['Listing difilter'] },
+  's-detail': { title:'Lihat Detail Program', actor:'Santri', desc:'Halaman detail lengkap: deskripsi program, profil ustad dengan kredensial, kurikulum per sesi, semua batch tersedia beserta sisa slot, ulasan alumni, dan FAQ. Ini adalah decision page utama.', inputs:['Klik program card'], outputs:['Buka profil ustad','Compare','Pilih batch'] },
+  's-ustad': { title:'Lihat Profil Ustad', actor:'Santri', desc:'Profil ustad lengkap: foto, bio, pengalaman mengajar, sertifikasi dan ijazah, jumlah alumni yang lulus, rata-rata rating, video perkenalan singkat, dan semua program yang diajarkan.', inputs:['Klik nama ustad'], outputs:['Kepercayaan meningkat','Kembali ke program'] },
+  's-batch': { title:'Pilih Batch', actor:'Santri', desc:'Santri memilih batch dari daftar yang tersedia. Setiap batch menampilkan: tanggal mulai-selesai, jadwal sesi (hari & jam), sisa slot, dan harga (bisa berbeda per batch untuk early bird).', inputs:['Klik batch option'], outputs:['Slot dicek sistem'] },
+  's-checkout': { title:'Checkout', actor:'Santri', desc:'Halaman checkout: ringkasan program yang dipilih, batch yang dipilih, harga total, input kode promo (jika ada), pilihan metode pembayaran, dan syarat & ketentuan.', inputs:['Konfirmasi batch'], outputs:['Inisiasi payment'] },
+  's-pay': { title:'Proses Pembayaran', actor:'Santri + Xendit', desc:'Payment via Xendit. Tersedia: Virtual Account (BCA, BRI, Mandiri, BNI), QRIS (scan dengan GoPay/OVO/Dana/dll), dan E-wallet langsung (GoPay, OVO, Dana, ShopeePay). Semua transaksi expired dalam 24 jam.', inputs:['Metode bayar dipilih'], outputs:['Payment instruction','Expired timer'] },
+  's-confirm': { title:'Konfirmasi Enrollment', actor:'Sistem', desc:'Setelah pembayaran berhasil: slot otomatis berkurang 1, santri masuk grup WhatsApp batch, akses dashboard dibuka, email konfirmasi dikirim, dan event kalender dibuat.', inputs:['Payment webhook success'], outputs:['Email konfirmasi','WA grup join','Dashboard akses'] },
+  's-access': { title:'Akses Dashboard Batch', actor:'Santri', desc:'Dashboard batch santri: jadwal sesi lengkap, materi pre-study, daftar anggota batch, link video call per sesi, progress bar pribadi, dan catatan dari ustad.', inputs:['Login ke platform'], outputs:['Siap ikut sesi'] },
+  's-join': { title:'Ikuti Sesi Live', actor:'Santri', desc:'Santri join sesi live via video call yang terintegrasi di platform (tidak perlu keluar ke Zoom/Meet terpisah). Absensi otomatis tercatat saat join. Ada fitur raise hand, chat, dan screen share ustad.', inputs:['Klik "Join Sesi"'], outputs:['Absensi tercatat','Progress update'] },
+  's-cert': { title:'Terima Sertifikat', actor:'Sistem → Santri', desc:'Sertifikat digital diterbitkan otomatis setelah ustad konfirmasi kelulusan. Format: PDF dengan QR code verifikasi. Bisa dibagikan ke LinkedIn, Instagram, atau didownload.', inputs:['Ustad konfirmasi lulus'], outputs:['Sertifikat PDF','QR verifikasi'] },
+  's-review': { title:'Beri Ulasan', actor:'Santri', desc:'Santri diminta memberikan: rating bintang (1-5), testimoni teks (min 50 karakter), dan opsi feedback khusus untuk ustad (private). Ulasan publik akan tampil di halaman program.', inputs:['Batch completed'], outputs:['Rating publik','Feedback ke ustad'] },
+
+  'u-register': { title:'Daftar Akun Ustad', actor:'Ustad', desc:'Ustad mendaftar dengan memilih role "Pengajar". Input: nama lengkap, email, nomor WA aktif. Bisa via Google OAuth atau email+password.', inputs:['Email / Google'], outputs:['Akun dibuat, pending verifikasi'] },
+  'u-profile': { title:'Lengkapi Profil', actor:'Ustad', desc:'Ustad mengisi: foto profil profesional, bio singkat, spesialisasi (iqra/tajwid/tahsin/tahfidz), metode mengajar, pengalaman (tahun), dan video perkenalan singkat (opsional).', inputs:['Form input'], outputs:['Profil tersimpan'] },
+  'u-upload': { title:'Upload Dokumen', actor:'Ustad', desc:'Dokumen yang diperlukan: (1) Ijazah pesantren/madrasah/universitas Islam, (2) Sertifikat mengaji/tajwid, (3) KTP/Identitas. Semua dalam format JPG atau PDF maks 5MB.', inputs:['File upload'], outputs:['Dokumen dikirim ke admin review'] },
+  'u-create': { title:'Buat Program Baru', actor:'Ustad', desc:'Form step-by-step: (1) Info dasar program, (2) Kurikulum per sesi, (3) Kuota & jadwal batch, (4) Harga & publish. Ada live preview kartu program yang akan terlihat santri.', inputs:['Klik "Buat Program"'], outputs:['Draft program'] },
+  'u-quota': { title:'Set Kuota & Harga', actor:'Ustad', desc:'Ustad menentukan: jumlah maksimal santri per batch (5-50), harga per santri, apakah ada early bird discount, dan kebijakan refund. Ada kalkulator otomatis estimasi pendapatan per batch.', inputs:['Input form'], outputs:['Pricing configured'] },
+  'u-schedule': { title:'Set Jadwal Batch', actor:'Ustad', desc:'Input jadwal: tanggal mulai, tanggal selesai, hari sesi (mis: Rabu & Sabtu), jam mulai, durasi per sesi. Sistem otomatis menggenerate daftar semua tanggal sesi dalam batch.', inputs:['Kalender input'], outputs:['Jadwal sesi generated'] },
+  'u-publish': { title:'Publikasikan Program', actor:'Ustad + Sistem', desc:'Sistem melakukan auto-review: cek kelengkapan konten, validasi jadwal, cek harga (minimum Rp 50.000). Jika lolos, program langsung live dalam hitungan menit.', inputs:['Klik Publish'], outputs:['Program live di listing'] },
+  'u-session': { title:'Jalankan Sesi Live', actor:'Ustad', desc:'Ustad memulai sesi dari dashboard. Video call terintegrasi langsung launch di platform. Fitur tersedia: whiteboard, screen share, mute peserta, dan rekam sesi (jika diaktifkan).', inputs:['Klik "Mulai Sesi"'], outputs:['Sesi aktif','Absensi berjalan'] },
+  'u-feedback': { title:'Beri Feedback Santri', actor:'Ustad', desc:'Setelah setiap sesi, ustad mengisi catatan per santri: area yang sudah bagus, yang perlu diperbaiki, dan rekomendasi latihan mandiri. Santri bisa lihat catatan ini di dashboard mereka.', inputs:['Post-session form'], outputs:['Catatan tersimpan','Notif ke santri'] },
+  'u-payout': { title:'Terima Payout', actor:'Ustad + Sistem', desc:'Setelah batch berstatus COMPLETED, sistem otomatis menghitung: total pendapatan = sum(semua pembayaran santri) × 90%. Transfer ke rekening bank ustad dalam T+3 hari kerja.', inputs:['Batch completed'], outputs:['Transfer ke bank','Rekap pendapatan'] },
+
+  'bl-open': { title:'Status: OPEN', actor:'Sistem', desc:'Batch terbuka untuk pendaftaran. Slot counter aktif dan terlihat di listing. Ustad mendapat notifikasi setiap ada santri baru yang enroll.', inputs:['Program published'], outputs:['Visible di listing','Enrollment buka'] },
+  'bl-ongoing': { title:'Status: ONGOING', actor:'Sistem', desc:'Batch sedang berjalan. Tidak bisa ada enrollee baru. Sesi dijadwalkan sesuai kalender. Absensi dan progress tracking aktif.', inputs:['Tanggal mulai tercapai'], outputs:['Sesi aktif','Progress tracking'] },
+  'bl-complete': { title:'Status: COMPLETED', actor:'Sistem', desc:'Semua sesi telah selesai dijalankan dan ustad telah konfirmasi kelulusan santri. Trigger: penerbitan sertifikat + proses payout ustad.', inputs:['Ustad konfirmasi selesai'], outputs:['Sertifikat terbit','Payout proses'] },
+
+  'p-xendit': { title:'Xendit Payment Gateway', actor:'Platform + Xendit', desc:'Santri.ID menggunakan Xendit sebagai payment gateway. Xendit dipilih karena support semua metode bayar Indonesia, webhook reliable, dan settlement harian.', inputs:['Order request'], outputs:['Payment instruction','Webhook on status change'] },
+  'p-webhook': { title:'Xendit Webhook', actor:'Xendit → Platform', desc:'Xendit mengirim HTTP POST ke endpoint platform setiap ada perubahan status pembayaran. Platform memvalidasi HMAC signature sebelum memproses. Events: PAID, EXPIRED, FAILED.', inputs:['Payment status change'], outputs:['Platform processes status'] },
+};
+
+// ── Tooltip ──
+const tooltip = document.getElementById('tooltip');
+document.querySelectorAll('[data-tip]').forEach(el => {
+  el.addEventListener('mouseenter', e => {
+    const tip = el.getAttribute('data-tip');
+    tooltip.innerHTML = tip;
+    tooltip.classList.add('show');
+  });
+  el.addEventListener('mousemove', e => {
+    tooltip.style.left = (e.clientX + 14) + 'px';
+    tooltip.style.top = (e.clientY - 30) + 'px';
+  });
+  el.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+});
+
+// ── Detail Panel ──
+document.querySelectorAll('[data-id]').forEach(el => {
+  el.addEventListener('click', e => {
+    const id = el.getAttribute('data-id');
+    const d = nodeData[id];
+    if (!d) return;
+    const panel = document.getElementById('detailPanel');
+    const content = document.getElementById('panelContent');
+    const actorColor = { 'Santri':'var(--teal)', 'Ustad':'var(--gold)', 'Sistem':'var(--purple)', 'Platform + Xendit':'var(--blue)', 'Xendit → Platform':'var(--blue)' }[d.actor] || 'var(--light)';
+    content.innerHTML = `
+      <div class="dp-title">${d.title}</div>
+      <div class="dp-actor" style="color:${actorColor}">${d.actor}</div>
+      <div class="dp-desc">${d.desc}</div>
+      ${d.inputs?.length ? `<div class="dp-section">INPUT</div>${d.inputs.map(i=>`<div class="dp-item">${i}</div>`).join('')}` : ''}
+      ${d.outputs?.length ? `<div class="dp-section">OUTPUT / TRIGGER</div>${d.outputs.map(o=>`<div class="dp-item">${o}</div>`).join('')}` : ''}
+    `;
+    panel.classList.add('open');
+    document.querySelectorAll('[data-id]').forEach(n => n.classList.remove('highlighted'));
+    el.classList.add('highlighted');
+    e.stopPropagation();
+  });
+});
+
+function closePanel() {
+  document.getElementById('detailPanel').classList.remove('open');
+  document.querySelectorAll('[data-id]').forEach(n => n.classList.remove('highlighted'));
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('[data-id]') && !e.target.closest('.detail-panel')) closePanel();
+});
+
+// ── Canvas pan ──
+document.querySelectorAll('.flow-canvas').forEach(canvas => {
+  let isDragging = false, startX, startY, scrollLeft, scrollTop;
+  canvas.addEventListener('mousedown', e => {
+    if (e.target.closest('[data-id]')) return;
+    isDragging = true;
+    startX = e.pageX - canvas.offsetLeft;
+    startY = e.pageY - canvas.offsetTop;
+    scrollLeft = canvas.scrollLeft;
+    scrollTop = canvas.scrollTop;
+  });
+  canvas.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const x = e.pageX - canvas.offsetLeft;
+    const y = e.pageY - canvas.offsetTop;
+    canvas.scrollLeft = scrollLeft - (x - startX);
+    canvas.scrollTop = scrollTop - (y - startY);
+  });
+  canvas.addEventListener('mouseup', () => isDragging = false);
+  canvas.addEventListener('mouseleave', () => isDragging = false);
+});
+</script>
+</body>
+</html>
