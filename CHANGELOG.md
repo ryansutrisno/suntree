@@ -1,3 +1,17 @@
+## [1.1.0](https://github.com/ryansutrisno/suntree/compare/v1.0.0...v1.1.0) (2026-06-02)
+
+
+### ✨ Features
+
+* **admin:** Add initial admin seeder ([929fc2a](https://github.com/ryansutrisno/suntree/commit/929fc2a473d011956850d8a4d0428bbb47d7dd6e))
+* **auth:** Add user roles for phase 1 ([9164b24](https://github.com/ryansutrisno/suntree/commit/9164b2445ca85e62f7d855a628623fee1919d421))
+* **data:** Add core phase 1 models ([b23e2de](https://github.com/ryansutrisno/suntree/commit/b23e2deead25fbe17284d4e9f769074b0bb51fad))
+
+
+### 👷 CI/CD
+
+* **tests:** Drop PHP 8.3 from matrix ([440d75b](https://github.com/ryansutrisno/suntree/commit/440d75b380762f2195389d28de30d0215e17d7d3))
+
 ## 1.0.0 (2026-06-02)
 
 
