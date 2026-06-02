@@ -132,7 +132,7 @@ gh pr create --base main --head feature/phase-1-nama-fitur
 Task awal berdasarkan PRD/TechStack v1.1:
 
 - [x] `01-role-auth-email-password.md` — Role & auth email/password.
-- [ ] `02-core-data-model.md` — Core model dan migration awal.
+- [x] `02-core-data-model.md` — Core model dan migration awal.
 - [ ] `03-admin-seeder.md` — Seeder admin awal.
 
 Tambahkan task baru jika Phase 1 berkembang, tetapi pastikan urutan tetap jelas.
