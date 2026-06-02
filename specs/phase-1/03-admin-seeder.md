@@ -28,67 +28,74 @@ Menyiapkan admin awal agar operasional MVP bisa dimulai dari dashboard/admin flo
 
 ## Workflow Wajib Sebelum Mulai
 
-- [ ] Checkout ke `main`.
-- [ ] Pull latest `main`.
-- [ ] Buat branch baru: `chore/phase-1-admin-seeder`.
-- [ ] Review PRD v1.1 dan TechStack v1.1.
-- [ ] Inspect seeder, factory, user model, dan config env terkait.
+- [x] Lanjut di branch fase: `feature/phase-1-foundation`.
+- [x] Review PRD v1.1 dan TechStack v1.1.
+- [x] Inspect seeder, factory, user model, dan config env terkait.
 
-Contoh command:
+Command branch yang dipakai:
 
 ```bash
-git checkout main
-git pull origin main
-git checkout -b chore/phase-1-admin-seeder
+git branch --show-current
+# feature/phase-1-foundation
 ```
 
 ## Todo Implementasi
 
-- [ ] Inspect seeder/factory saat ini.
-- [ ] Tentukan credential admin development yang aman dan terdokumentasi.
-- [ ] Implementasi/update admin seeder bila belum ada.
-- [ ] Pastikan role admin sesuai implementasi role Phase 1.
-- [ ] Tambah/update test seeder bila relevan.
-- [ ] Jalankan test spesifik seeder/user.
-- [ ] Jalankan formatter bila ada perubahan PHP.
-- [ ] Catat hasil verifikasi di dokumen ini.
-- [ ] Siap untuk review/PR.
+- [x] Inspect seeder/factory saat ini.
+- [x] Tentukan credential admin development yang aman dan terdokumentasi.
+- [x] Implementasi/update admin seeder bila belum ada.
+- [x] Pastikan role admin sesuai implementasi role Phase 1.
+- [x] Tambah/update test seeder bila relevan.
+- [x] Jalankan test spesifik seeder/user.
+- [x] Jalankan formatter bila ada perubahan PHP.
+- [x] Catat hasil verifikasi di dokumen ini.
+- [x] Siap untuk review/PR setelah seluruh task Phase 1 selesai.
 
 ## Verifikasi
 
-Command yang perlu dicatat setelah benar-benar dijalankan:
+Command yang sudah dijalankan:
 
 ```bash
-php artisan test --compact --filter=Seeder
-php artisan test --compact
-```
-
-Jika ada perubahan PHP:
-
-```bash
+php artisan test --compact --filter=AdminSeeder
 vendor/bin/pint --dirty --format agent
+php artisan test --compact
 ```
 
 Hasil:
 
-- [ ] Test seeder/user pass.
-- [ ] Seeder tidak membuat duplikasi admin.
-- [ ] Formatter pass bila relevan.
-- [ ] Tidak ada regresi yang diketahui.
+- [x] Test seeder/user pass: `AdminSeeder` pass dengan 2 tests dan 7 assertions.
+- [x] Seeder tidak membuat duplikasi admin: tercakup oleh test idempotency.
+- [x] Formatter pass: Pint pass.
+- [x] Tidak ada regresi yang diketahui: full suite pass dengan 9 tests dan 30 assertions.
 
 ## Catatan Implementasi
 
 - Keputusan teknis penting:
+  - `AdminUserSeeder` membuat admin terverifikasi dari `config('auth.admin_seed.*')`.
+  - Credential development didokumentasikan lewat `.env.example` sebagai `ADMIN_SEED_NAME`, `ADMIN_SEED_EMAIL`, dan `ADMIN_SEED_PASSWORD`.
+  - Seeder memakai `User::updateOrCreate()` agar idempotent dan tidak membuat duplikasi admin berdasarkan email.
+  - Seeder memiliki guard production yang melempar error jika password default `password` dipakai di production.
 - Tradeoff:
+  - Password akan di-hash ulang saat seeder dijalankan ulang. Ini aman untuk bootstrap/development account dan menjaga implementasi tetap sederhana untuk MVP.
+  - Full admin management dan reset password tetap out of scope untuk task ini.
 - File utama yang diubah:
+  - `database/seeders/AdminUserSeeder.php`
+  - `database/seeders/DatabaseSeeder.php`
+  - `config/auth.php`
+  - `.env.example`
+  - `tests/Feature/AdminSeederTest.php`
+  - `specs/phase-1/03-admin-seeder.md`
+  - `specs/phase-1/README.md`
 - Risiko atau follow-up:
+  - Set dan rotasi password production yang kuat lewat environment deployment.
+  - Flow dashboard admin, verifikasi ustadz, dan konfirmasi pembayaran dikerjakan di task berikutnya.
 
 ## Status
 
-`Planned`
+`Done`
 
 ## Link
 
-- Branch:
-- PR:
-- Issue/Ticket:
+- Branch: `feature/phase-1-foundation`
+- PR: -
+- Issue/Ticket: -
