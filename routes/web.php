@@ -30,4 +30,82 @@ Route::middleware(['auth', 'admin'])
                 ],
             ]);
         })->name('dashboard');
+
+        Route::get('/users', function () {
+            return Inertia::render('admin/users/index', [
+                'shell' => [
+                    'title' => 'Kelola Users',
+                    'description' => 'Halaman shell untuk pengelolaan user admin.',
+                    'emptyState' => [
+                        'title' => 'Belum ada aksi user',
+                        'description' => 'CRUD users akan dihubungkan pada phase berikutnya.',
+                    ],
+                ],
+            ]);
+        })->name('users.index');
+
+        Route::get('/ustadz', function () {
+            return Inertia::render('admin/ustadz/index', [
+                'shell' => [
+                    'title' => 'Verifikasi Ustadz',
+                    'description' => 'Halaman shell untuk verifikasi profil ustadz.',
+                    'emptyState' => [
+                        'title' => 'Belum ada ustadz menunggu',
+                        'description' => 'Antrian verifikasi akan tampil di sini.',
+                    ],
+                ],
+            ]);
+        })->name('ustadz.index');
+
+        Route::get('/programs', function () {
+            return Inertia::render('admin/programs/index', [
+                'shell' => [
+                    'title' => 'Kelola Programs',
+                    'description' => 'Halaman shell untuk pengelolaan program.',
+                    'emptyState' => [
+                        'title' => 'Belum ada program',
+                        'description' => 'Daftar program akan ditampilkan di sini.',
+                    ],
+                ],
+            ]);
+        })->name('programs.index');
+
+        Route::get('/batches', function () {
+            return Inertia::render('admin/batches/index', [
+                'shell' => [
+                    'title' => 'Kelola Batches',
+                    'description' => 'Halaman shell untuk pengelolaan batch.',
+                    'emptyState' => [
+                        'title' => 'Belum ada batch',
+                        'description' => 'Data batch akan muncul di sini.',
+                    ],
+                ],
+            ]);
+        })->name('batches.index');
+
+        Route::get('/enrollments', function () {
+            return Inertia::render('admin/enrollments/index', [
+                'shell' => [
+                    'title' => 'Kelola Enrollments',
+                    'description' => 'Halaman shell untuk pengelolaan enrollment.',
+                    'emptyState' => [
+                        'title' => 'Belum ada enrollment',
+                        'description' => 'Daftar enrollment akan ditampilkan di sini.',
+                    ],
+                ],
+            ]);
+        })->name('enrollments.index');
+
+        Route::get('/payments', function () {
+            return Inertia::render('admin/payments/index', [
+                'shell' => [
+                    'title' => 'Payment Queue',
+                    'description' => 'Halaman shell untuk antrean pembayaran.',
+                    'emptyState' => [
+                        'title' => 'Belum ada pembayaran pending',
+                        'description' => 'Queue pembayaran akan tampil di sini.',
+                    ],
+                ],
+            ]);
+        })->name('payments.index');
     });

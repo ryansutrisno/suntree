@@ -8,11 +8,12 @@ type AdminLayoutProps = PropsWithChildren<{
 
 const navigationItems = [
     { label: 'Dashboard', href: '/admin' },
-    { label: 'Users', href: '#' },
-    { label: 'Ustadz', href: '#' },
-    { label: 'Programs', href: '#' },
-    { label: 'Batches', href: '#' },
-    { label: 'Payments', href: '#' },
+    { label: 'Users', href: '/admin/users' },
+    { label: 'Ustadz', href: '/admin/ustadz' },
+    { label: 'Programs', href: '/admin/programs' },
+    { label: 'Batches', href: '/admin/batches' },
+    { label: 'Enrollments', href: '/admin/enrollments' },
+    { label: 'Payments', href: '/admin/payments' },
 ];
 
 export default function AdminLayout({
