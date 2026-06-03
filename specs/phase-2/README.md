@@ -100,6 +100,6 @@ Task awal berdasarkan PRD/TechStack v1.1:
 - [x] `01-admin-access-layout.md` — Route group, guard, dan layout dasar admin.
 - [x] `02-admin-dashboard-basic.md` — Landing dashboard admin dengan ringkasan data utama.
 - [x] `03-admin-master-data-shell.md` — Shell halaman admin untuk user, ustadz, program, batch, enrollment, dan payment queue.
-- [ ] `04-ustadz-verification-boolean.md` — Approval/revoke ustadz berbasis boolean oleh admin.
+- [x] `04-ustadz-verification-boolean.md` — Approval/revoke ustadz berbasis boolean oleh admin.
 
 Tambahkan task baru jika scope Phase 2 berkembang, tetapi pastikan urutan tetap jelas.

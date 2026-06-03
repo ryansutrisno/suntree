@@ -17,9 +17,9 @@ Route::middleware(['auth', 'admin'])
         Route::get('/', function () {
             return Inertia::render('admin/dashboard', [
                 'stats' => [
-                    'total_users' => User::count(),
+                    'total_users' => User::query()->count(),
                     'verified_ustadz' => UstadzProfile::query()->where('is_verified', true)->count(),
-                    'total_programs' => Program::count(),
+                    'total_programs' => Program::query()->count(),
                     'pending_payments' => Enrollment::query()->where('payment_status', 'pending')->count(),
                 ],
                 'quickLinks' => [
@@ -45,7 +45,24 @@ Route::middleware(['auth', 'admin'])
         })->name('users.index');
 
         Route::get('/ustadz', function () {
+            $ustadzProfiles = UstadzProfile::query()
+                ->orderByDesc('is_verified')
+                ->orderBy('display_name')
+                ->get(['id', 'display_name', 'is_verified', 'approved_at', 'approved_by'])
+                ->map(fn (UstadzProfile $ustadzProfile): array => [
+                    'id' => $ustadzProfile->id,
+                    'display_name' => $ustadzProfile->display_name,
+                    'is_verified' => $ustadzProfile->is_verified,
+                    'approved_at' => $ustadzProfile->approved_at?->toISOString(),
+                    'approved_by' => $ustadzProfile->approved_by,
+                    'status_label' => $ustadzProfile->is_verified ? 'Approved' : 'Pending',
+                    'approve_url' => route('admin.ustadz.approve', ['ustadzProfile' => $ustadzProfile]),
+                    'revoke_url' => route('admin.ustadz.revoke', ['ustadzProfile' => $ustadzProfile]),
+                ])
+                ->all();
+
             return Inertia::render('admin/ustadz/index', [
+                'ustadzProfiles' => $ustadzProfiles,
                 'shell' => [
                     'title' => 'Verifikasi Ustadz',
                     'description' => 'Halaman shell untuk verifikasi profil ustadz.',
@@ -56,6 +73,26 @@ Route::middleware(['auth', 'admin'])
                 ],
             ]);
         })->name('ustadz.index');
+
+        Route::patch('/ustadz/{ustadzProfile}/approve', function (UstadzProfile $ustadzProfile) {
+            $ustadzProfile->update([
+                'is_verified' => true,
+                'approved_at' => now(),
+                'approved_by' => request()->user()?->id,
+            ]);
+
+            return to_route('admin.ustadz.index');
+        })->name('ustadz.approve');
+
+        Route::patch('/ustadz/{ustadzProfile}/revoke', function (UstadzProfile $ustadzProfile) {
+            $ustadzProfile->update([
+                'is_verified' => false,
+                'approved_at' => null,
+                'approved_by' => null,
+            ]);
+
+            return to_route('admin.ustadz.index');
+        })->name('ustadz.revoke');
 
         Route::get('/programs', function () {
             return Inertia::render('admin/programs/index', [
