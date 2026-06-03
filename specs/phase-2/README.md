@@ -98,7 +98,7 @@ git checkout -b feature/phase-2-admin-dashboard
 Task awal berdasarkan PRD/TechStack v1.1:
 
 - [x] `01-admin-access-layout.md` — Route group, guard, dan layout dasar admin.
-- [ ] `02-admin-dashboard-basic.md` — Landing dashboard admin dengan ringkasan data utama.
+- [x] `02-admin-dashboard-basic.md` — Landing dashboard admin dengan ringkasan data utama.
 - [ ] `03-admin-master-data-shell.md` — Shell halaman admin untuk user, ustadz, program, batch, enrollment, dan payment queue.
 - [ ] `04-ustadz-verification-boolean.md` — Approval/revoke ustadz berbasis boolean oleh admin.
 
