@@ -10,6 +10,31 @@ use Inertia\Inertia;
 Route::inertia('/', 'welcome')->name('home');
 Route::inertia('/login', 'auth/login')->name('login');
 
+Route::get('/ustadz/{ustadzProfile}', function (UstadzProfile $ustadzProfile) {
+    abort_unless($ustadzProfile->is_verified, 404);
+
+    $ustadzProfile->load([
+        'programs' => fn ($query) => $query
+            ->where('is_published', true)
+            ->orderBy('id')
+            ->select('id', 'ustadz_profile_id', 'title', 'description', 'price', 'is_published'),
+    ]);
+
+    return Inertia::render('public/ustadz/show', [
+        'ustadz' => [
+            'id' => $ustadzProfile->id,
+            'display_name' => $ustadzProfile->display_name,
+            'bio' => $ustadzProfile->bio,
+        ],
+        'programs' => $ustadzProfile->programs->map(fn (Program $program) => [
+            'id' => $program->id,
+            'title' => $program->title,
+            'description' => $program->description,
+            'price' => $program->price,
+        ])->values(),
+    ]);
+})->name('public.ustadz.show');
+
 Route::middleware(['auth', 'admin'])
     ->prefix('admin')
     ->name('admin.')

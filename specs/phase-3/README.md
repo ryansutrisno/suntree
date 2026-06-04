@@ -42,7 +42,7 @@ Mas Bro ingin pindah branch khusus Phase 3, bisa dilakukan sebelum implementasi 
 
 - [ ] `01-program-listing-search-basic.md` — Listing program publik + search/filter basic.
 - [ ] `02-program-detail-page.md` — Halaman detail program publik.
-- [ ] `03-public-ustadz-profile.md` — Halaman profil ustadz publik.
+- [x] `03-public-ustadz-profile.md` — Halaman profil ustadz publik.
 
 ## Urutan Eksekusi yang Diminta Saat Ini
 
