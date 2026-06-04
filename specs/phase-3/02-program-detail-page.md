@@ -32,49 +32,70 @@ program sebelum lanjut ke langkah enrollment pada phase berikutnya.
 
 ## Workflow Wajib Sebelum Mulai
 
-- [ ] Pastikan baseline listing/public route sudah dipahami.
-- [ ] Review PRD v1.1 bagian detail program.
-- [ ] Review mockup public page hierarchy yang paling dekat.
-- [ ] Review relasi `Program -> UstadzProfile -> Batch`.
+- [x] Pastikan baseline listing/public route sudah dipahami.
+- [x] Review PRD v1.1 bagian detail program.
+- [x] Review mockup public page hierarchy yang paling dekat.
+- [x] Review relasi `Program -> UstadzProfile -> Batch`.
 
 ## Todo Implementasi
 
-- [ ] Tentukan route detail program.
-- [ ] Tulis RED test untuk render detail program.
-- [ ] Tulis RED test untuk not found / unavailable state.
-- [ ] Implementasi query detail + eager loading minimum.
-- [ ] Render layout detail program.
-- [ ] Tambah CTA / placeholder flow berikutnya.
-- [ ] Jalankan test spesifik task ini.
-- [ ] Jalankan formatter/build/test suite relevan.
-- [ ] Update dokumen task ini.
+- [x] Tentukan route detail program.
+- [x] Tulis RED test untuk render detail program.
+- [x] Tulis RED test untuk not found / unavailable state.
+- [x] Implementasi query detail + eager loading minimum.
+- [x] Render layout detail program.
+- [x] Tambah CTA / placeholder flow berikutnya.
+- [x] Jalankan test spesifik task ini.
+- [x] Jalankan formatter/build/test suite relevan.
+- [x] Update dokumen task ini.
 - [ ] Commit task.
 
 ## Verifikasi
 
-Command yang diperkirakan relevan:
+Command yang dijalankan:
 
 ```bash
-php artisan test --compact --filter=ProgramDetail
+php artisan test --compact --filter=PublicProgramDetailTest
 vendor/bin/pint --dirty --format agent
 npm run build
 php artisan test --compact
 ```
 
+Hasil:
+
+- [x] `PublicProgramDetailTest` pass (`3 test`, `26 assertion`).
+- [x] Formatter pass.
+- [x] Frontend build pass.
+- [x] Full test suite pass (`35 test`, `227 assertion`).
+
 ## Catatan Implementasi
 
 - Keputusan teknis penting:
+  - Public route memakai implicit route model binding `/programs/{program}`.
+  - Program hanya tampil bila `is_published = true`.
+  - Detail program ikut memvalidasi bahwa ustadz terkait harus `is_verified`, agar halaman publik tetap aman.
+  - Data minimum yang diexpose hanya `program`, `ustadz`, dan `batches`.
 - Tradeoff:
+  - Query dan transform data masih inline di route closure demi kecepatan MVP.
+  - Batch yang ditampilkan baru ringkasan dasar tanpa slot/availability detail.
+  - CTA enrollment masih placeholder sampai flow Phase 4/5 disambungkan.
 - File utama yang diubah:
+  - `routes/web.php`
+  - `resources/js/pages/public/programs/show.tsx`
+  - `tests/Feature/PublicProgramDetailTest.php`
+  - `specs/phase-3/02-program-detail-page.md`
+  - `specs/phase-3/README.md`
 - Risiko atau follow-up:
+  - Jika nanti butuh SEO/public slug, route berbasis ID ini bisa dipindah ke slug.
+  - Program card/listing dan detail bisa diselaraskan lagi setelah task listing manual Mas Bro selesai.
 
 ## Status
 
-`Planned`
+`Done`
 
 ## Link
 
-- Branch:
+- Branch: `feature/phase-3-public-marketplace`
 - Commit:
 - PR:
 - Issue/Ticket:

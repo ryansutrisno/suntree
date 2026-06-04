@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Batch;
 use App\Models\Enrollment;
 use App\Models\Program;
 use App\Models\User;
@@ -9,6 +10,40 @@ use Inertia\Inertia;
 
 Route::inertia('/', 'welcome')->name('home');
 Route::inertia('/login', 'auth/login')->name('login');
+
+Route::get('/programs/{program}', function (Program $program) {
+    abort_unless($program->is_published, 404);
+
+    $program->load([
+        'ustadzProfile' => fn ($query) => $query->select('id', 'display_name', 'bio', 'is_verified'),
+        'batches' => fn ($query) => $query
+            ->orderBy('id')
+            ->select('id', 'program_id', 'name', 'starts_at', 'ends_at', 'capacity'),
+    ]);
+
+    abort_unless($program->ustadzProfile?->is_verified, 404);
+
+    return Inertia::render('public/programs/show', [
+        'program' => [
+            'id' => $program->id,
+            'title' => $program->title,
+            'description' => $program->description,
+            'price' => $program->price,
+        ],
+        'ustadz' => [
+            'id' => $program->ustadzProfile->id,
+            'display_name' => $program->ustadzProfile->display_name,
+            'bio' => $program->ustadzProfile->bio,
+        ],
+        'batches' => $program->batches->map(fn (Batch $batch) => [
+            'id' => $batch->id,
+            'name' => $batch->name,
+            'starts_at' => $batch->starts_at?->toDateString(),
+            'ends_at' => $batch->ends_at?->toDateString(),
+            'capacity' => $batch->capacity,
+        ])->values(),
+    ]);
+})->name('public.programs.show');
 
 Route::get('/ustadz/{ustadzProfile}', function (UstadzProfile $ustadzProfile) {
     abort_unless($ustadzProfile->is_verified, 404);
