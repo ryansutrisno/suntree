@@ -1,3 +1,18 @@
+## [1.3.0](https://github.com/ryansutrisno/suntree/compare/v1.2.0...v1.3.0) (2026-06-16)
+
+
+### ✨ Features
+
+* add program enums, seeders and fix config/docs ([6e38b50](https://github.com/ryansutrisno/suntree/commit/6e38b5048a245c12a57e03bbbe0069b9b2c2e8b5))
+* **public:** Add program detail page ([46c4742](https://github.com/ryansutrisno/suntree/commit/46c47424ff03891a99bbbe76af7000e131a8664c))
+* **public:** Add program listing with search & filters ([c152e7c](https://github.com/ryansutrisno/suntree/commit/c152e7c5bf21293c104cc8a0af7b620c76f7c09c))
+* **public:** Add ustadz profile page ([8002036](https://github.com/ryansutrisno/suntree/commit/80020367c8aecab2ad39bba03171e8d0aa238cf4))
+
+
+### 📚 Documentation
+
+* **phase-3:** Add marketplace task breakdown ([b61b489](https://github.com/ryansutrisno/suntree/commit/b61b48958bb0c8f7c437d49532e912a58fb2f6e5))
+
 ## [1.2.0](https://github.com/ryansutrisno/suntree/compare/v1.1.0...v1.2.0) (2026-06-03)
 
 
