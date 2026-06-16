@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\ProgramCategory;
+use App\Enums\ProgramLevel;
 use App\Models\Program;
 use App\Models\UstadzProfile;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,7 +24,9 @@ class ProgramFactory extends Factory
             'ustadz_profile_id' => UstadzProfile::factory(),
             'title' => fake()->sentence(3),
             'description' => fake()->paragraph(),
-            'price' => fake()->numberBetween(100000, 1000000),
+            'price' => fake()->numberBetween(100_000, 1_000_000),
+            'category' => fake()->randomElement(ProgramCategory::cases()),
+            'level' => fake()->randomElement(ProgramLevel::cases()),
             'is_published' => false,
         ];
     }
