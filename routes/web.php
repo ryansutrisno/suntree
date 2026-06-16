@@ -1,15 +1,77 @@
 <?php
 
+use App\Enums\ProgramCategory;
+use App\Enums\ProgramLevel;
 use App\Models\Batch;
 use App\Models\Enrollment;
 use App\Models\Program;
 use App\Models\User;
 use App\Models\UstadzProfile;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 Route::inertia('/', 'welcome')->name('home');
 Route::inertia('/login', 'auth/login')->name('login');
+
+Route::get('/programs', function () {
+    $filters = request()->validate([
+        'search' => ['nullable', 'string', 'max:100'],
+        'category' => ['nullable', Rule::enum(ProgramCategory::class)],
+        'level' => ['nullable', Rule::enum(ProgramLevel::class)],
+        'price_min' => ['nullable', 'integer', 'min:0'],
+        'price_max' => ['nullable', 'integer', 'min:0'],
+    ]);
+
+    $programs = Program::query()
+        ->where('is_published', true)
+        ->whereHas('ustadzProfile', fn ($query) => $query->where('is_verified', true))
+        ->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('title', 'like', "%{$search}%");
+        })
+        ->when($filters['category'] ?? null, function ($query, $category) {
+            $query->where('category', $category);
+        })
+        ->when($filters['level'] ?? null, function ($query, $level) {
+            $query->where('level', $level);
+        })
+        ->when($filters['price_min'] ?? null, function ($query, $priceMin) {
+            $query->where('price', '>=', $priceMin);
+        })
+        ->when($filters['price_max'] ?? null, function ($query, $priceMax) {
+            $query->where('price', '<=', $priceMax);
+        })
+        ->with([
+            'ustadzProfile' => fn ($query) => $query->select('id', 'display_name'),
+        ])
+        ->orderByDesc('created_at')
+        ->paginate(12, ['id', 'ustadz_profile_id', 'title', 'description', 'price', 'category', 'level'])
+        ->withQueryString();
+
+    return Inertia::render('public/programs/index', [
+        'programs' => $programs->through(fn (Program $program) => [
+            'id' => $program->id,
+            'title' => $program->title,
+            'description' => $program->description,
+            'price' => $program->price,
+            'category' => $program->category->value,
+            'category_label' => $program->category->name,
+            'level' => $program->level->value,
+            'level_label' => $program->level->name,
+            'ustadz_name' => $program->ustadzProfile?->display_name,
+            'show_url' => route('public.programs.show', ['program' => $program]),
+        ]),
+        'filters' => $filters,
+        'categories' => collect(ProgramCategory::cases())->map(fn ($case) => [
+            'value' => $case->value,
+            'label' => $case->name,
+        ])->all(),
+        'levels' => collect(ProgramLevel::cases())->map(fn ($case) => [
+            'value' => $case->value,
+            'label' => $case->name,
+        ])->all(),
+    ]);
+})->name('public.programs.index');
 
 Route::get('/programs/{program}', function (Program $program) {
     abort_unless($program->is_published, 404);
