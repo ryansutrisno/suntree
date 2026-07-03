@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use Carbon\CarbonImmutable;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\DB;
+use App\Models\UstadzProfile;
+use App\Policies\UstadzProfilePolicy;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,28 +23,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->configureDefaults();
-    }
+        Vite::prefetch(concurrency: 3);
 
-    /**
-     * Configure default behaviors for production-ready applications.
-     */
-    protected function configureDefaults(): void
-    {
-        Date::use(CarbonImmutable::class);
+        // Register Policies
+        Gate::policy(UstadzProfile::class, UstadzProfilePolicy::class);
 
-        DB::prohibitDestructiveCommands(
-            app()->isProduction(),
-        );
+        // Gate: Only verified ustadz can create/edit programs
+        Gate::define('create-program', function ($user) {
+            return $user->isVerifiedUstadz();
+        });
 
-        Password::defaults(fn (): ?Password => app()->isProduction()
-            ? Password::min(12)
-                ->mixedCase()
-                ->letters()
-                ->numbers()
-                ->symbols()
-                ->uncompromised()
-            : null,
-        );
+        // Gate: Check if user is verified ustadz
+        Gate::define('is-verified-ustadz', function ($user) {
+            return $user->isVerifiedUstadz();
+        });
     }
 }

@@ -56,7 +56,7 @@ git branch --show-current
 - [x] Jalankan formatter/linter bila perlu.
 - [x] Jalankan build bila frontend berubah.
 - [x] Update checklist task ini.
-- [ ] Commit task setelah verifikasi pass.
+- [x] Commit task setelah verifikasi pass.
 - [x] Siap untuk review/PR.
 
 ## Verifikasi

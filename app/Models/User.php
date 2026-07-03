@@ -49,6 +49,19 @@ class User extends Authenticatable
         return $this->role === UserRole::Admin;
     }
 
+    /**
+     * Check if the ustadz is verified.
+     * Only verified ustadz can publish programs.
+     */
+    public function isVerifiedUstadz(): bool
+    {
+        if (! $this->isUstadz()) {
+            return false;
+        }
+
+        return $this->ustadzProfile?->is_verified ?? false;
+    }
+
     public function ustadzProfile(): HasOne
     {
         return $this->hasOne(UstadzProfile::class);

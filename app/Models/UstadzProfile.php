@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['user_id', 'display_name', 'bio', 'is_verified', 'approved_at', 'approved_by'])]
+#[Fillable(['user_id', 'display_name', 'bio', 'location', 'whatsapp', 'youtube_link', 'is_verified', 'approved_at', 'approved_by'])]
 class UstadzProfile extends Model
 {
     /** @use HasFactory<UstadzProfileFactory> */
