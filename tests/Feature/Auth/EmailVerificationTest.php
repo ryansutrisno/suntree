@@ -5,6 +5,10 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 
+beforeEach(function () {
+    $this->withoutVite();
+});
+
 test('email verification screen can be rendered', function () {
     $user = User::factory()->unverified()->create();
 

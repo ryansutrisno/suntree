@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\User;
-use App\Models\UstadzProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);

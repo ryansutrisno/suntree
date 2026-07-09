@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ShellController;
+use App\Http\Controllers\Admin\UstadzController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Public\ProgramController;
+use App\Http\Controllers\Public\UstadzController as PublicUstadzController;
+use App\Http\Controllers\Ustadz\DashboardController as UstadzDashboardController;
 use App\Http\Controllers\UstadzProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,9 +31,30 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth', 'ustadz'])->prefix('ustadz')->name('ustadz.')->group(function () {
+    Route::get('/', UstadzDashboardController::class)->name('dashboard');
+});
+
 Route::middleware('auth')->prefix('ustadz')->name('ustadz.')->group(function () {
     Route::get('/onboarding', [UstadzProfileController::class, 'edit'])->name('onboarding.edit');
     Route::patch('/onboarding', [UstadzProfileController::class, 'update'])->name('onboarding.update');
 });
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', DashboardController::class)->name('dashboard');
+
+    Route::get('/users', ShellController::class)->name('users.index');
+    Route::get('/programs', ShellController::class)->name('programs.index');
+    Route::get('/batches', ShellController::class)->name('batches.index');
+    Route::get('/enrollments', ShellController::class)->name('enrollments.index');
+    Route::get('/payments', ShellController::class)->name('payments.index');
+
+    Route::get('/ustadz', [UstadzController::class, 'index'])->name('ustadz.index');
+    Route::patch('/ustadz/{ustadzProfile}/approve', [UstadzController::class, 'approve'])->name('ustadz.approve');
+    Route::patch('/ustadz/{ustadzProfile}/revoke', [UstadzController::class, 'revoke'])->name('ustadz.revoke');
+});
+
+Route::get('/programs/{program}', [ProgramController::class, 'show'])->name('programs.show');
+Route::get('/ustadz/{ustadzProfile}', [PublicUstadzController::class, 'show'])->name('ustadz.show');
 
 require __DIR__.'/auth.php';

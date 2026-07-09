@@ -2,6 +2,10 @@
 
 use App\Models\User;
 
+beforeEach(function () {
+    $this->withoutVite();
+});
+
 test('confirm password screen can be rendered', function () {
     $user = User::factory()->create();
 
