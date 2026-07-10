@@ -40,7 +40,7 @@ Mas Bro ingin pindah branch khusus Phase 3, bisa dilakukan sebelum implementasi 
 
 ## Urutan Task Berdasarkan PRD
 
-- [ ] `01-program-listing-search-basic.md` — Listing program publik + search/filter basic.
+- [x] `01-program-listing-search-basic.md` — Listing program publik + search/filter basic.
 - [x] `02-program-detail-page.md` — Halaman detail program publik.
 - [x] `03-public-ustadz-profile.md` — Halaman profil ustadz publik.
 
@@ -54,13 +54,13 @@ Sesuai arahan Mas Bro:
 
 ## Checklist Sebelum Mulai Task Berikutnya
 
-- [ ] Pastikan task sebelumnya sudah committed atau memang sengaja ditahan.
-- [ ] Pastikan verifikasi lokal untuk perubahan terakhir sudah hijau.
-- [ ] Pastikan task doc berikutnya masih sesuai PRD terbaru.
+- [x] Pastikan task sebelumnya sudah committed atau memang sengaja ditahan.
+- [x] Pastikan verifikasi lokal untuk perubahan terakhir sudah hijau.
+- [x] Pastikan task doc berikutnya masih sesuai PRD terbaru.
 
 ## Checklist Sebelum Push / PR
 
-- [ ] Semua task yang ingin ikut dikirim sudah berstatus `Done`.
-- [ ] Test suite relevan sudah dijalankan.
-- [ ] Build frontend dijalankan bila ada perubahan UI/public page.
-- [ ] Tidak ada file nyasar / untracked yang tidak sengaja ikut.
+- [x] Semua task yang ingin ikut dikirim sudah berstatus `Done`.
+- [x] Test suite relevan sudah dijalankan.
+- [x] Build frontend dijalankan bila ada perubahan UI/public page.
+- [x] Tidak ada file nyasar / untracked yang tidak sengaja ikut.

@@ -62,36 +62,36 @@ git pull origin main
 git checkout -b feature/phase-2-admin-dashboard
 ```
 
-- [ ] Branch dibuat dari latest `main`.
-- [ ] File task dibuat di `specs/phase-2/`.
-- [ ] Scope jelas.
-- [ ] Out of scope jelas.
-- [ ] Verifikasi/test plan jelas.
+- [x] Branch dibuat dari latest `main`.
+- [x] File task dibuat di `specs/phase-2/`.
+- [x] Scope jelas.
+- [x] Out of scope jelas.
+- [x] Verifikasi/test plan jelas.
 
 ## Checklist Setelah Task Selesai
 
-- [ ] Semua todo task dicentang.
-- [ ] Status task menjadi `Done`.
-- [ ] Command verifikasi dan hasilnya tercatat di file task.
-- [ ] `git status` sudah direview.
-- [ ] `git diff` sudah direview.
-- [ ] `git log --oneline -10` sudah direview.
-- [ ] File yang distage hanya file terkait task.
-- [ ] Commit dibuat dengan Conventional Commit.
+- [x] Semua todo task dicentang.
+- [x] Status task menjadi `Done`.
+- [x] Command verifikasi dan hasilnya tercatat di file task.
+- [x] `git status` sudah direview.
+- [x] `git diff` sudah direview.
+- [x] `git log --oneline -10` sudah direview.
+- [x] File yang distage hanya file terkait task.
+- [x] Commit dibuat dengan Conventional Commit.
 
 ## Checklist Sebelum PR atau Review Phase 2
 
-- [ ] Semua todo task yang selesai sudah dicentang.
-- [ ] Test relevan sudah dijalankan dan dicatat.
-- [ ] `vendor/bin/pint --dirty --format agent` dijalankan bila ada perubahan PHP.
-- [ ] `npm run build` dijalankan bila ada perubahan frontend.
-- [ ] `git status` dan `git diff` sudah direview.
-- [ ] Catatan implementasi dan follow-up sudah ditulis.
-- [ ] Semua task yang selesai sudah punya commit.
-- [ ] Semua task Phase 2 berstatus `Done`.
-- [ ] Branch di-push ke remote.
-- [ ] PR dibuat ke `main`.
-- [ ] Remote CI lint/test dipantau sampai selesai.
+- [x] Semua todo task yang selesai sudah dicentang.
+- [x] Test relevan sudah dijalankan dan dicatat.
+- [x] `vendor/bin/pint --dirty --format agent` dijalankan bila ada perubahan PHP.
+- [x] `npm run build` dijalankan bila ada perubahan frontend.
+- [x] `git status` dan `git diff` sudah direview.
+- [x] Catatan implementasi dan follow-up sudah ditulis.
+- [x] Semua task yang selesai sudah punya commit.
+- [x] Semua task Phase 2 berstatus `Done`.
+- [x] Branch di-push ke remote.
+- [x] PR dibuat ke `main`.
+- [x] Remote CI lint/test dipantau sampai selesai.
 
 ## Daftar Task Phase 2
 

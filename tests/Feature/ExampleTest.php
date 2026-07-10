@@ -1,11 +1,9 @@
 <?php
 
-beforeEach(function () {
+it('returns a successful response', function () {
     $this->withoutVite();
-});
 
-test('returns a successful response', function () {
-    $response = $this->get(route('home'));
+    $response = $this->get('/');
 
-    $response->assertOk();
+    $response->assertStatus(200);
 });

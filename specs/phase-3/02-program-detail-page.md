@@ -48,7 +48,7 @@ program sebelum lanjut ke langkah enrollment pada phase berikutnya.
 - [x] Jalankan test spesifik task ini.
 - [x] Jalankan formatter/build/test suite relevan.
 - [x] Update dokumen task ini.
-- [ ] Commit task.
+- [x] Commit task.
 
 ## Verifikasi
 

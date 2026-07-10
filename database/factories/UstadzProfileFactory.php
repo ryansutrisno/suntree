@@ -22,6 +22,9 @@ class UstadzProfileFactory extends Factory
             'user_id' => User::factory()->ustadz(),
             'display_name' => fake()->name(),
             'bio' => fake()->paragraph(),
+            'location' => fake()->city().', '.fake()->country(),
+            'whatsapp' => '628'.fake()->numerify('##########'),
+            'youtube_link' => fake()->optional()->url(),
             'is_verified' => false,
         ];
     }

@@ -47,7 +47,7 @@ ustadz yang sudah diverifikasi beserta konteks program yang dia ajar.
 - [x] Jalankan test spesifik task ini.
 - [x] Jalankan formatter/build/test suite relevan.
 - [x] Update dokumen task ini.
-- [ ] Commit task.
+- [x] Commit task.
 
 ## Verifikasi
 

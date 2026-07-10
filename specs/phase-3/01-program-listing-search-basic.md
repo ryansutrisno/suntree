@@ -34,24 +34,24 @@ tersedia melalui daftar, search basic, filter basic, dan pagination.
 
 ## Workflow Wajib Sebelum Mulai
 
-- [ ] Pastikan branch kerja yang dipakai sudah benar.
-- [ ] Review PRD v1.1 bagian listing/search marketplace.
-- [ ] Review mockup public marketplace untuk struktur card dan hierarchy konten.
-- [ ] Review schema/factory data yang diperlukan.
+- [x] Pastikan branch kerja yang dipakai sudah benar.
+- [x] Review PRD v1.1 bagian listing/search marketplace.
+- [x] Review mockup public marketplace untuk struktur card dan hierarchy konten.
+- [x] Review schema/factory data yang diperlukan.
 
 ## Todo Implementasi
 
-- [ ] Tentukan route publik listing program.
-- [ ] Tulis RED test untuk listing program publik.
-- [ ] Tulis RED test untuk search/filter basic.
-- [ ] Implementasi query listing server-side minimal.
-- [ ] Render card program publik.
-- [ ] Tambah search/filter form.
-- [ ] Tambah pagination + empty state.
-- [ ] Jalankan test spesifik task ini.
-- [ ] Jalankan formatter/build/test suite relevan.
-- [ ] Update dokumen task ini.
-- [ ] Commit task.
+- [x] Tentukan route publik listing program.
+- [x] Tulis RED test untuk listing program publik.
+- [x] Tulis RED test untuk search/filter basic.
+- [x] Implementasi query listing server-side minimal.
+- [x] Render card program publik.
+- [x] Tambah search/filter form.
+- [x] Tambah pagination + empty state.
+- [x] Jalankan test spesifik task ini.
+- [x] Jalankan formatter/build/test suite relevan.
+- [x] Update dokumen task ini.
+- [x] Commit task.
 
 ## Verifikasi
 
@@ -73,7 +73,7 @@ php artisan test --compact
 
 ## Status
 
-`Planned`
+`Done`
 
 ## Link
 
