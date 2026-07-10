@@ -1,3 +1,24 @@
+## [1.4.0](https://github.com/ryansutrisno/suntree/compare/v1.3.0...v1.4.0) (2026-07-10)
+
+
+### ✨ Features
+
+* **phase-4:** add auth & onboarding scaffolding ([418e6a0](https://github.com/ryansutrisno/suntree/commit/418e6a0e17ff5d8ff8fb14ccb49d7731f71af192))
+
+
+### 🐛 Bug Fixes
+
+* bump inertiajs/inertia-laravel constraint to ^3.0 ([278842c](https://github.com/ryansutrisno/suntree/commit/278842c680011720ca5bdd98c7f3534adb5e5a1e))
+* clean up package.json devDependencies to resolve npm ERESOLVE ([9929b88](https://github.com/ryansutrisno/suntree/commit/9929b88304781c811e988204e8d8424441cdcf81))
+* resolve CI build errors for Inertia v3 and Tailwind v4 ([d1b02a0](https://github.com/ryansutrisno/suntree/commit/d1b02a0c1438853abf837a50dc86e9ef8a960696))
+* resolve CI test failures for phase-4 auth onboarding ([6acc7cb](https://github.com/ryansutrisno/suntree/commit/6acc7cb9a09332c96f92bde211632b516007417b))
+
+
+### 📚 Documentation
+
+* **phase-5:** add phase-5 spec planning docs ([f041512](https://github.com/ryansutrisno/suntree/commit/f0415128daded2e2d714b0d8c2a1d859beea68f7))
+* update project docs for inertia v3 and tailwind v4 ([4cc4ace](https://github.com/ryansutrisno/suntree/commit/4cc4aceb6779c88b4f220810239bb823fb4e1c03))
+
 ## [1.3.0](https://github.com/ryansutrisno/suntree/compare/v1.2.0...v1.3.0) (2026-06-16)
 
 
