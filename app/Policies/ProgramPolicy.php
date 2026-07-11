@@ -28,7 +28,7 @@ class ProgramPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isVerifiedUstadz();
     }
 
     /**
@@ -36,7 +36,14 @@ class ProgramPolicy
      */
     public function update(User $user, Program $program): bool
     {
-        return false;
+        return $user->isVerifiedUstadz()
+            && $user->ustadzProfile?->id === $program->ustadz_profile_id;
+    }
+
+    public function archive(User $user, Program $program): bool
+    {
+        return $user->isVerifiedUstadz()
+            && $user->ustadzProfile?->id === $program->ustadz_profile_id;
     }
 
     /**
