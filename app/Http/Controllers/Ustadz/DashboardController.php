@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Ustadz;
 
+use App\Enums\BatchStatus;
+use App\Enums\ProgramStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Batch;
 use App\Models\Enrollment;
@@ -21,33 +23,39 @@ class DashboardController extends Controller
 
         $programIds = Program::where('ustadz_profile_id', $ustadzProfile->id)->pluck('id');
 
-        $totalPrograms = $programIds->count();
+        $activePrograms = Program::where('ustadz_profile_id', $ustadzProfile->id)
+            ->where('status', ProgramStatus::Published)
+            ->count();
 
-        $activeBatches = Batch::whereIn('program_id', $programIds)
-            ->where('starts_at', '<=', now())
-            ->where('ends_at', '>=', now())
+        $openOngoingBatches = Batch::whereIn('program_id', $programIds)
+            ->whereIn('status', [BatchStatus::Open, BatchStatus::Ongoing])
             ->count();
 
         $batchIds = Batch::whereIn('program_id', $programIds)->pluck('id');
 
-        $totalEnrollments = Enrollment::whereIn('batch_id', $batchIds)->count();
-
-        $pendingPayments = Enrollment::whereIn('batch_id', $batchIds)
-            ->where('payment_status', 'pending')
+        $confirmedParticipants = Enrollment::whereIn('batch_id', $batchIds)
+            ->where('payment_status', 'paid')
             ->count();
+
+        $programs = Program::where('ustadz_profile_id', $ustadzProfile->id)
+            ->orderByDesc('created_at')
+            ->limit(5)
+            ->get(['id', 'title', 'status', 'category', 'level']);
+
+        $recentBatches = Batch::whereIn('program_id', $programIds)
+            ->with('program:id,title')
+            ->orderByDesc('created_at')
+            ->limit(5)
+            ->get(['id', 'program_id', 'name', 'status', 'starts_at', 'ends_at']);
 
         return Inertia::render('ustadz/dashboard', [
             'stats' => [
-                'total_programs' => $totalPrograms,
-                'active_batches' => $activeBatches,
-                'total_enrollments' => $totalEnrollments,
-                'pending_payments' => $pendingPayments,
+                'active_programs' => $activePrograms,
+                'open_ongoing_batches' => $openOngoingBatches,
+                'confirmed_participants' => $confirmedParticipants,
             ],
-            'quickLinks' => [
-                ['label' => 'Kelola Programs', 'href' => '/ustadz/programs'],
-                ['label' => 'Kelola Batches', 'href' => '/ustadz/batches'],
-                ['label' => 'Lihat Enrollments', 'href' => '/ustadz/enrollments'],
-            ],
+            'programs' => $programs,
+            'recentBatches' => $recentBatches,
         ]);
     }
 }

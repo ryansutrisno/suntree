@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\ProgramCategory;
 use App\Enums\ProgramLevel;
+use App\Enums\ProgramStatus;
 use App\Models\Program;
 use App\Models\UstadzProfile;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -28,6 +29,7 @@ class ProgramFactory extends Factory
             'category' => fake()->randomElement(ProgramCategory::cases()),
             'level' => fake()->randomElement(ProgramLevel::cases()),
             'is_published' => false,
+            'status' => ProgramStatus::Draft,
         ];
     }
 }
