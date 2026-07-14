@@ -45,9 +45,10 @@ Route::middleware(['auth', 'ustadz'])->prefix('ustadz')->name('ustadz.')->group(
     Route::post('/programs/{program}/archive', [UstadzProgramController::class, 'archive'])->name('programs.archive');
 
     // Batch CRUD
-    Route::get('/programs/{program}/batches', [BatchController::class, 'create'])->name('batches.create');
+    Route::get('/programs/{program}/batches', [BatchController::class, 'index'])->name('batches.index');
+    Route::get('/programs/{program}/batches/create', [BatchController::class, 'create'])->name('batches.create');
     Route::post('/programs/{program}/batches', [BatchController::class, 'store'])->name('batches.store');
-    Route::get('/programs/{program}/batches/{batch}', [BatchController::class, 'edit'])->name('batches.edit');
+    Route::get('/programs/{program}/batches/{batch}/edit', [BatchController::class, 'edit'])->name('batches.edit');
     Route::put('/programs/{program}/batches/{batch}', [BatchController::class, 'update'])->name('batches.update');
     Route::post('/programs/{program}/batches/{batch}/status', [BatchController::class, 'updateStatus'])->name('batches.status');
 

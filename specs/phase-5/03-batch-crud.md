@@ -50,17 +50,17 @@ git checkout -b feature/phase-5-ustadz-dashboard
 
 ## Todo Implementasi
 
-- [ ] Tulis atau update test untuk behavior yang berubah.
-- [ ] Implementasi BatchPolicy (ownership via program).
-- [ ] Implementasi controller methods (index, create, store, edit, update, status).
-- [ ] Implementasi Form Request validation (capacity >= active enrollment).
-- [ ] Implementasi Inertia React pages (index, create, edit).
-- [ ] Jalankan test spesifik yang relevan.
-- [ ] Jalankan formatter/linter bila perlu.
-- [ ] Jalankan build bila frontend berubah.
+- [x] Tulis atau update test untuk behavior yang berubah.
+- [x] Implementasi BatchPolicy (ownership via program).
+- [x] Implementasi controller methods (index, create, store, edit, update, status).
+- [x] Implementasi Form Request validation (capacity >= active enrollment).
+- [x] Implementasi Inertia React pages (index, create, edit).
+- [x] Jalankan test spesifik yang relevan.
+- [x] Jalankan formatter/linter bila perlu.
+- [x] Jalankan build bila frontend berubah.
 - [ ] Lakukan manual verification bila relevan.
-- [ ] Update checklist task ini.
-- [ ] Commit task setelah verifikasi pass.
+- [x] Update checklist task ini.
+- [x] Commit task setelah verifikasi pass.
 - [ ] Siap untuk review/PR.
 
 ## Verifikasi
@@ -85,10 +85,10 @@ npm run build
 
 Hasil:
 
-- [ ] Test pass.
-- [ ] Build pass bila relevan.
-- [ ] Formatter/linter pass bila relevan.
-- [ ] Tidak ada regresi yang diketahui.
+- [x] Test pass. `php artisan test --compact --filter=BatchCrud` → 21 passed (71 assertions).
+- [x] Build pass bila relevan. `npm run build` → ✓ built in 261ms.
+- [x] Formatter/linter pass bila relevan. `vendor/bin/pint --dirty --format agent` → fixed import ordering di `UpdateBatchRequest.php`.
+- [x] Tidak ada regresi yang diketahui. Full suite: 149 passed, 1 pre-existing failure (`UstadzParticipantListTest` boilerplate `example` yang gagal di HEAD sebelum perubahan task ini — bukan bagian scope).
 
 ## Commit Setelah Task Selesai
 
@@ -117,17 +117,34 @@ git commit -m "feat(phase-5): Add batch CRUD for ustadz"
 ## Catatan Implementasi
 
 - Keputusan teknis penting:
+  - Ownership di-enforce via `BatchPolicy` menelusuri `batch->program->ustadz_profile_id`
+    (mirror `ProgramPolicy`).
+  - "Active enrollment count" didefinisikan sebagai `payment_status = 'paid'`, konsisten
+    dengan `DashboardController::confirmedParticipants`.
+  - Route dibuat RESTful (`index/create/{batch}/edit`) agar match spec "pages: index,
+    create, edit"; mengganti scaffold awal yang memetakan `GET /batches` ke `create`.
 - Tradeoff:
+  - Status transition manual (sesuai MVP spec); tidak ada guard urutan transisi
+    (mis. `draft` → `completed`) untuk menjaga scope.
 - File utama yang diubah:
+  - `app/Policies/BatchPolicy.php`
+  - `app/Http/Requests/StoreBatchRequest.php`, `UpdateBatchRequest.php`
+  - `app/Http/Controllers/Ustadz/BatchController.php`
+  - `routes/web.php`
+  - `resources/js/pages/ustadz/batches/{index,create,edit}.tsx`
+  - `tests/Feature/UstadzBatchCrudTest.php`
 - Risiko atau follow-up:
+  - Vocabulary mismatch enrollment status (spec task 04: `enrolled/confirmed/cancelled`
+    vs migration: `pending_payment` + `payment_status`). Relevan untuk task 04.
+  - Tidak ada validasi urutan transisi status (out of scope MVP).
 
 ## Status
 
-`Planned`
+`Done`
 
 ## Link
 
-- Branch:
-- Commit:
-- PR:
-- Issue/Ticket:
+- Branch: `feature/phase-5-ustadz-dashboard`
+- Commit: `feat(phase-5): implement ustadz batch CRUD with tests`
+- PR: (belum dibuat)
+- Issue/Ticket: —

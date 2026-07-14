@@ -3,40 +3,44 @@
 namespace App\Policies;
 
 use App\Models\Batch;
+use App\Models\Program;
 use App\Models\User;
 
 class BatchPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view any batches for a program.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(User $user, Program $program): bool
     {
-        return false;
+        return $user->isVerifiedUstadz()
+            && $user->ustadzProfile?->id === $program->ustadz_profile_id;
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can create a batch for a program.
      */
-    public function view(User $user, Batch $batch): bool
+    public function create(User $user, Program $program): bool
     {
-        return false;
+        return $user->isVerifiedUstadz()
+            && $user->ustadzProfile?->id === $program->ustadz_profile_id;
     }
 
     /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can update the batch.
      */
     public function update(User $user, Batch $batch): bool
     {
-        return false;
+        return $user->isVerifiedUstadz()
+            && $user->ustadzProfile?->id === $batch->program->ustadz_profile_id;
+    }
+
+    /**
+     * Determine whether the user can transition the batch status.
+     */
+    public function updateStatus(User $user, Batch $batch): bool
+    {
+        return $this->update($user, $batch);
     }
 
     /**
