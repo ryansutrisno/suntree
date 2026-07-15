@@ -36,6 +36,16 @@ class BatchPolicy
     }
 
     /**
+     * Determine whether the user can view participants of the batch.
+     */
+    public function viewParticipants(User $user, Program $program, Batch $batch): bool
+    {
+        return $user->isVerifiedUstadz()
+            && $user->ustadzProfile?->id === $program->ustadz_profile_id
+            && $batch->program_id === $program->id;
+    }
+
+    /**
      * Determine whether the user can transition the batch status.
      */
     public function updateStatus(User $user, Batch $batch): bool

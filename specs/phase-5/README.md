@@ -38,8 +38,8 @@ Setiap task di phase ini tetap mengikuti pola yang sama seperti phase sebelumnya
 
 ## Urutan Task Berdasarkan PRD
 
-- [ ] `01-ustadz-dashboard.md` — Halaman dashboard ustadz dengan ringkasan program & batch milik sendiri.
-- [ ] `02-program-crud.md` — F-10 Program CRUD: ustadz verified create, edit, archive own program.
+- [x] `01-ustadz-dashboard.md` — Halaman dashboard ustadz dengan ringkasan program & batch milik sendiri.
+- [x] `02-program-crud.md` — F-10 Program CRUD: ustadz verified create, edit, archive own program.
 - [x] `03-batch-crud.md` — F-11 Batch CRUD: ustadz verified kelola batch dari program sendiri.
 - [ ] `04-participant-list.md` — Participant list: ustadz lihat santri enrolled/confirmed per batch.
 

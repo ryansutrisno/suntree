@@ -30,11 +30,11 @@ program milik sendiri.
 
 ## Workflow Wajib Sebelum Mulai
 
-- [ ] Checkout ke `main`.
-- [ ] Pull latest `main`.
-- [ ] Buat branch baru `feature/phase-5-ustadz-dashboard`.
-- [ ] Review PRD/TechStack versi terbaru yang relevan.
-- [ ] Review area kode terkait sebelum implementasi.
+- [x] Checkout ke `main`.
+- [x] Pull latest `main`.
+- [x] Buat branch baru `feature/phase-5-ustadz-dashboard`.
+- [x] Review PRD/TechStack versi terbaru yang relevan.
+- [x] Review area kode terkait sebelum implementasi.
 
 Contoh command:
 
@@ -46,15 +46,15 @@ git checkout -b feature/phase-5-ustadz-dashboard
 
 ## Todo Implementasi
 
-- [ ] Tulis atau update test untuk behavior yang berubah.
-- [ ] Implementasi route + controller untuk participant list.
-- [ ] Implementasi Policy (ownership via program → batch).
-- [ ] Implementasi Inertia React page (participant list).
-- [ ] Jalankan test spesifik yang relevan.
-- [ ] Jalankan formatter/linter bila perlu.
-- [ ] Jalankan build bila frontend berubah.
-- [ ] Lakukan manual verification bila relevan.
-- [ ] Update checklist task ini.
+- [x] Tulis atau update test untuk behavior yang berubah.
+- [x] Implementasi route + controller untuk participant list.
+- [x] Implementasi Policy (ownership via program → batch).
+- [x] Implementasi Inertia React page (participant list).
+- [x] Jalankan test spesifik yang relevan.
+- [x] Jalankan formatter/linter bila perlu.
+- [x] Jalankan build bila frontend berubah.
+- [x] Lakukan manual verification bila relevan.
+- [x] Update checklist task ini.
 - [ ] Commit task setelah verifikasi pass.
 - [ ] Siap untuk review/PR.
 
@@ -80,10 +80,10 @@ npm run build
 
 Hasil:
 
-- [ ] Test pass.
-- [ ] Build pass bila relevan.
-- [ ] Formatter/linter pass bila relevan.
-- [ ] Tidak ada regresi yang diketahui.
+- [x] Test pass.
+- [x] Build pass bila relevan.
+- [x] Formatter/linter pass bila relevan.
+- [x] Tidak ada regresi yang diketahui.
 
 ## Commit Setelah Task Selesai
 
@@ -111,14 +111,14 @@ git commit -m "feat(phase-5): Add participant list for ustadz"
 
 ## Catatan Implementasi
 
-- Keputusan teknis penting:
-- Tradeoff:
-- File utama yang diubah:
-- Risiko atau follow-up:
+- Keputusan teknis penting: Policy `viewParticipants` menerima 3 parameter (User, Program, Batch) untuk memvalidasi ownership program + batch belongs to program sekaligus.
+- Tradeoff: Filter status menggunakan query param string langsung dari request, tidak menggunakan Form Request terpisah karena hanya read-only filter.
+- File utama yang diubah: `app/Policies/BatchPolicy.php`, `app/Http/Controllers/Ustadz/ParticipantController.php`, `resources/js/pages/ustadz/batches/participants.tsx`, `tests/Feature/UstadzParticipantListTest.php`.
+- Risiko atau follow-up: Spec menyebut status `enrolled/confirmed/cancelled` tapi DB menggunakan `status` (default `pending_payment`) + `payment_status` (default `pending`). Implementasi mengikuti nilai DB aktual.
 
 ## Status
 
-`Planned`
+`Done`
 
 ## Link
 
