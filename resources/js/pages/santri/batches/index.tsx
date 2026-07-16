@@ -1,5 +1,4 @@
 import { Link, router } from '@inertiajs/react';
-import { type FormEvent } from 'react';
 import SantriLayout from '@/layouts/santri-layout';
 
 interface Program {

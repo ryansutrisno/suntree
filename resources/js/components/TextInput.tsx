@@ -1,6 +1,7 @@
+import type {
+    InputHTMLAttributes} from 'react';
 import {
     forwardRef,
-    InputHTMLAttributes,
     useEffect,
     useImperativeHandle,
     useRef,

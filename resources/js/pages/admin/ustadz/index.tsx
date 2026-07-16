@@ -1,6 +1,6 @@
-import AdminLayout from '@/layouts/admin-layout';
 import { Link } from '@inertiajs/react';
-import { type AdminShellProps } from '@/pages/admin/shell-page';
+import AdminLayout from '@/layouts/admin-layout';
+import type {AdminShellProps} from '@/pages/admin/shell-page';
 
 type UstadzProfile = {
     id: number;
