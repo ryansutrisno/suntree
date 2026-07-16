@@ -24,6 +24,8 @@ class EnrollmentFactory extends Factory
             'batch_id' => Batch::factory(),
             'status' => 'pending_payment',
             'payment_status' => 'pending',
+            'amount' => 500000,
+            'payment_method' => 'manual_bank_transfer',
         ];
     }
 }
