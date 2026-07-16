@@ -1,3 +1,13 @@
+## [1.5.0](https://github.com/ryansutrisno/suntree/compare/v1.4.0...v1.5.0) (2026-07-16)
+
+
+### ✨ Features
+
+* **phase-5:** add participant list for ustadz ([8097a4e](https://github.com/ryansutrisno/suntree/commit/8097a4eb69fc98c7d8a91fe9c234ea6c81df8848))
+* **phase-5:** align ustadz dashboard with spec stats and program/batch lists ([7c1ca83](https://github.com/ryansutrisno/suntree/commit/7c1ca83615218b587ce74fd723e4751411585ddb))
+* **phase-5:** implement ustadz batch CRUD with tests ([9d8c6db](https://github.com/ryansutrisno/suntree/commit/9d8c6dbe58fbd4d16ba8ad80d04f239869893cc8))
+* **phase-5:** implement ustadz program CRUD with tests ([e350764](https://github.com/ryansutrisno/suntree/commit/e3507646e439e8a2343919a331f2e6a1414f5830))
+
 ## [1.4.0](https://github.com/ryansutrisno/suntree/compare/v1.3.0...v1.4.0) (2026-07-10)
 
 
