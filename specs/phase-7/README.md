@@ -13,9 +13,9 @@ Fase ini mengimplementasikan admin-side manual payment confirmation. Admin dapat
 
 | # | Task | Status | Spec |
 |---|------|--------|------|
-| 1 | Admin Payment Controller & Routes | Planned | [01-admin-payment-controller-routes.md](01-admin-payment-controller-routes.md) |
-| 2 | Admin Payment Queue Page | Planned | [02-admin-payment-queue-page.md](02-admin-payment-queue-page.md) |
-| 3 | Payment Confirmation Tests | Planned | [03-payment-confirmation-tests.md](03-payment-confirmation-tests.md) |
+| 1 | Admin Payment Controller & Routes | Done | [01-admin-payment-controller-routes.md](01-admin-payment-controller-routes.md) |
+| 2 | Admin Payment Queue Page | Done | [02-admin-payment-queue-page.md](02-admin-payment-queue-page.md) |
+| 3 | Payment Confirmation Tests | Done | [03-payment-confirmation-tests.md](03-payment-confirmation-tests.md) |
 
 ## Verification
 

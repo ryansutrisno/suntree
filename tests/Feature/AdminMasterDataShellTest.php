@@ -36,7 +36,7 @@ test('admin can access master data shell pages', function (
     ['/admin/programs', 'admin/programs/index', 'Kelola Programs'],
     ['/admin/batches', 'admin/batches/index', 'Kelola Batches'],
     ['/admin/enrollments', 'admin/enrollments/index', 'Kelola Enrollments'],
-    ['/admin/payments', 'admin/payments/index', 'Payment Queue'],
+    ['/admin/payments', 'admin/payments/index', 'Verifikasi Pembayaran'],
 ]);
 
 test('non admins cannot access master data shell pages', function (string $uri): void {
