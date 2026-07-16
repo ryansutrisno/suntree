@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\UstadzController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Public\ProgramController;
 use App\Http\Controllers\Public\UstadzController as PublicUstadzController;
+use App\Http\Controllers\Santri\BatchController as SantriBatchController;
+use App\Http\Controllers\Santri\DashboardController as SantriDashboardController;
+use App\Http\Controllers\Santri\EnrollmentController as SantriEnrollmentController;
 use App\Http\Controllers\Ustadz\BatchController;
 use App\Http\Controllers\Ustadz\DashboardController as UstadzDashboardController;
 use App\Http\Controllers\Ustadz\ParticipantController;
@@ -32,6 +35,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'santri'])->prefix('santri')->name('santri.')->group(function () {
+    Route::get('/dashboard', [SantriDashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/batches', [SantriBatchController::class, 'index'])->name('batches.index');
+    Route::post('/enrollments', [SantriEnrollmentController::class, 'store'])->name('enrollments.store');
+    Route::get('/enrollments/{enrollment}/payment', [SantriEnrollmentController::class, 'payment'])->name('enrollments.payment');
 });
 
 Route::middleware(['auth', 'ustadz'])->prefix('ustadz')->name('ustadz.')->group(function () {

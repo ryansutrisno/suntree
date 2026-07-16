@@ -1,5 +1,6 @@
 import { Link, useForm } from '@inertiajs/react';
-import { useEffect, type FormEvent } from 'react';
+import { useEffect  } from 'react';
+import type {FormEvent} from 'react';
 
 type Program = {
     id: number;
@@ -223,7 +224,7 @@ export default function PublicProgramsIndex({
         }, 400);
 
         return () => clearTimeout(timer);
-    }, [data.search]);
+    }, [data.search, get]);
 
     const handleFilterChange = (key: string, value: string) => {
         setData(key as any, value);

@@ -1,5 +1,5 @@
-import UstadzLayout from '@/layouts/ustadz-layout';
 import { Link } from '@inertiajs/react';
+import UstadzLayout from '@/layouts/ustadz-layout';
 
 type DashboardStats = {
     active_programs: number;
