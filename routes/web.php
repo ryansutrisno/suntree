@@ -6,7 +6,10 @@ use App\Http\Controllers\Admin\UstadzController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Public\ProgramController;
 use App\Http\Controllers\Public\UstadzController as PublicUstadzController;
+use App\Http\Controllers\Ustadz\BatchController;
 use App\Http\Controllers\Ustadz\DashboardController as UstadzDashboardController;
+use App\Http\Controllers\Ustadz\ParticipantController;
+use App\Http\Controllers\Ustadz\ProgramController as UstadzProgramController;
 use App\Http\Controllers\UstadzProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +35,25 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'ustadz'])->prefix('ustadz')->name('ustadz.')->group(function () {
-    Route::get('/', UstadzDashboardController::class)->name('dashboard');
+    Route::get('/dashboard', UstadzDashboardController::class)->name('dashboard');
+
+    // Program CRUD
+    Route::get('/programs', [UstadzProgramController::class, 'create'])->name('programs.create');
+    Route::post('/programs', [UstadzProgramController::class, 'store'])->name('programs.store');
+    Route::get('/programs/{program}', [UstadzProgramController::class, 'edit'])->name('programs.edit');
+    Route::put('/programs/{program}', [UstadzProgramController::class, 'update'])->name('programs.update');
+    Route::post('/programs/{program}/archive', [UstadzProgramController::class, 'archive'])->name('programs.archive');
+
+    // Batch CRUD
+    Route::get('/programs/{program}/batches', [BatchController::class, 'index'])->name('batches.index');
+    Route::get('/programs/{program}/batches/create', [BatchController::class, 'create'])->name('batches.create');
+    Route::post('/programs/{program}/batches', [BatchController::class, 'store'])->name('batches.store');
+    Route::get('/programs/{program}/batches/{batch}/edit', [BatchController::class, 'edit'])->name('batches.edit');
+    Route::put('/programs/{program}/batches/{batch}', [BatchController::class, 'update'])->name('batches.update');
+    Route::post('/programs/{program}/batches/{batch}/status', [BatchController::class, 'updateStatus'])->name('batches.status');
+
+    // Participant List
+    Route::get('/programs/{program}/batches/{batch}/participants', [ParticipantController::class, 'index'])->name('participants.index');
 });
 
 Route::middleware('auth')->prefix('ustadz')->name('ustadz.')->group(function () {

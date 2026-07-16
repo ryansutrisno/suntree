@@ -43,15 +43,15 @@ git checkout -b feature/phase-5-ustadz-dashboard
 
 ## Todo Implementasi
 
-- [ ] Tulis atau update test untuk behavior yang berubah.
-- [ ] Implementasi route + controller untuk ustadz dashboard.
-- [ ] Implementasi Inertia React page untuk dashboard.
-- [ ] Jalankan test spesifik yang relevan.
-- [ ] Jalankan formatter/linter bila perlu.
-- [ ] Jalankan build bila frontend berubah.
+- [x] Tulis atau update test untuk behavior yang berubah.
+- [x] Implementasi route + controller untuk ustadz dashboard.
+- [x] Implementasi Inertia React page untuk dashboard.
+- [x] Jalankan test spesifik yang relevan.
+- [x] Jalankan formatter/linter bila perlu.
+- [x] Jalankan build bila frontend berubah.
 - [ ] Lakukan manual verification bila relevan.
-- [ ] Update checklist task ini.
-- [ ] Commit task setelah verifikasi pass.
+- [x] Update checklist task ini.
+- [x] Commit task setelah verifikasi pass.
 - [ ] Siap untuk review/PR.
 
 ## Verifikasi
@@ -76,10 +76,10 @@ npm run build
 
 Hasil:
 
-- [ ] Test pass.
-- [ ] Build pass bila relevan.
-- [ ] Formatter/linter pass bila relevan.
-- [ ] Tidak ada regresi yang diketahui.
+- [x] Test pass. `php artisan test --compact --filter=UstadzDashboard` → 4 passed.
+- [x] Build pass bila relevan. `npm run build` → ✓ built.
+- [x] Formatter/linter pass bila relevan. `vendor/bin/pint --dirty --format agent` → pass.
+- [x] Tidak ada regresi yang diketahui.
 
 ## Commit Setelah Task Selesai
 
@@ -108,17 +108,26 @@ git commit -m "feat(phase-5): Add ustadz dashboard page"
 ## Catatan Implementasi
 
 - Keputusan teknis penting:
+  - Stats di-align dengan spec: `active_programs` = status Published, `open_ongoing_batches` = status Open/Ongoing, `confirmed_participants` = payment_status paid.
+  - Dashboard menampilkan list program (limit 5) dan recent batches (limit 5) milik ustadz.
+  - Route `GET /ustadz/dashboard` di-guard oleh middleware ustadz only.
 - Tradeoff:
+  - Tidak ada pagination pada list program/batch di dashboard (limit 5 cukup untuk MVP).
 - File utama yang diubah:
+  - `app/Http/Controllers/Ustadz/DashboardController.php`
+  - `resources/js/pages/ustadz/dashboard.tsx`
+  - `tests/Feature/UstadzDashboardTest.php`
+  - `routes/web.php`
 - Risiko atau follow-up:
+  - Dashboard link ke participant list mengarah ke route task 04 yang belum diimplementasi.
 
 ## Status
 
-`Planned`
+`Done`
 
 ## Link
 
-- Branch:
-- Commit:
-- PR:
-- Issue/Ticket:
+- Branch: `feature/phase-5-ustadz-dashboard`
+- Commit: `7c1ca83` — `feat(phase-5): align ustadz dashboard with spec stats and program/batch lists`
+- PR: (belum dibuat)
+- Issue/Ticket: —

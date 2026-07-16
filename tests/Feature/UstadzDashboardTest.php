@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\BatchStatus;
+use App\Enums\ProgramStatus;
 use App\Models\Batch;
 use App\Models\Enrollment;
 use App\Models\Program;
@@ -20,59 +22,55 @@ test('ustadz dashboard renders summary metrics scoped to the authenticated ustad
         'is_verified' => true,
     ]);
 
-    $programOne = Program::factory()->for($ustadzProfile)->create();
-    $programTwo = Program::factory()->for($ustadzProfile)->create();
-
-    // Active batch (starts in past, ends in future)
-    Batch::factory()->for($programOne)->create([
-        'starts_at' => now()->subDays(5),
-        'ends_at' => now()->addDays(5),
+    // Published programs (active)
+    $programOne = Program::factory()->for($ustadzProfile)->create([
+        'status' => ProgramStatus::Published,
     ]);
-    // Inactive batch (starts in future)
-    Batch::factory()->for($programOne)->create([
-        'starts_at' => now()->addWeek(),
-        'ends_at' => now()->addMonth(),
+    $programTwo = Program::factory()->for($ustadzProfile)->create([
+        'status' => ProgramStatus::Published,
+    ]);
+    // Draft program (not active)
+    Program::factory()->for($ustadzProfile)->create([
+        'status' => ProgramStatus::Draft,
     ]);
 
+    // Open and ongoing batches (active)
+    $batchOne = Batch::factory()->for($programOne)->create([
+        'status' => BatchStatus::Open,
+    ]);
+    $batchTwo = Batch::factory()->for($programOne)->create([
+        'status' => BatchStatus::Ongoing,
+    ]);
+    // Draft batch (not active)
+    Batch::factory()->for($programOne)->create([
+        'status' => BatchStatus::Draft,
+    ]);
+
+    // Confirmed participants (paid)
     $santriOne = User::factory()->santri()->create();
     $santriTwo = User::factory()->santri()->create();
 
-    // Active batches for enrollments
-    $batchOne = Batch::factory()->for($programOne)->create([
-        'starts_at' => now()->subDays(3),
-        'ends_at' => now()->addDays(3),
-    ]);
-    $batchTwo = Batch::factory()->for($programTwo)->create([
-        'starts_at' => now()->subDays(3),
-        'ends_at' => now()->addDays(3),
-    ]);
-
     Enrollment::factory()->for($santriOne, 'user')->for($batchOne)->create([
-        'payment_status' => 'pending',
+        'payment_status' => 'paid',
     ]);
     Enrollment::factory()->for($santriTwo, 'user')->for($batchTwo)->create([
         'payment_status' => 'paid',
     ]);
+    // Pending payment (not confirmed)
     Enrollment::factory()->for($santriOne, 'user')->for($batchTwo)->create([
         'payment_status' => 'pending',
     ]);
 
     $this->actingAs($ustadz)
-        ->get('/ustadz')
+        ->get('/ustadz/dashboard')
         ->assertSuccessful()
         ->assertInertia(fn (Assert $page) => $page
             ->component('ustadz/dashboard')
-            ->where('stats.total_programs', 2)
-            ->where('stats.active_batches', 3)
-            ->where('stats.total_enrollments', 3)
-            ->where('stats.pending_payments', 2)
-            ->has('quickLinks', 3)
-            ->where('quickLinks.0.label', 'Kelola Programs')
-            ->where('quickLinks.0.href', '/ustadz/programs')
-            ->where('quickLinks.1.label', 'Kelola Batches')
-            ->where('quickLinks.1.href', '/ustadz/batches')
-            ->where('quickLinks.2.label', 'Lihat Enrollments')
-            ->where('quickLinks.2.href', '/ustadz/enrollments')
+            ->where('stats.active_programs', 2)
+            ->where('stats.open_ongoing_batches', 2)
+            ->where('stats.confirmed_participants', 2)
+            ->has('programs', 3)
+            ->has('recentBatches', 3)
         );
 });
 
@@ -80,7 +78,7 @@ test('santri cannot access ustadz dashboard', function () {
     $santri = User::factory()->santri()->create();
 
     $this->actingAs($santri)
-        ->get('/ustadz')
+        ->get('/ustadz/dashboard')
         ->assertForbidden();
 });
 
@@ -88,10 +86,10 @@ test('admin cannot access ustadz dashboard', function () {
     $admin = User::factory()->admin()->create();
 
     $this->actingAs($admin)
-        ->get('/ustadz')
+        ->get('/ustadz/dashboard')
         ->assertForbidden();
 });
 
 test('guest cannot access ustadz dashboard', function () {
-    $this->get('/ustadz')->assertRedirect('/login');
+    $this->get('/ustadz/dashboard')->assertRedirect('/login');
 });
