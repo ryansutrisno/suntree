@@ -1,3 +1,23 @@
+## [1.6.0](https://github.com/ryansutrisno/suntree/compare/v1.5.0...v1.6.0) (2026-07-16)
+
+
+### ✨ Features
+
+* **phase-6:** add enroll batch flow with capacity check ([a5008bb](https://github.com/ryansutrisno/suntree/commit/a5008bb984c6fc02533021c2f2c34cf820bb06e4))
+* **phase-6:** add enrollment migration, santri middleware and routes ([cb67176](https://github.com/ryansutrisno/suntree/commit/cb671769596d2ccf76583a2ad3b11e2458c7260a))
+* **phase-6:** add payment instruction page for santri ([c443b52](https://github.com/ryansutrisno/suntree/commit/c443b52506268c88cd692ad76dc99bee9aa408b3))
+* **phase-6:** add santri dashboard with enrollment list ([dd840b4](https://github.com/ryansutrisno/suntree/commit/dd840b4c48d1fbf0ed4aa5879a1c00f0b6beef9d))
+
+
+### 🐛 Bug Fixes
+
+* **lint:** remove unused FormEvent import and fix useEffect deps ([049a706](https://github.com/ryansutrisno/suntree/commit/049a706a25c18da7b76533be6f3dcecca2d883e9))
+
+
+### 📚 Documentation
+
+* **phase-6:** mark all tasks as done ([4785ffa](https://github.com/ryansutrisno/suntree/commit/4785ffadde4fc5831cb8da5b6158e201c6c8747a))
+
 ## [1.5.0](https://github.com/ryansutrisno/suntree/compare/v1.4.0...v1.5.0) (2026-07-16)
 
 
