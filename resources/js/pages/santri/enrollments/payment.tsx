@@ -32,8 +32,15 @@ interface EnrollmentData {
     batch: Batch;
 }
 
+interface BankInstructions {
+    bank_name: string;
+    account_number: string;
+    account_holder: string;
+}
+
 type PaymentProps = {
     enrollment: EnrollmentData;
+    bankInstructions: BankInstructions;
 };
 
 function formatCurrency(amount: number): string {
@@ -53,7 +60,7 @@ function formatDate(dateString: string): string {
     });
 }
 
-export default function Payment({ enrollment }: PaymentProps) {
+export default function Payment({ enrollment, bankInstructions }: PaymentProps) {
     return (
         <SantriLayout
             title="Pembayaran"
@@ -99,11 +106,57 @@ export default function Payment({ enrollment }: PaymentProps) {
                     </p>
                 </div>
 
-                <div className="mt-6 rounded-2xl border border-dashed border-[#eadcc8] bg-[#f8f3eb] px-6 py-8 text-center">
-                    <p className="text-sm text-slate-500">
- Informasi petunjuk pembayaran akan ditambahkan di sini.
-                    </p>
-                </div>
+                {enrollment.payment_status === 'paid' ? (
+                    <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-6 py-8 text-center">
+                        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100">
+                            <svg className="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>
+                        </div>
+                        <h4 className="text-base font-semibold text-emerald-800">Pembayaran Telah Dikonfirmasi</h4>
+                        <p className="mt-1 text-sm text-emerald-600">
+                            Pembayaran sebesar {formatCurrency(enrollment.amount)} telah dikonfirmasi.
+                        </p>
+                    </div>
+                ) : enrollment.payment_status === 'rejected' ? (
+                    <div className="mt-6 rounded-2xl border border-red-200 bg-red-50 px-6 py-8 text-center">
+                        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+                            <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                        <h4 className="text-base font-semibold text-red-800">Pembayaran Ditolak</h4>
+                        <p className="mt-1 text-sm text-red-600">
+                            Pembayaran Anda tidak dapat diverifikasi. Silakan hubungi ustadz pengelola program untuk informasi lebih lanjut.
+                        </p>
+                    </div>
+                ) : (
+                    <div className="mt-6">
+                        <h3 className="text-lg font-semibold text-slate-900">
+                            Instruksi Pembayaran Transfer Bank
+                        </h3>
+
+                        <div className="mt-4 rounded-2xl border border-[#eadcc8] bg-white p-5 shadow-sm">
+                            <div className="space-y-4 text-sm text-slate-600">
+                                <p className="text-base font-semibold text-slate-900">
+                                    Total yang harus dibayar:{' '}
+                                    <span className="text-[#0f766e]">{formatCurrency(enrollment.amount)}</span>
+                                </p>
+
+                                <div className="border-t border-[#eadcc8] pt-4">
+                                    <p className="text-xs uppercase tracking-wide text-slate-400">Rekening Tujuan</p>
+                                    <p className="mt-1.5 text-base font-semibold text-slate-900">{bankInstructions.bank_name}</p>
+                                    <p className="mt-1 text-lg font-bold text-[#0f766e]">{bankInstructions.account_number}</p>
+                                    <p className="text-sm text-slate-500">a.n. {bankInstructions.account_holder}</p>
+                                </div>
+
+                                <p className="text-xs leading-relaxed text-slate-400">
+                                    Silakan transfer sesuai jumlah di atas ke rekening berikut, lalu konfirmasi pembayaran Anda akan diverifikasi oleh ustadz pengelola program.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 <div className="mt-6">
                     <Link

@@ -85,6 +85,21 @@ class EnrollmentController extends Controller
 
         return Inertia::render('santri/enrollments/payment', [
             'enrollment' => $enrollment,
+            'bankInstructions' => $this->bankInstructions(),
         ]);
+    }
+
+    /**
+     * Get bank transfer instructions.
+     *
+     * @return array<string, string>
+     */
+    private function bankInstructions(): array
+    {
+        return [
+            'bank_name' => 'Bank Syariah Indonesia (BSI)',
+            'account_number' => '7123456789',
+            'account_holder' => 'Yayasan PojokSantri',
+        ];
     }
 }
