@@ -88,7 +88,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::patch('/ustadz/{ustadzProfile}/revoke', [UstadzController::class, 'revoke'])->name('ustadz.revoke');
 });
 
-Route::get('/programs/{program}', [ProgramController::class, 'show'])->name('programs.show');
+Route::get('/programs', [ProgramController::class, 'index'])->name('public.programs.index');
+Route::get('/programs/{program}', [ProgramController::class, 'show'])->name('public.programs.show');
 Route::get('/ustadz/{ustadzProfile}', [PublicUstadzController::class, 'show'])->name('ustadz.show');
 
 require __DIR__.'/auth.php';
