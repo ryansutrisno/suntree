@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ShellController;
 use App\Http\Controllers\Admin\UstadzController;
 use App\Http\Controllers\ProfileController;
@@ -78,7 +79,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/programs', ShellController::class)->name('programs.index');
     Route::get('/batches', ShellController::class)->name('batches.index');
     Route::get('/enrollments', ShellController::class)->name('enrollments.index');
-    Route::get('/payments', ShellController::class)->name('payments.index');
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
+    Route::patch('/payments/{enrollment}/confirm', [PaymentController::class, 'confirm'])->name('payments.confirm');
+    Route::patch('/payments/{enrollment}/reject', [PaymentController::class, 'reject'])->name('payments.reject');
 
     Route::get('/ustadz', [UstadzController::class, 'index'])->name('ustadz.index');
     Route::patch('/ustadz/{ustadzProfile}/approve', [UstadzController::class, 'approve'])->name('ustadz.approve');
