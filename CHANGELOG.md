@@ -1,3 +1,15 @@
+## [1.7.0](https://github.com/ryansutrisno/suntree/compare/v1.6.0...v1.7.0) (2026-07-17)
+
+
+### ✨ Features
+
+* **phase-7:** add admin payment controller, queue page, and tests ([6fdcfb8](https://github.com/ryansutrisno/suntree/commit/6fdcfb88133a5802a874f71a97bf6791a9313e17))
+
+
+### 📚 Documentation
+
+* **phase-7:** add manual payment flow spec ([55066dd](https://github.com/ryansutrisno/suntree/commit/55066ddd09b584c3c26816407dea55b3999cf7d4))
+
 ## [1.6.0](https://github.com/ryansutrisno/suntree/compare/v1.5.0...v1.6.0) (2026-07-16)
 
 
