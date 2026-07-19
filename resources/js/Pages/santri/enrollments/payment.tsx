@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import SantriLayout from '@/layouts/santri-layout';
+import SantriLayout from '@/Layouts/santri-layout';
 
 interface BatchProgram {
     id: number;

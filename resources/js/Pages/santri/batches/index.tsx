@@ -1,5 +1,5 @@
 import { Link, router } from '@inertiajs/react';
-import SantriLayout from '@/layouts/santri-layout';
+import SantriLayout from '@/Layouts/santri-layout';
 
 interface Program {
     id: number;

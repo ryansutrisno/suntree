@@ -1,6 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
-import UstadzLayout from '@/layouts/ustadz-layout';
+import UstadzLayout from '@/Layouts/ustadz-layout';
 
 type Program = {
     id: number;
