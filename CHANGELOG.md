@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/ryansutrisno/suntree/compare/v1.7.0...v1.7.1) (2026-07-17)
+
+
+### 🐛 Bug Fixes
+
+* **phase-8:** restore public program listing route and controller ([840ae44](https://github.com/ryansutrisno/suntree/commit/840ae445be25ed9b04f9eb8a7ab529c51e2cc6d9))
+
 ## [1.7.0](https://github.com/ryansutrisno/suntree/compare/v1.6.0...v1.7.0) (2026-07-17)
 
 
