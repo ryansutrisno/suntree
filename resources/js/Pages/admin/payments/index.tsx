@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import AdminLayout from '@/Layouts/admin-layout';
-import type { AdminShellProps } from '@/pages/admin/shell-page';
+import type { AdminShellProps } from '@/Pages/admin/shell-page';
 
 type PaymentUser = {
     id: number;
