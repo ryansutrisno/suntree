@@ -1,3 +1,24 @@
+## [1.8.0](https://github.com/ryansutrisno/suntree/compare/v1.7.1...v1.8.0) (2026-07-20)
+
+
+### ✨ Features
+
+* **seeders:** add ustadz + santri demo accounts for role-based testing ([aa69de7](https://github.com/ryansutrisno/suntree/commit/aa69de7f58263a814d81c5b0334acf6c498127c6))
+
+
+### 🐛 Bug Fixes
+
+* **build:** swap @tailwindcss/vite for @tailwindcss/postcss (Vite v8 compat) ([bcaf8e1](https://github.com/ryansutrisno/suntree/commit/bcaf8e18ea10aa3086d1a6c7a090db2653bc00c2))
+* **casing:** align admin shell-page imports to capital @/Pages/ ([05a4d7c](https://github.com/ryansutrisno/suntree/commit/05a4d7c191fe97dca4b35079a20f3cca7e45d76e))
+* **casing:** align inertia pages path to capital js/Pages ([bfb89b1](https://github.com/ryansutrisno/suntree/commit/bfb89b159dfe82340842499a9c2ab8ac8ca60e1e))
+* **casing:** correct PascalCase for Inertia-rendered pages ([481ccf3](https://github.com/ryansutrisno/suntree/commit/481ccf322ce171d5c26f3fe9b70361a2f9c1a4f8))
+* **casing:** rename js dirs to PascalCase + align layout imports ([46716ee](https://github.com/ryansutrisno/suntree/commit/46716ee008d8b2bbf7458a980ab7446e128fe9d6))
+
+
+### 📚 Documentation
+
+* **phase-8:** add verification phase readme ([e6f89eb](https://github.com/ryansutrisno/suntree/commit/e6f89ebbeffb1d9dc85fb31557d1144df421d42a))
+
 ## [1.7.1](https://github.com/ryansutrisno/suntree/compare/v1.7.0...v1.7.1) (2026-07-17)
 
 
