@@ -154,20 +154,19 @@ function DemoAccountCard({ account, onPick }: { account: DemoAccount; onPick: (e
         <button
             type="button"
             onClick={() => onPick(account.email)}
-            className="group flex items-center gap-3 rounded-xl border border-brand-border bg-white px-3 py-2.5 text-left transition-all hover:-translate-y-0.5 hover:border-brand-teal-mid hover:shadow-sm"
+            className="group flex items-center gap-2.5 rounded-xl border border-brand-border bg-white px-2.5 py-2 text-left transition-all hover:-translate-y-0.5 hover:border-brand-teal-mid hover:shadow-sm sm:flex-col sm:items-start sm:gap-2 sm:px-3 sm:py-2.5"
         >
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-teal-light text-[13px] font-bold text-brand-teal">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-teal-light text-[12px] font-bold text-brand-teal sm:h-9 sm:w-9 sm:text-[13px]">
                 {account.initial}
             </span>
             <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-light">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-light sm:text-[11px]">
                     {account.role}
                 </p>
-                <p className="truncate text-[12.5px] font-medium text-brand-dark">{account.email}</p>
+                <p className="truncate text-[12px] font-medium text-brand-dark sm:text-[12.5px]">
+                    {account.email}
+                </p>
             </div>
-            <span className="shrink-0 text-[10px] font-semibold uppercase tracking-wide text-brand-light opacity-0 transition-opacity group-hover:text-brand-teal group-hover:opacity-100">
-                Pakai →
-            </span>
         </button>
     );
 }
@@ -195,17 +194,17 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     };
 
     const inputClass =
-        'mt-2 block w-full rounded-xl border-[1.5px] border-brand-border bg-white px-4 py-3 text-[14px] text-brand-dark placeholder:text-brand-light transition-all outline-none focus:border-brand-teal focus:ring-4 focus:ring-brand-teal-light';
+        'mt-2 block w-full rounded-xl border-[1.5px] border-brand-border bg-white px-4 py-2.5 text-[14px] text-brand-dark placeholder:text-brand-light transition-all outline-none focus:border-brand-teal focus:ring-4 focus:ring-brand-teal-light';
 
     return (
         <>
             <Head title="Masuk" />
 
-            <main className="grid min-h-screen grid-cols-1 bg-brand-surface lg:grid-cols-[1.05fr_0.95fr]">
+            <main className="grid min-h-screen grid-cols-1 bg-brand-surface lg:h-dvh lg:grid-cols-[1.05fr_0.95fr] lg:overflow-hidden">
                 <MarketingPanel />
 
                 {/* Form panel */}
-                <section className="relative flex flex-col items-center justify-center px-5 py-12 sm:px-10">
+                <section className="relative flex flex-col items-center justify-center px-5 py-10 sm:px-8 lg:py-6">
                     {/* Subtle dotted bg */}
                     <div
                         className="pointer-events-none absolute inset-0 opacity-30"
@@ -219,27 +218,27 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
                     <div className="relative w-full max-w-md">
                         {/* Mobile/tablet brand */}
-                        <div className="mb-8 lg:hidden">
+                        <div className="mb-6 lg:hidden">
                             <MobileBrandMark />
                         </div>
 
-                        <div className="animate-fade-up rounded-2xl border border-brand-border bg-white p-7 shadow-[0_8px_40px_rgba(10,74,69,0.06)] sm:p-9">
-                            <div className="mb-7">
-                                <h1 className="font-display text-[28px] font-bold leading-tight tracking-tight text-brand-dark sm:text-[32px]">
+                        <div className="animate-fade-up rounded-2xl border border-brand-border bg-white p-6 shadow-[0_8px_40px_rgba(10,74,69,0.06)] sm:p-7 lg:max-h-[calc(100dvh-3rem)] lg:overflow-y-auto">
+                            <div className="mb-5 lg:mb-4">
+                                <h1 className="font-display text-[26px] font-bold leading-tight tracking-tight text-brand-dark sm:text-[30px] lg:text-[26px]">
                                     Masuk ke akunmu
                                 </h1>
-                                <p className="mt-2 text-[14px] leading-relaxed text-brand-mid">
+                                <p className="mt-2 text-[13.5px] leading-relaxed text-brand-mid">
                                     Lanjutkan perjalanan ngaji kamu dari tempat kamu tinggalkan.
                                 </p>
                             </div>
 
                             {status && (
-                                <div className="mb-5 rounded-xl border border-brand-teal-mid bg-brand-teal-light px-4 py-3 text-[13px] font-medium text-brand-teal-dark">
+                                <div className="mb-4 rounded-xl border border-brand-teal-mid bg-brand-teal-light px-4 py-3 text-[13px] font-medium text-brand-teal-dark">
                                     {status}
                                 </div>
                             )}
 
-                            <form onSubmit={submit} className="space-y-5">
+                            <form onSubmit={submit} className="space-y-4">
                                 <div>
                                     <label htmlFor="email" className="block text-[13px] font-semibold text-brand-dark">
                                         Email
@@ -313,7 +312,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-teal px-6 py-3.5 text-[14px] font-bold text-white shadow-[0_8px_24px_rgba(10,124,107,0.25)] transition-all hover:-translate-y-0.5 hover:bg-brand-teal-dark hover:shadow-[0_12px_32px_rgba(10,124,107,0.35)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+                                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-teal px-6 py-3 text-[14px] font-bold text-white shadow-[0_8px_24px_rgba(10,124,107,0.25)] transition-all hover:-translate-y-0.5 hover:bg-brand-teal-dark hover:shadow-[0_12px_32px_rgba(10,124,107,0.35)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                                 >
                                     {processing ? (
                                         <>
@@ -361,19 +360,17 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                             </form>
 
                             {/* Demo credentials helper */}
-                            <div className="mt-7 rounded-xl border border-[#E8D5A8] bg-brand-gold-light p-4">
-                                <div className="flex items-center justify-between gap-2">
+                            <div className="mt-5 rounded-xl border border-[#E8D5A8] bg-brand-gold-light p-4 lg:p-3.5">
+                                <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
                                     <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-gold">
                                         Akun Demo
                                     </p>
-                                    <span className="text-[10px] font-medium text-brand-light">
-                                        Password: <span className="font-mono">password</span>
-                                    </span>
+                                    <p className="text-[10px] text-brand-light">
+                                        Klik untuk pakai · Password:{' '}
+                                        <span className="font-mono text-brand-mid">password</span>
+                                    </p>
                                 </div>
-                                <p className="mt-1.5 text-[12px] text-brand-mid">
-                                    Klik salah satu akun untuk mengisi form otomatis.
-                                </p>
-                                <div className="mt-3 space-y-2">
+                                <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-3 lg:mt-2">
                                     {DEMO_ACCOUNTS.map((account) => (
                                         <DemoAccountCard
                                             key={account.email}
@@ -386,7 +383,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         </div>
 
                         {/* Register CTA */}
-                        <p className="mt-6 text-center text-[13.5px] text-brand-mid">
+                        <p className="mt-4 text-center text-[13.5px] text-brand-mid">
                             Belum punya akun?{' '}
                             <Link
                                 href={register.url()}
