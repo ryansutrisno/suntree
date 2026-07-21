@@ -229,7 +229,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                                     Masuk ke akunmu
                                 </h1>
                                 <p className="mt-2 text-[14px] leading-relaxed text-brand-mid">
-                                    Lanjutkan perjalanan ngaji kamu dari where kamu tinggal.
+                                    Lanjutkan perjalanan ngaji kamu dari tempat kamu tinggalkan.
                                 </p>
                             </div>
 
