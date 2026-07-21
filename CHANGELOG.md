@@ -1,3 +1,10 @@
+## [1.9.0](https://github.com/ryansutrisno/suntree/compare/v1.8.0...v1.9.0) (2026-07-21)
+
+
+### ✨ Features
+
+* **landing:** adapt mock home screen into PojokSantri landing page ([86f08bd](https://github.com/ryansutrisno/suntree/commit/86f08bdc565d2041ee4edba109c5b42669053dd4))
+
 ## [1.8.0](https://github.com/ryansutrisno/suntree/compare/v1.7.1...v1.8.0) (2026-07-20)
 
 
