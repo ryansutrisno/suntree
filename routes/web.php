@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ShellController;
 use App\Http\Controllers\Admin\UstadzController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProgramController;
 use App\Http\Controllers\Public\UstadzController as PublicUstadzController;
 use App\Http\Controllers\Santri\BatchController as SantriBatchController;
@@ -15,18 +16,10 @@ use App\Http\Controllers\Ustadz\DashboardController as UstadzDashboardController
 use App\Http\Controllers\Ustadz\ParticipantController;
 use App\Http\Controllers\Ustadz\ProgramController as UstadzProgramController;
 use App\Http\Controllers\UstadzProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', HomeController::class)->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

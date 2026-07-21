@@ -1,1 +1,83 @@
 @import "tailwindcss";
+
+@theme {
+    /* PojokSantri brand palette */
+    --color-brand-teal: #0A7C6B;
+    --color-brand-teal-dark: #065A4D;
+    --color-brand-teal-light: #E6F4F1;
+    --color-brand-teal-mid: #B2D8D2;
+    --color-brand-gold: #C8973A;
+    --color-brand-gold-light: #FBF3E3;
+    --color-brand-cream: #FAF8F4;
+    --color-brand-surface: #F0EDE8;
+    --color-brand-dark: #1A1A1A;
+    --color-brand-mid: #4A4A4A;
+    --color-brand-light: #8A8A8A;
+    --color-brand-border: #E8E4DC;
+
+    /* Status accents (used sparingly on program cards) */
+    --color-brand-pemula: #2D8A5F;
+    --color-brand-pemula-bg: #E8F5E9;
+    --color-brand-menengah: #E67E22;
+    --color-brand-menengah-bg: #FFF3E0;
+    --color-brand-lanjutan: #7B1FA2;
+    --color-brand-lanjutan-bg: #EDE7F6;
+
+    /* Typography */
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+
+    /* Orchestration animations */
+    --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    --animate-fade-in: fade-in 0.8s ease-out both;
+    --animate-float-card: float-card 6s ease-in-out infinite;
+
+    @keyframes fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes float-card {
+        0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, 0deg)); }
+        50% { transform: translateY(-10px) rotate(var(--tw-rotate, 0deg)); }
+    }
+}
+
+@layer utilities {
+    /* Hero center card: fade-up entrance, then settle into a gentle float */
+    .animate-hero-card-center {
+        animation:
+            fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both,
+            float-card 6s ease-in-out 1.6s infinite;
+    }
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font-sans);
+        background-color: var(--color-brand-surface);
+        color: var(--color-brand-dark);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+        background-color: var(--color-brand-teal);
+        color: #fff;
+    }
+}
