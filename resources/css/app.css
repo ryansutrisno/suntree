@@ -54,6 +54,15 @@
     }
 }
 
+@layer utilities {
+    /* Hero center card: fade-up entrance, then settle into a gentle float */
+    .animate-hero-card-center {
+        animation:
+            fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both,
+            float-card 6s ease-in-out 1.6s infinite;
+    }
+}
+
 @layer base {
     html {
         scroll-behavior: smooth;

@@ -81,7 +81,7 @@ function AuthActions({ canLogin, canRegister }: { canLogin: boolean; canRegister
             {canLogin && (
                 <Link
                     href="/login"
-                    className="rounded-lg border-[1.5px] border-brand-border bg-white px-5 py-2 text-[13px] font-semibold text-brand-mid transition-all hover:-translate-y-0.5 hover:border-brand-teal hover:text-brand-teal"
+                    className="rounded-lg border-[1.5px] border-brand-border bg-white px-5 py-2 text-[13px] font-semibold text-brand-mid transition-all hover:-translate-y-0.5 hover:border-brand-teal hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                 >
                     Masuk
                 </Link>
@@ -89,7 +89,7 @@ function AuthActions({ canLogin, canRegister }: { canLogin: boolean; canRegister
             {canRegister && (
                 <Link
                     href="/register"
-                    className="group inline-flex items-center gap-1.5 rounded-lg bg-brand-teal px-5 py-2 text-[13px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-brand-teal-dark hover:shadow-lg hover:shadow-brand-teal/25"
+                    className="group inline-flex items-center gap-1.5 rounded-lg bg-brand-teal px-5 py-2 text-[13px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-brand-teal-dark hover:shadow-lg hover:shadow-brand-teal/25 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                 >
                     Jadi Ustadz
                     <span className="transition-transform duration-200 group-hover:translate-x-0.5">
@@ -108,7 +108,7 @@ function MobileMenuToggle({ open, onToggle }: { open: boolean; onToggle: () => v
             onClick={onToggle}
             aria-label={open ? 'Tutup menu' : 'Buka menu'}
             aria-expanded={open}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-brand-border bg-white text-brand-mid transition-colors hover:border-brand-teal hover:text-brand-teal md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-brand-border bg-white text-brand-mid transition-colors hover:border-brand-teal hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-white md:hidden"
         >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="h-5 w-5">
                 {open ? (

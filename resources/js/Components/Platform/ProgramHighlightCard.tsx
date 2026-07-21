@@ -37,7 +37,7 @@ export function ProgramHighlightCard({ program }: { program: ProgramHighlight })
     return (
         <Link
             href={program.show_url}
-            className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-border bg-white transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal-mid hover:shadow-[0_16px_40px_rgba(10,74,69,0.10)]"
+            className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-border bg-white transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal-mid hover:shadow-[0_16px_40px_rgba(10,74,69,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream"
         >
             {/* Top strip: level + bookmark */}
             <div className="flex items-start justify-between px-5 pt-5">

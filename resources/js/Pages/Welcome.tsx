@@ -111,12 +111,13 @@ function HeroCardStack({ programs }: { programs: ProgramHighlight[] }) {
                 {stack.map((program, index) => {
                     const pos = offsets[index];
                     const ustadzName = program.ustadz_name ?? 'Ustadz';
+                    const isCenter = index === 1;
 
                     return (
                         <div
                             key={program.id}
-                            className={`animate-fade-up absolute rounded-2xl border border-brand-border bg-white p-5 shadow-[0_8px_40px_rgba(10,74,69,0.12)] ${pos.top} ${pos.right} ${pos.width} ${pos.opacity} ${pos.z} ${rotations[index]}`}
-                            style={{ animationDelay: `${500 + index * 150}ms` }}
+                            className={`${isCenter ? 'animate-hero-card-center' : 'animate-fade-up'} absolute rounded-2xl border border-brand-border bg-white p-5 shadow-[0_8px_40px_rgba(10,74,69,0.12)] ${pos.top} ${pos.right} ${pos.width} ${pos.opacity} ${pos.z} ${rotations[index]}`}
+                            style={isCenter ? undefined : { animationDelay: `${500 + index * 150}ms` }}
                         >
                             <div className="mb-3.5 flex items-start gap-2.5">
                                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-brand-teal-mid bg-brand-teal-light text-base font-bold text-brand-teal">
@@ -180,6 +181,11 @@ function Hero({ programs, stats }: { programs: ProgramHighlight[]; stats: Welcom
                 }}
                 aria-hidden="true"
             />
+            {/* Soft depth glow behind text column */}
+            <div
+                className="pointer-events-none absolute -left-40 top-1/2 hidden h-[560px] w-[560px] -translate-y-1/2 rounded-full bg-brand-teal-light/50 blur-3xl lg:block"
+                aria-hidden="true"
+            />
             <div className="relative mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2 lg:gap-16 lg:py-24">
                 <div className="max-w-xl space-y-6">
                     <HeroBadge delay={0}>Platform ngaji berbasis batch</HeroBadge>
@@ -209,7 +215,7 @@ function Hero({ programs, stats }: { programs: ProgramHighlight[]; stats: Welcom
                     >
                         <Link
                             href="/programs"
-                            className="group inline-flex items-center gap-2 rounded-xl bg-brand-teal px-7 py-3.5 text-[14px] font-bold text-white shadow-[0_8px_24px_rgba(10,124,107,0.25)] transition-all hover:-translate-y-0.5 hover:bg-brand-teal-dark hover:shadow-[0_12px_32px_rgba(10,124,107,0.35)]"
+                            className="group inline-flex items-center gap-2 rounded-xl bg-brand-teal px-7 py-3.5 text-[14px] font-bold text-white shadow-[0_8px_24px_rgba(10,124,107,0.25)] transition-all hover:-translate-y-0.5 hover:bg-brand-teal-dark hover:shadow-[0_12px_32px_rgba(10,124,107,0.35)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream"
                         >
                             Jelajahi Program
                             <svg
@@ -224,7 +230,7 @@ function Hero({ programs, stats }: { programs: ProgramHighlight[]; stats: Welcom
                         </Link>
                         <Link
                             href="/register"
-                            className="inline-flex items-center gap-2 rounded-xl border-2 border-brand-border bg-white px-7 py-3.5 text-[14px] font-semibold text-brand-mid transition-all hover:-translate-y-0.5 hover:border-brand-teal hover:text-brand-teal"
+                            className="inline-flex items-center gap-2 rounded-xl border-2 border-brand-border bg-white px-7 py-3.5 text-[14px] font-semibold text-brand-mid transition-all hover:-translate-y-0.5 hover:border-brand-teal hover:text-brand-teal active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream"
                         >
                             Saya seorang Ustadz
                         </Link>
@@ -260,7 +266,7 @@ function SearchTeaser() {
             <div className="mx-auto max-w-[1100px]">
                 <Link
                     href="/programs"
-                    className="group flex flex-col items-stretch gap-3 rounded-2xl border-[1.5px] border-brand-border bg-white p-2 shadow-[0_8px_28px_rgba(10,74,69,0.08)] transition-all hover:border-brand-teal-mid hover:shadow-[0_14px_36px_rgba(10,74,69,0.12)] sm:flex-row sm:items-center"
+                    className="group flex flex-col items-stretch gap-3 rounded-2xl border-[1.5px] border-brand-border bg-white p-2 shadow-[0_8px_28px_rgba(10,74,69,0.08)] transition-all hover:border-brand-teal-mid hover:shadow-[0_14px_36px_rgba(10,74,69,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface sm:flex-row sm:items-center"
                 >
                     <div className="flex flex-1 items-center gap-3 px-3 py-2">
                         <svg
@@ -401,7 +407,7 @@ function ProgramHighlights({ programs }: { programs: ProgramHighlight[] }) {
                     />
                     <Link
                         href="/programs"
-                        className="group inline-flex shrink-0 items-center gap-1.5 rounded-xl border-[1.5px] border-brand-border bg-white px-5 py-2.5 text-[13px] font-semibold text-brand-mid transition-all hover:-translate-y-0.5 hover:border-brand-teal hover:text-brand-teal"
+                        className="group inline-flex shrink-0 items-center gap-1.5 rounded-xl border-[1.5px] border-brand-border bg-white px-5 py-2.5 text-[13px] font-semibold text-brand-mid transition-all hover:-translate-y-0.5 hover:border-brand-teal hover:text-brand-teal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream"
                     >
                         Lihat semua program
                         <svg
@@ -436,7 +442,7 @@ function ProgramHighlights({ programs }: { programs: ProgramHighlight[] }) {
                         </p>
                         <Link
                             href="/programs"
-                            className="mt-5 inline-flex items-center gap-1.5 rounded-xl bg-brand-teal px-5 py-2.5 text-[13px] font-bold text-white transition-colors hover:bg-brand-teal-dark"
+                            className="mt-5 inline-flex items-center gap-1.5 rounded-xl bg-brand-teal px-5 py-2.5 text-[13px] font-bold text-white transition-colors hover:bg-brand-teal-dark active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream"
                         >
                             Lihat semua program
                         </Link>
@@ -577,7 +583,7 @@ function FinalCta() {
                     <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                         <Link
                             href="/programs"
-                            className="group inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-[14px] font-bold text-brand-teal-dark transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/10"
+                            className="group inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-[14px] font-bold text-brand-teal-dark transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/10 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-teal"
                         >
                             Jelajahi Program
                             <svg
@@ -592,7 +598,7 @@ function FinalCta() {
                         </Link>
                         <Link
                             href="/register"
-                            className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 bg-transparent px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:border-white"
+                            className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 bg-transparent px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:border-white active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-teal"
                         >
                             Jadi Ustadz
                         </Link>
