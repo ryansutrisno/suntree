@@ -154,19 +154,29 @@ function DemoAccountCard({ account, onPick }: { account: DemoAccount; onPick: (e
         <button
             type="button"
             onClick={() => onPick(account.email)}
-            className="group flex items-center gap-2.5 rounded-xl border border-brand-border bg-white px-2.5 py-2 text-left transition-all hover:-translate-y-0.5 hover:border-brand-teal-mid hover:shadow-sm sm:flex-col sm:items-start sm:gap-2 sm:px-3 sm:py-2.5"
+            className="group flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors hover:bg-white/70"
         >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-teal-light text-[12px] font-bold text-brand-teal sm:h-9 sm:w-9 sm:text-[13px]">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-teal-light text-[12px] font-bold text-brand-teal">
                 {account.initial}
             </span>
             <div className="min-w-0 flex-1">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-light sm:text-[11px]">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-light">
                     {account.role}
                 </p>
-                <p className="truncate text-[12px] font-medium text-brand-dark sm:text-[12.5px]">
+                <p className="truncate text-[12.5px] font-medium text-brand-dark">
                     {account.email}
                 </p>
             </div>
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.5}
+                className="h-3.5 w-3.5 shrink-0 text-brand-light opacity-0 transition-opacity group-hover:text-brand-teal group-hover:opacity-100"
+                aria-hidden="true"
+            >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
         </button>
     );
 }
@@ -370,7 +380,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                                         <span className="font-mono text-brand-mid">password</span>
                                     </p>
                                 </div>
-                                <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-3 lg:mt-2">
+                                <div className="mt-2 space-y-0.5">
                                     {DEMO_ACCOUNTS.map((account) => (
                                         <DemoAccountCard
                                             key={account.email}
@@ -380,18 +390,18 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                                     ))}
                                 </div>
                             </div>
-                        </div>
 
-                        {/* Register CTA */}
-                        <p className="mt-4 text-center text-[13.5px] text-brand-mid">
-                            Belum punya akun?{' '}
-                            <Link
-                                href={register.url()}
-                                className="font-semibold text-brand-teal underline-offset-4 transition-colors hover:text-brand-teal-dark hover:underline"
-                            >
-                                Daftar sebagai Ustadz
-                            </Link>
-                        </p>
+                            {/* Register CTA — inside card so it scrolls with content if viewport is short */}
+                            <p className="mt-5 text-center text-[13.5px] text-brand-mid">
+                                Belum punya akun?{' '}
+                                <Link
+                                    href={register.url()}
+                                    className="font-semibold text-brand-teal underline-offset-4 transition-colors hover:text-brand-teal-dark hover:underline"
+                                >
+                                    Daftar sebagai Ustadz
+                                </Link>
+                            </p>
+                        </div>
                     </div>
                 </section>
             </main>
