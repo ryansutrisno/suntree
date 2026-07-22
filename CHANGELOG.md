@@ -1,3 +1,17 @@
+## [1.10.0](https://github.com/ryansutrisno/suntree/compare/v1.9.0...v1.10.0) (2026-07-22)
+
+
+### ✨ Features
+
+* **auth:** redesign Login page with PojokSantri branding ([9219885](https://github.com/ryansutrisno/suntree/commit/92198850d1b751f229fa24bb4ab1c5022aaee3ed))
+
+
+### 🐛 Bug Fixes
+
+* **auth:** replace english 'where' with indonesian in login subtitle ([2142f15](https://github.com/ryansutrisno/suntree/commit/2142f153cb6d8c5c998e6cd5122b2ce7e6daa788))
+* **auth:** resolve demo account card overlap in login page ([585bf18](https://github.com/ryansutrisno/suntree/commit/585bf181bf5758e95a0f5e29be9bd759a24eebea))
+* **ci:** generate wayfinder routes before build/lint ([36c9253](https://github.com/ryansutrisno/suntree/commit/36c9253072b5f1eb43488abeac93d5ceb7b17501)), closes [#11](https://github.com/ryansutrisno/suntree/issues/11)
+
 ## [1.9.0](https://github.com/ryansutrisno/suntree/compare/v1.8.0...v1.9.0) (2026-07-21)
 
 
