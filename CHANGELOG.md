@@ -1,3 +1,10 @@
+## [1.11.0](https://github.com/ryansutrisno/suntree/compare/v1.10.0...v1.11.0) (2026-07-25)
+
+
+### ✨ Features
+
+* **auth:** redesign Register and ForgotPassword with PojokSantri branding ([e0c53ce](https://github.com/ryansutrisno/suntree/commit/e0c53ce036c12a3a6d77cd4b07cb2c9d8cf7d9bb))
+
 ## [1.10.0](https://github.com/ryansutrisno/suntree/compare/v1.9.0...v1.10.0) (2026-07-22)
 
 
