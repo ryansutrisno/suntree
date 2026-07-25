@@ -1,3 +1,10 @@
+## [1.12.0](https://github.com/ryansutrisno/suntree/compare/v1.11.0...v1.12.0) (2026-07-25)
+
+
+### ✨ Features
+
+* **auth:** redesign ResetPassword, VerifyEmail, and ConfirmPassword with PojokSantri branding ([2c2f071](https://github.com/ryansutrisno/suntree/commit/2c2f071433035d990f35ebd645d459cbf1e71afe))
+
 ## [1.11.0](https://github.com/ryansutrisno/suntree/compare/v1.10.0...v1.11.0) (2026-07-25)
 
 
