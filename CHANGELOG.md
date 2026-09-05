@@ -1,3 +1,10 @@
+## [1.13.0](https://github.com/ryansutrisno/suntree/compare/v1.12.0...v1.13.0) (2026-09-05)
+
+
+### ✨ Features
+
+* **docker:** add docker setup for laravel app ([f919682](https://github.com/ryansutrisno/suntree/commit/f9196821b92448b05c7218f9d4a9a746bf507e8c))
+
 ## [1.12.0](https://github.com/ryansutrisno/suntree/compare/v1.11.0...v1.12.0) (2026-07-25)
 
 
