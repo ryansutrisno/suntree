@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/ryansutrisno/suntree/compare/v1.14.0...v1.14.1) (2026-09-14)
+
+
+### 🐛 Bug Fixes
+
+* **build:** remove stale vite.config.js that shadowed vite.config.ts ([197a22e](https://github.com/ryansutrisno/suntree/commit/197a22e5bdf09932e851ca57b90a2c1c1c37b822))
+
 ## [1.14.0](https://github.com/ryansutrisno/suntree/compare/v1.13.2...v1.14.0) (2026-09-14)
 
 
