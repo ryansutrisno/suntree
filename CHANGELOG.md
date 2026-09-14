@@ -1,3 +1,10 @@
+## [1.15.2](https://github.com/ryansutrisno/suntree/compare/v1.15.1...v1.15.2) (2026-09-14)
+
+
+### 🐛 Bug Fixes
+
+* **seed:** use .id domain for the demo admin email ([4b5b099](https://github.com/ryansutrisno/suntree/commit/4b5b099e2094de71338d147100a0609d925f61fb))
+
 ## [1.15.1](https://github.com/ryansutrisno/suntree/compare/v1.15.0...v1.15.1) (2026-09-14)
 
 
