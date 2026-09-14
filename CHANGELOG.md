@@ -1,3 +1,15 @@
+## [1.15.0](https://github.com/ryansutrisno/suntree/compare/v1.14.1...v1.15.0) (2026-09-14)
+
+
+### ✨ Features
+
+* **seed:** enable production seeding with configurable passwords ([cf2c531](https://github.com/ryansutrisno/suntree/commit/cf2c531a1bee5f561b1de95aa2f563c66a194a45))
+
+
+### 📚 Documentation
+
+* add deployment and troubleshooting guide ([34475cf](https://github.com/ryansutrisno/suntree/commit/34475cf41dfa0e099d7f2867403d0ffc0e9a8721))
+
 ## [1.14.1](https://github.com/ryansutrisno/suntree/compare/v1.14.0...v1.14.1) (2026-09-14)
 
 
