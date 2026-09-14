@@ -1,7 +1,7 @@
 # PojokSantri.ID
 
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php&logoColor=white)](https://www.php.net)
+[![PHP](https://img.shields.io/badge/PHP-8.4.1%2B-777BB4?logo=php&logoColor=white)](https://www.php.net)
 [![Inertia](https://img.shields.io/badge/Inertia-3.x-9553E9?logo=inertia&logoColor=white)](https://inertiajs.com)
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=black)](https://react.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
@@ -47,7 +47,7 @@ Status proyek: **Phase 1 MVP Alignment**. Sumber kebenaran produk dan teknis saa
 
 | Area | Teknologi |
 | --- | --- |
-| Backend | Laravel 13, PHP 8.3+ |
+| Backend | Laravel 13, PHP 8.4.1+ |
 | Frontend | Inertia React v3, React 19 |
 | Styling | Tailwind CSS v4 |
 | Bundler | Vite |
@@ -63,7 +63,7 @@ Status proyek: **Phase 1 MVP Alignment**. Sumber kebenaran produk dan teknis saa
 
 ## Prasyarat
 
-- PHP 8.3 atau lebih baru.
+- PHP 8.4.1 atau lebih baru (symfony 8.1.x memakai sintaks property hooks PHP 8.4).
 - Composer.
 - Node.js 22 atau lebih baru.
 - npm.
@@ -296,7 +296,7 @@ Build frontend production:
 npm run build
 ```
 
-CI GitHub saat ini menjalankan test pada PHP `8.3`, `8.4`, dan `8.5` dengan Node.js 22.
+CI GitHub saat ini menjalankan test pada PHP `8.4` dan `8.5` dengan Node.js 22.
 
 ## Development Workflow
 
@@ -328,7 +328,22 @@ Workflow release menginstall tool semantic-release menggunakan `npm install --no
 
 ## Deployment
 
-Belum ada konfigurasi deployment final di repository ini. Baseline deployment Laravel production:
+Production berjalan di VPS dengan **Dokploy** memakai build type **Nixpacks**. Dokumentasi lengkap — termasuk riwayat insiden build/deploy dan langkah troubleshooting — ada di **[DEPLOYMENT.md](DEPLOYMENT.md)**.
+
+Yang wajib dipenuhi:
+
+- `composer.json` → `require.php` = `^8.4.1`
+- `package.json` → `engines.node` = `^22.12.0`
+- Build type Dokploy = **Nixpacks** (bukan Dockerfile; `Dockerfile` di repo tidak dipakai)
+- Database MySQL 8.4 dengan user aplikasi memakai plugin `mysql_native_password`
+
+Alur deploy: push ke `main` (semantic-release menaikkan versi otomatis) → **Redeploy** di Dokploy → verifikasi:
+
+```bash
+curl -I https://suntree.trazmedia.com
+```
+
+Baseline deployment Laravel production yang dijalankan otomatis oleh Nixpacks:
 
 ```bash
 composer install --no-dev --optimize-autoloader
