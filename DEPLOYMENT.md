@@ -161,30 +161,30 @@ Titik injeksi config MySQL 8.4 di server ini adalah `/etc/mysql/conf.d/` — `/e
 
 ## Seeding data demo
 
-Seeder dirancang supaya `php artisan db:seed` aman dipakai di produksi, **tapi hanya setelah** password seed di-set lewat environment. Kalau dibiarkan default (`password`), seeder sengaja melempar `RuntimeException` agar kredensial demo tidak pernah ikut ter-deploy.
+`php artisan db:seed` bisa langsung dijalankan di produksi dan menghasilkan akun serta data demo yang siap pakai — tidak ada guard yang menghalangi, jadi tidak ada environment variable yang wajib.
 
-Environment variable yang dibutuhkan:
+Environment variable berikut **opsional**, dipakai hanya kalau ingin mengganti kredensial demo dari nilai default:
 
 | Variabel | Dipakai oleh | Default |
 | --- | --- | --- |
 | `ADMIN_SEED_EMAIL` | `AdminUserSeeder` | `admin@pojoksantri.test` |
 | `ADMIN_SEED_NAME` | `AdminUserSeeder` | `PojokSantri Admin` |
-| `ADMIN_SEED_PASSWORD` | `AdminUserSeeder` | `password` (ditolak di produksi) |
-| `DEMO_SEED_PASSWORD` | `UstadzUserSeeder`, `SantriUserSeeder` | `password` (ditolak di produksi) |
+| `ADMIN_SEED_PASSWORD` | `AdminUserSeeder` | `password` |
+| `DEMO_SEED_PASSWORD` | `UstadzUserSeeder`, `SantriUserSeeder` | `password` |
 
 Langkah seeding di server:
 
 ```bash
-# 1. Set ADMIN_SEED_PASSWORD, ADMIN_SEED_EMAIL, dan DEMO_SEED_PASSWORD di Dokploy,
-#    lalu redeploy aplikasi supaya entrypoint membangun ulang config cache.
-
-# 2. Jalankan seeder
 sudo docker exec -w /app <APP_CONTAINER> php artisan db:seed --force
 ```
+
+Kalau ingin mengganti password demo, set `ADMIN_SEED_PASSWORD` dan `DEMO_SEED_PASSWORD` di Dokploy **lalu redeploy aplikasi** sebelum menjalankan seeder.
 
 Seeder membuat: admin terverifikasi, satu ustadz demo (`ustadz@pojoksantri.id`) dengan profil terverifikasi, satu program untuk setiap kombinasi kategori × level beserta satu batch-nya, dan satu santri demo (`santri@pojoksantri.id`) yang langsung ter-enroll ke batch terakhir.
 
 > **Catatan config cache**: entrypoint container menjalankan `config:cache`. Environment variable baru **tidak** terbaca sampai config di-cache ulang — karena itu setiap perubahan env butuh redeploy (atau jalankan `php artisan config:clear` sebelum seeder).
+
+> **Catatan keamanan**: default `password` sangat lemah. Kalau situs ini publik, ganti password akun demo segera setelah seeding, atau set `ADMIN_SEED_PASSWORD`/`DEMO_SEED_PASSWORD` dulu sebelum seeding.
 
 ## Catatan keamanan
 

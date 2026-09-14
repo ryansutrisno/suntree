@@ -8,7 +8,6 @@ use App\Models\UstadzProfile;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use RuntimeException;
 
 class UstadzUserSeeder extends Seeder
 {
@@ -27,10 +26,6 @@ class UstadzUserSeeder extends Seeder
     public function run(): void
     {
         $password = (string) config('auth.demo_seed.password');
-
-        if (app()->isProduction() && $password === 'password') {
-            throw new RuntimeException('Set DEMO_SEED_PASSWORD before seeding the demo ustadz in production.');
-        }
 
         $user = User::updateOrCreate(
             ['email' => self::DEMO['email']],
