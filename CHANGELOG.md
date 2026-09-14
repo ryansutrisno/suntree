@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/ryansutrisno/suntree/compare/v1.15.0...v1.15.1) (2026-09-14)
+
+
+### 🐛 Bug Fixes
+
+* **seed:** drop production guard so demo seeding works out of the box ([e3d5962](https://github.com/ryansutrisno/suntree/commit/e3d596284e80b7e5d22cbf1c3bfd8940c048d1b6))
+
 ## [1.15.0](https://github.com/ryansutrisno/suntree/compare/v1.14.1...v1.15.0) (2026-09-14)
 
 
