@@ -1,3 +1,10 @@
+## [1.14.0](https://github.com/ryansutrisno/suntree/compare/v1.13.2...v1.14.0) (2026-09-14)
+
+
+### ✨ Features
+
+* **.serena:** add initial project configuration files ([7f49966](https://github.com/ryansutrisno/suntree/commit/7f49966455455e6aa71201a2a0e70f9f9710f4e6))
+
 ## [1.13.2](https://github.com/ryansutrisno/suntree/compare/v1.13.1...v1.13.2) (2026-09-14)
 
 
