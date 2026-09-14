@@ -1,3 +1,10 @@
+## [1.15.3](https://github.com/ryansutrisno/suntree/compare/v1.15.2...v1.15.3) (2026-09-14)
+
+
+### 🐛 Bug Fixes
+
+* **http:** trust forwarded proto headers behind the Cloudflare proxy ([c09d07a](https://github.com/ryansutrisno/suntree/commit/c09d07aba2cfb5df293ddec3c2b85398ba8af54d))
+
 ## [1.15.2](https://github.com/ryansutrisno/suntree/compare/v1.15.1...v1.15.2) (2026-09-14)
 
 
