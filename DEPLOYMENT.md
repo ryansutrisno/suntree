@@ -167,7 +167,7 @@ Environment variable berikut **opsional**, dipakai hanya kalau ingin mengganti k
 
 | Variabel | Dipakai oleh | Default |
 | --- | --- | --- |
-| `ADMIN_SEED_EMAIL` | `AdminUserSeeder` | `admin@pojoksantri.test` |
+| `ADMIN_SEED_EMAIL` | `AdminUserSeeder` | `admin@pojoksantri.id` |
 | `ADMIN_SEED_NAME` | `AdminUserSeeder` | `PojokSantri Admin` |
 | `ADMIN_SEED_PASSWORD` | `AdminUserSeeder` | `password` |
 | `DEMO_SEED_PASSWORD` | `UstadzUserSeeder`, `SantriUserSeeder` | `password` |

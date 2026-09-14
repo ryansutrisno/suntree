@@ -116,7 +116,7 @@ return [
 
     'admin_seed' => [
         'name' => env('ADMIN_SEED_NAME', 'PojokSantri Admin'),
-        'email' => env('ADMIN_SEED_EMAIL', 'admin@pojoksantri.test'),
+        'email' => env('ADMIN_SEED_EMAIL', 'admin@pojoksantri.id'),
         'password' => env('ADMIN_SEED_PASSWORD', 'password'),
     ],
 
