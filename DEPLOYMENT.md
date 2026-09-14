@@ -159,6 +159,33 @@ Titik injeksi config MySQL 8.4 di server ini adalah `/etc/mysql/conf.d/` — `/e
 
 > `mysql_native_password` **deprecated** dan **dihapus di MySQL 9**. Ini solusi jangka pendek; aman selama server masih MySQL 8.4.
 
+## Seeding data demo
+
+Seeder dirancang supaya `php artisan db:seed` aman dipakai di produksi, **tapi hanya setelah** password seed di-set lewat environment. Kalau dibiarkan default (`password`), seeder sengaja melempar `RuntimeException` agar kredensial demo tidak pernah ikut ter-deploy.
+
+Environment variable yang dibutuhkan:
+
+| Variabel | Dipakai oleh | Default |
+| --- | --- | --- |
+| `ADMIN_SEED_EMAIL` | `AdminUserSeeder` | `admin@pojoksantri.test` |
+| `ADMIN_SEED_NAME` | `AdminUserSeeder` | `PojokSantri Admin` |
+| `ADMIN_SEED_PASSWORD` | `AdminUserSeeder` | `password` (ditolak di produksi) |
+| `DEMO_SEED_PASSWORD` | `UstadzUserSeeder`, `SantriUserSeeder` | `password` (ditolak di produksi) |
+
+Langkah seeding di server:
+
+```bash
+# 1. Set ADMIN_SEED_PASSWORD, ADMIN_SEED_EMAIL, dan DEMO_SEED_PASSWORD di Dokploy,
+#    lalu redeploy aplikasi supaya entrypoint membangun ulang config cache.
+
+# 2. Jalankan seeder
+sudo docker exec -w /app <APP_CONTAINER> php artisan db:seed --force
+```
+
+Seeder membuat: admin terverifikasi, satu ustadz demo (`ustadz@pojoksantri.id`) dengan profil terverifikasi, satu program untuk setiap kombinasi kategori × level beserta satu batch-nya, dan satu santri demo (`santri@pojoksantri.id`) yang langsung ter-enroll ke batch terakhir.
+
+> **Catatan config cache**: entrypoint container menjalankan `config:cache`. Environment variable baru **tidak** terbaca sampai config di-cache ulang — karena itu setiap perubahan env butuh redeploy (atau jalankan `php artisan config:clear` sebelum seeder).
+
 ## Catatan keamanan
 
 - `DB_PASSWORD` dan `APP_KEY` pernah terekspos di output `php -i` yang dibagikan ke pihak lain. Rotasi `DB_PASSWORD` aman dilakukan kapan saja.

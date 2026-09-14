@@ -16,22 +16,21 @@ class SantriUserSeeder extends Seeder
     use WithoutModelEvents;
 
     /**
-     * Demo credentials used by this seeder.
+     * Demo identity used by this seeder.
      *
-     * @var array{name: string, email: string, password: string}
+     * @var array{name: string, email: string}
      */
     private const DEMO = [
         'name' => 'Santri Demo',
         'email' => 'santri@pojoksantri.id',
-        'password' => 'password',
     ];
 
     public function run(): void
     {
-        $password = self::DEMO['password'];
+        $password = (string) config('auth.demo_seed.password');
 
         if (app()->isProduction() && $password === 'password') {
-            throw new RuntimeException('Override the demo santri password before seeding in production.');
+            throw new RuntimeException('Set DEMO_SEED_PASSWORD before seeding the demo santri in production.');
         }
 
         $user = User::updateOrCreate(

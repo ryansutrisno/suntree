@@ -120,4 +120,8 @@ return [
         'password' => env('ADMIN_SEED_PASSWORD', 'password'),
     ],
 
+    'demo_seed' => [
+        'password' => env('DEMO_SEED_PASSWORD', 'password'),
+    ],
+
 ];
