@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/ryansutrisno/suntree/compare/v1.13.0...v1.13.1) (2026-09-14)
+
+
+### 🐛 Bug Fixes
+
+* **build:** require PHP 8.4.1 for Nixpacks deploy compatibility ([5b9e652](https://github.com/ryansutrisno/suntree/commit/5b9e652ff8e8be9c27fbc17be42b01fd2c9b6479))
+
 ## [1.13.0](https://github.com/ryansutrisno/suntree/compare/v1.12.0...v1.13.0) (2026-09-05)
 
 
