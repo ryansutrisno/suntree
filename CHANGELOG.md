@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/ryansutrisno/suntree/compare/v1.13.1...v1.13.2) (2026-09-14)
+
+
+### 🐛 Bug Fixes
+
+* **build:** pin Node 22 via package.json engines for Nixpacks ([dcdcfb5](https://github.com/ryansutrisno/suntree/commit/dcdcfb5f6f793b62d81d053e58fde927e7a94d09))
+
 ## [1.13.1](https://github.com/ryansutrisno/suntree/compare/v1.13.0...v1.13.1) (2026-09-14)
 
 
