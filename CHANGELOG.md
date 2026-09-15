@@ -1,3 +1,10 @@
+## [1.16.0](https://github.com/ryansutrisno/suntree/compare/v1.15.5...v1.16.0) (2026-09-15)
+
+
+### ✨ Features
+
+* **ui:** add logout button to dashboard layouts ([d66f8fc](https://github.com/ryansutrisno/suntree/commit/d66f8fc90bc6cf969a7c7296e5d1b0cd7f1dae7b))
+
 ## [1.15.5](https://github.com/ryansutrisno/suntree/compare/v1.15.4...v1.15.5) (2026-09-15)
 
 
