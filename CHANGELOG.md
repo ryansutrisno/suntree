@@ -1,3 +1,10 @@
+## [1.17.0](https://github.com/ryansutrisno/suntree/compare/v1.16.0...v1.17.0) (2026-09-15)
+
+
+### ✨ Features
+
+* **seo:** add per-page meta title and description ([511a79e](https://github.com/ryansutrisno/suntree/commit/511a79e8c14635d5027d5c5bd87f2bf369eccae7))
+
 ## [1.16.0](https://github.com/ryansutrisno/suntree/compare/v1.15.5...v1.16.0) (2026-09-15)
 
 
