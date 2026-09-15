@@ -1,3 +1,10 @@
+## [1.15.5](https://github.com/ryansutrisno/suntree/compare/v1.15.4...v1.15.5) (2026-09-15)
+
+
+### 🐛 Bug Fixes
+
+* **http:** force https scheme in production behind the proxy ([fa5b911](https://github.com/ryansutrisno/suntree/commit/fa5b911164d69171b481bbcab06c97c0f48004d2))
+
 ## [1.15.4](https://github.com/ryansutrisno/suntree/compare/v1.15.3...v1.15.4) (2026-09-15)
 
 
