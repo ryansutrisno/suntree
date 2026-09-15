@@ -159,6 +159,26 @@ Titik injeksi config MySQL 8.4 di server ini adalah `/etc/mysql/conf.d/` — `/e
 
 > `mysql_native_password` **deprecated** dan **dihapus di MySQL 9**. Ini solusi jangka pendek; aman selama server masih MySQL 8.4.
 
+### 5. Redirect login memakai `http://` sehingga navigasi Inertia diblokir
+
+**Gejala**: setelah submit login, aplikasi mengembalikan `302` tetapi halaman tidak berpindah sampai di-refresh manual.
+
+**Akar masalah**: Cloudflare memakai SSL/TLS mode **Flexible**, jadi Cloudflare menghubungi origin lewat HTTP. Traefik kemudian menimpa header `X-Forwarded-Proto` dengan skema koneksi masuk (`http`), sehingga Laravel menganggap request tidak secure dan membangkitkan URL `http://`. Fitur *Automatic HTTPS Rewrites* Cloudflare memperbaiki aset di dalam HTML, tetapi **tidak bisa** menulis ulang header `Location` pada respons `302` — XHR dari halaman `https` pun diblokir sebagai mixed content.
+
+**Perbaikan (sisi aplikasi)**:
+
+- `app/Providers/AppServiceProvider.php` memanggil `URL::forceScheme('https')` saat environment `production`, sehingga redirect dan URL aset selalu `https`.
+- Environment Dokploy: set `SESSION_SECURE_COOKIE=true` supaya cookie sesi ikut ditandai `Secure`.
+
+```bash
+# Verifikasi dari server: Location harus https
+curl -s -o /dev/null -w "code=%{http_code} loc=%{redirect_url}\n" \
+  https://suntree.trazmedia.com/dashboard
+# code=302 loc=https://suntree.trazmedia.com/login
+```
+
+**Perbaikan yang lebih rapi (belum dikerjakan)**: aktifkan HTTPS/Let's Encrypt untuk domain di Dokploy, lalu ubah SSL/TLS mode Cloudflare ke **Full (strict)**. Dengan begitu jalur Cloudflare → origin juga terenkripsi dan `URL::forceScheme()` tidak lagi dibutuhkan.
+
 ## Seeding data demo
 
 `php artisan db:seed` bisa langsung dijalankan di produksi dan menghasilkan akun serta data demo yang siap pakai — tidak ada guard yang menghalangi, jadi tidak ada environment variable yang wajib.
