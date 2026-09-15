@@ -41,17 +41,18 @@ Setiap task di phase ini tetap mengikuti pola yang sama seperti phase sebelumnya
 - [x] `01-ustadz-dashboard.md` — Halaman dashboard ustadz dengan ringkasan program & batch milik sendiri.
 - [x] `02-program-crud.md` — F-10 Program CRUD: ustadz verified create, edit, archive own program.
 - [x] `03-batch-crud.md` — F-11 Batch CRUD: ustadz verified kelola batch dari program sendiri.
-- [ ] `04-participant-list.md` — Participant list: ustadz lihat santri enrolled/confirmed per batch.
+- [x] `04-participant-list.md` — Participant list: ustadz lihat santri enrolled/confirmed per batch.
+- [x] `05-ustadz-batches-enrollments-overview.md` — Perbaikan navigasi sidebar ustadz + halaman overview Batches & Enrollments (read-only).
 
 ## Checklist Sebelum Mulai Task Berikutnya
 
-- [ ] Pastikan task sebelumnya sudah committed atau memang sengaja ditahan.
-- [ ] Pastikan verifikasi lokal untuk perubahan terakhir sudah hijau.
-- [ ] Pastikan task doc berikutnya masih sesuai PRD terbaru.
+- [x] Pastikan task sebelumnya sudah committed atau memang sengaja ditahan.
+- [x] Pastikan verifikasi lokal untuk perubahan terakhir sudah hijau.
+- [x] Pastikan task doc berikutnya masih sesuai PRD terbaru.
 
 ## Checklist Sebelum Push / PR
 
-- [ ] Semua task yang ingin ikut dikirim sudah berstatus `Done`.
-- [ ] Test suite relevan sudah dijalankan.
-- [ ] Build frontend dijalankan bila ada perubahan UI/public page.
-- [ ] Tidak ada file nyasar / untracked yang tidak sengaja ikut.
+- [x] Semua task yang ingin ikut dikirim sudah berstatus `Done`.
+- [x] Test suite relevan sudah dijalankan.
+- [x] Build frontend dijalankan bila ada perubahan UI/public page.
+- [x] Tidak ada file nyasar / untracked yang tidak sengaja ikut.

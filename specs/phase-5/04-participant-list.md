@@ -55,8 +55,8 @@ git checkout -b feature/phase-5-ustadz-dashboard
 - [x] Jalankan build bila frontend berubah.
 - [x] Lakukan manual verification bila relevan.
 - [x] Update checklist task ini.
-- [ ] Commit task setelah verifikasi pass.
-- [ ] Siap untuk review/PR.
+- [x] Commit task setelah verifikasi pass.
+- [x] Siap untuk review/PR.
 
 ## Verifikasi
 
@@ -91,12 +91,12 @@ Setiap task yang sudah `Done` wajib langsung dibuat commit sebelum lanjut ke tas
 
 Checklist sebelum commit:
 
-- [ ] Pastikan branch bukan `main` atau `master`.
-- [ ] Review `git status`.
-- [ ] Review `git diff`.
-- [ ] Review `git log --oneline -10`.
-- [ ] Stage hanya file yang memang bagian dari task.
-- [ ] Buat commit dengan Conventional Commit.
+- [x] Pastikan branch bukan `main` atau `master`.
+- [x] Review `git status`.
+- [x] Review `git diff`.
+- [x] Review `git log --oneline -10`.
+- [x] Stage hanya file yang memang bagian dari task.
+- [x] Buat commit dengan Conventional Commit.
 
 Contoh command:
 

@@ -27,11 +27,11 @@ sedang login.
 
 ## Workflow Wajib Sebelum Mulai
 
-- [ ] Checkout ke `main`.
-- [ ] Pull latest `main`.
-- [ ] Buat branch baru `feature/phase-5-ustadz-dashboard`.
-- [ ] Review PRD/TechStack versi terbaru yang relevan.
-- [ ] Review area kode terkait sebelum implementasi.
+- [x] Checkout ke `main`.
+- [x] Pull latest `main`.
+- [x] Buat branch baru `feature/phase-5-ustadz-dashboard`.
+- [x] Review PRD/TechStack versi terbaru yang relevan.
+- [x] Review area kode terkait sebelum implementasi.
 
 Contoh command:
 
@@ -49,10 +49,10 @@ git checkout -b feature/phase-5-ustadz-dashboard
 - [x] Jalankan test spesifik yang relevan.
 - [x] Jalankan formatter/linter bila perlu.
 - [x] Jalankan build bila frontend berubah.
-- [ ] Lakukan manual verification bila relevan.
+- [x] Lakukan manual verification bila relevan.
 - [x] Update checklist task ini.
 - [x] Commit task setelah verifikasi pass.
-- [ ] Siap untuk review/PR.
+- [x] Siap untuk review/PR.
 
 ## Verifikasi
 
@@ -87,12 +87,12 @@ Setiap task yang sudah `Done` wajib langsung dibuat commit sebelum lanjut ke tas
 
 Checklist sebelum commit:
 
-- [ ] Pastikan branch bukan `main` atau `master`.
-- [ ] Review `git status`.
-- [ ] Review `git diff`.
-- [ ] Review `git log --oneline -10`.
-- [ ] Stage hanya file yang memang bagian dari task.
-- [ ] Buat commit dengan Conventional Commit.
+- [x] Pastikan branch bukan `main` atau `master`.
+- [x] Review `git status`.
+- [x] Review `git diff`.
+- [x] Review `git log --oneline -10`.
+- [x] Stage hanya file yang memang bagian dari task.
+- [x] Buat commit dengan Conventional Commit.
 
 Contoh command:
 
