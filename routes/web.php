@@ -13,6 +13,7 @@ use App\Http\Controllers\Santri\DashboardController as SantriDashboardController
 use App\Http\Controllers\Santri\EnrollmentController as SantriEnrollmentController;
 use App\Http\Controllers\Ustadz\BatchController;
 use App\Http\Controllers\Ustadz\DashboardController as UstadzDashboardController;
+use App\Http\Controllers\Ustadz\EnrollmentController as UstadzEnrollmentController;
 use App\Http\Controllers\Ustadz\ParticipantController;
 use App\Http\Controllers\Ustadz\ProgramController as UstadzProgramController;
 use App\Http\Controllers\UstadzProfileController;
@@ -40,6 +41,9 @@ Route::middleware(['auth', 'santri'])->prefix('santri')->name('santri.')->group(
 
 Route::middleware(['auth', 'ustadz'])->prefix('ustadz')->name('ustadz.')->group(function () {
     Route::get('/dashboard', UstadzDashboardController::class)->name('dashboard');
+
+    Route::get('/batches', [BatchController::class, 'overview'])->name('batches.overview');
+    Route::get('/enrollments', [UstadzEnrollmentController::class, 'index'])->name('enrollments.index');
 
     // Program CRUD
     Route::get('/programs', [UstadzProgramController::class, 'create'])->name('programs.create');
