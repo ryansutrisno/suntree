@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import type { PropsWithChildren } from 'react';
 import { logout } from '@/routes';
 
@@ -8,17 +8,34 @@ type UstadzLayoutProps = PropsWithChildren<{
 }>;
 
 const navigationItems = [
-    { label: 'Dashboard', href: '/ustadz' },
+    { label: 'Dashboard', href: '/ustadz/dashboard' },
     { label: 'Programs', href: '/ustadz/programs' },
     { label: 'Batches', href: '/ustadz/batches' },
     { label: 'Enrollments', href: '/ustadz/enrollments' },
 ];
+
+/**
+ * Dashboard hanya aktif pada path persis `/ustadz/dashboard`,
+ * sedangkan menu lain aktif saat URL dimulai dengan href-nya
+ * (agar tetap aktif di halaman detail/filter dengan query string).
+ */
+function isNavigationItemActive(itemHref: string, currentUrl: string): boolean {
+    const [currentPath] = currentUrl.split('?');
+
+    if (itemHref === '/ustadz/dashboard') {
+        return currentPath === '/ustadz/dashboard';
+    }
+
+    return currentPath.startsWith(itemHref);
+}
 
 export default function UstadzLayout({
     title,
     description,
     children,
 }: UstadzLayoutProps) {
+    const currentUrl = usePage().url;
+
     return (
         <div className="min-h-screen bg-[#f8f3eb] text-slate-900">
             <div className="mx-auto grid min-h-screen max-w-7xl gap-6 px-4 py-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:px-6">
@@ -33,21 +50,25 @@ export default function UstadzLayout({
                         </p>
                     </div>
 
-                    <nav className="mt-6 space-y-2">
-                        {navigationItems.map((item) => (
-                            <Link
-                                key={item.label}
-                                href={item.href}
-                                className="flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium text-white/90 transition hover:bg-white/10 hover:text-white"
-                            >
-                                <span>{item.label}</span>
-                                {item.href === '/ustadz' ? (
-                                    <span className="rounded-full bg-[#f7d27a] px-2 py-0.5 text-xs font-semibold text-[#0f766e]">
-                                        Live
-                                    </span>
-                                ) : null}
-                            </Link>
-                        ))}
+                    <nav className="mt-6 space-y-2" aria-label="Ustadz panel navigation">
+                        {navigationItems.map((item) => {
+                            const isActive = isNavigationItemActive(item.href, currentUrl);
+
+                            return (
+                                <Link
+                                    key={item.label}
+                                    href={item.href}
+                                    aria-current={isActive ? 'page' : undefined}
+                                    className={`flex items-center gap-3 rounded-2xl border-l-4 px-4 py-3 text-sm font-medium transition ${
+                                        isActive
+                                            ? 'border-l-[#f7d27a] bg-white/10 text-white'
+                                            : 'border-l-transparent text-white/90 hover:bg-white/10 hover:text-white'
+                                    }`}
+                                >
+                                    <span>{item.label}</span>
+                                </Link>
+                            );
+                        })}
                     </nav>
 
                     <div className="mt-auto border-t border-white/15 pt-6">
