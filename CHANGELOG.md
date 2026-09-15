@@ -1,3 +1,10 @@
+## [1.15.4](https://github.com/ryansutrisno/suntree/compare/v1.15.3...v1.15.4) (2026-09-15)
+
+
+### 🐛 Bug Fixes
+
+* **docker:** make the multi-stage build reproducible and self-contained ([bc95af9](https://github.com/ryansutrisno/suntree/commit/bc95af92e653d591a110552ad2eea2b705ede3f2))
+
 ## [1.15.3](https://github.com/ryansutrisno/suntree/compare/v1.15.2...v1.15.3) (2026-09-14)
 
 
