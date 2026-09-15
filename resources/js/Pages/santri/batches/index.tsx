@@ -1,4 +1,5 @@
 import { Link, router } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import SantriLayout from '@/Layouts/santri-layout';
 
 interface Program {
@@ -62,6 +63,11 @@ export default function BatchIndex({ batches, enrolledBatchIds }: BatchIndexProp
             title="Batch Tersedia"
             description="Pilih batch program yang ingin kamu ikuti."
         >
+            <AppHead
+                title="Batch Terbuka"
+                description="Daftar batch yang sedang membuka pendaftaran. Cek jadwal, sisa kuota, dan biaya sebelum mendaftar."
+                noindex
+            />
             {batches.length === 0 ? (
                 <section className="rounded-3xl border border-[#eadcc8] bg-white p-6 shadow-sm">
                     <div className="rounded-2xl border border-dashed border-[#eadcc8] px-6 py-12 text-center">

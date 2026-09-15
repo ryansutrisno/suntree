@@ -1,4 +1,5 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import PrimaryButton from '@/Components/PrimaryButton';
 import UstadzLayout from '@/Layouts/ustadz-layout';
 
@@ -67,7 +68,11 @@ export default function Participants({
             title={`Peserta - ${batch.name}`}
             description="Daftar santri yang terdaftar di batch ini."
         >
-            <Head title={`Peserta - ${batch.name}`} />
+            <AppHead
+                title={`Peserta - ${batch.name}`}
+                description="Daftar santri yang terdaftar pada batch ini beserta status pembayarannya."
+                noindex
+            />
 
             <section className="rounded-3xl border border-[#eadcc8] bg-white p-8 shadow-sm">
                 <div className="flex items-center justify-between">

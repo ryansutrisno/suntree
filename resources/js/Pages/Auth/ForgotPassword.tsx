@@ -1,5 +1,6 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 import type { FormEventHandler } from 'react';
+import AppHead from '@/Components/AppHead';
 import { login } from '@/routes';
 import { email as passwordEmail } from '@/routes/password';
 
@@ -144,7 +145,11 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
     return (
         <>
-            <Head title="Lupa Password" />
+            <AppHead
+                noindex
+                title="Lupa Password"
+                description="Masukkan email akunmu dan kami kirimkan tautan untuk mengatur ulang password."
+            />
 
             <main className="grid min-h-screen grid-cols-1 bg-brand-surface lg:h-dvh lg:grid-cols-[1.05fr_0.95fr] lg:overflow-hidden">
                 <MarketingPanel />

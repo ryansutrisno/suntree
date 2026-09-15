@@ -1,3 +1,4 @@
+import AppHead from '@/Components/AppHead';
 import AdminLayout from '@/Layouts/admin-layout';
 
 type DashboardStats = {
@@ -23,6 +24,11 @@ export default function AdminDashboard({ stats, quickLinks }: AdminDashboardProp
             title="Dashboard Admin"
             description="Ringkasan akses dan akses cepat untuk pengelolaan admin."
         >
+            <AppHead
+                title="Dashboard Admin"
+                description="Ringkasan aktivitas platform: ustadz menunggu verifikasi dan pembayaran menunggu konfirmasi."
+                noindex
+            />
             <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {[
                     { label: 'Total Users', value: stats.total_users },

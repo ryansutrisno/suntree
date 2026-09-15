@@ -1,5 +1,6 @@
-import { Head, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import type { FormEventHandler } from 'react';
+import AppHead from '@/Components/AppHead';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -40,7 +41,11 @@ export default function EditProgram({ program }: EditProgramProps) {
             title="Edit Program"
             description="Ubah detail program Anda."
         >
-            <Head title="Edit Program" />
+            <AppHead
+                title="Edit Program"
+                description="Perbarui judul, kategori, level, harga, atau status program milikmu."
+                noindex
+            />
 
             <section className="rounded-3xl border border-[#eadcc8] bg-white p-8 shadow-sm">
                 <form onSubmit={submit} className="space-y-6">

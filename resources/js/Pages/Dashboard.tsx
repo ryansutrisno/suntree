@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 export default function Dashboard() {
@@ -10,7 +10,11 @@ export default function Dashboard() {
                 </h2>
             }
         >
-            <Head title="Dashboard" />
+            <AppHead
+                noindex
+                title="Dashboard"
+                description="Ringkasan aktivitas akun PojokSantri kamu."
+            />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">

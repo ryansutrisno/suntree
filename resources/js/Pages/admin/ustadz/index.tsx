@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import AdminLayout from '@/Layouts/admin-layout';
 import type {AdminShellProps} from '@/Pages/admin/shell-page';
 
@@ -20,6 +21,11 @@ type AdminUstadzProps = AdminShellProps & {
 export default function UstadzIndex({ shell, ustadzProfiles }: AdminUstadzProps) {
     return (
         <AdminLayout title={shell.title} description={shell.description}>
+            <AppHead
+                title="Verifikasi Ustadz"
+                description="Daftar profil ustadz beserta status verifikasinya."
+                noindex
+            />
             {ustadzProfiles.length === 0 ? (
                 <section className="rounded-3xl border border-dashed border-[#d8c7ae] bg-white p-8 text-center shadow-sm">
                     <h3 className="text-xl font-semibold text-slate-900">{shell.emptyState.title}</h3>

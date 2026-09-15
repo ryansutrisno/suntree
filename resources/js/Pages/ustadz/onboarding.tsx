@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react';
-import { Head, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import type { FormEventHandler } from 'react';
+import AppHead from '@/Components/AppHead';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -37,7 +38,11 @@ export default function UstadzOnboarding({ profile, status }: OnboardingProps) {
 
     return (
         <>
-            <Head title="Lengkapi Profil Ustadz" />
+            <AppHead
+                title="Lengkapi Profil Ustadz"
+                description="Lengkapi profil ustadz kamu. Admin akan memverifikasi sebelum program bisa tampil di marketplace."
+                noindex
+            />
             <div className="min-h-screen bg-[#f8f5ef] px-6 py-12 text-slate-900">
                 <div className="mx-auto max-w-2xl space-y-8">
                     <header className="text-center">

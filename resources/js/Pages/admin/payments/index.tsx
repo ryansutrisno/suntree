@@ -1,4 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import AdminLayout from '@/Layouts/admin-layout';
 import type { AdminShellProps } from '@/Pages/admin/shell-page';
 
@@ -58,6 +59,11 @@ export default function PaymentsIndex({ shell, payments }: AdminPaymentsProps) {
 
     return (
         <AdminLayout title={shell.title} description={shell.description}>
+            <AppHead
+                title="Antrian Pembayaran"
+                description="Antrian pembayaran santri untuk dikonfirmasi atau ditolak."
+                noindex
+            />
             {flashStatus ? (
                 <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-4 text-sm font-medium text-emerald-800 shadow-sm">
                     {flashStatus}

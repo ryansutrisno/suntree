@@ -1,5 +1,6 @@
-import { Head, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import type { FormEventHandler } from 'react';
+import AppHead from '@/Components/AppHead';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -35,7 +36,11 @@ export default function CreateBatch({ program }: CreateBatchProps) {
             title="Buat Batch"
             description={`Tambahkan angkatan/cohort baru untuk program: ${program.title}.`}
         >
-            <Head title="Buat Batch" />
+            <AppHead
+                title="Buat Batch"
+                description="Buka batch baru dengan jadwal, kuota peserta, dan status pembukaan."
+                noindex
+            />
 
             <section className="rounded-3xl border border-[#eadcc8] bg-white p-8 shadow-sm">
                 <form onSubmit={submit} className="space-y-6">

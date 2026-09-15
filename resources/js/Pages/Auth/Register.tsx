@@ -1,6 +1,7 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 import type { FormEventHandler } from 'react';
 import { store as registerStore } from '@/actions/App/Http/Controllers/Auth/RegisteredUserController';
+import AppHead from '@/Components/AppHead';
 import { login } from '@/routes';
 
 function MarketingPanel() {
@@ -150,7 +151,11 @@ export default function Register() {
 
     return (
         <>
-            <Head title="Daftar" />
+            <AppHead
+                noindex
+                title="Daftar"
+                description="Buat akun PojokSantri sebagai santri atau ustadz untuk mulai belajar dan mengajar mengaji online."
+            />
 
             <main className="grid min-h-screen grid-cols-1 bg-brand-surface lg:h-dvh lg:grid-cols-[1.05fr_0.95fr] lg:overflow-hidden">
                 <MarketingPanel />

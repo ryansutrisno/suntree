@@ -1,6 +1,7 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 import type { FormEventHandler } from 'react';
 import { store as passwordStore } from '@/actions/App/Http/Controllers/Auth/NewPasswordController';
+import AppHead from '@/Components/AppHead';
 import { login } from '@/routes';
 
 function MarketingPanel() {
@@ -149,7 +150,11 @@ export default function ResetPassword({ token, email }: { token: string; email: 
 
     return (
         <>
-            <Head title="Atur Ulang Password" />
+            <AppHead
+                noindex
+                title="Atur Ulang Password"
+                description="Tetapkan password baru untuk akun PojokSantri kamu."
+            />
 
             <main className="grid min-h-screen grid-cols-1 bg-brand-surface lg:h-dvh lg:grid-cols-[1.05fr_0.95fr] lg:overflow-hidden">
                 <MarketingPanel />

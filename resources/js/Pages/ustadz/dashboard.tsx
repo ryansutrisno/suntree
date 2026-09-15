@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import UstadzLayout from '@/Layouts/ustadz-layout';
 
 type DashboardStats = {
@@ -58,6 +59,11 @@ export default function UstadzDashboard({ stats, programs, recentBatches }: Usta
             title="Dashboard Ustadz"
             description="Ringkasan program dan aktivitas pengelolaan ustadz."
         >
+            <AppHead
+                title="Dashboard Ustadz"
+                description="Ringkasan program dan batch milikmu, termasuk jumlah santri yang terdaftar."
+                noindex
+            />
             <section className="grid gap-4 md:grid-cols-3">
                 {[
                     { label: 'Program Aktif', value: stats.active_programs },

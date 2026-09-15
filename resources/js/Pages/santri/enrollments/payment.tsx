@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import SantriLayout from '@/Layouts/santri-layout';
 
 interface BatchProgram {
@@ -66,6 +67,11 @@ export default function Payment({ enrollment, bankInstructions }: PaymentProps) 
             title="Pembayaran"
             description="Selesaikan pembayaran untuk mengkonfirmasi pendaftaran."
         >
+            <AppHead
+                title="Instruksi Pembayaran"
+                description="Petunjuk transfer bank untuk menyelesaikan pembayaran pendaftaran batch kamu."
+                noindex
+            />
             <section className="rounded-3xl border border-[#eadcc8] bg-white p-6 shadow-sm">
                 <h3 className="text-lg font-semibold text-slate-900">
                     Detail Pembayaran

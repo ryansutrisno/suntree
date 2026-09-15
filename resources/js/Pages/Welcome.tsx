@@ -1,4 +1,5 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import { PlatformFooter } from '@/Components/Platform/PlatformFooter';
 import { PlatformNavbar } from '@/Components/Platform/PlatformNavbar';
 import { ProgramHighlightCard  } from '@/Components/Platform/ProgramHighlightCard';
@@ -614,7 +615,10 @@ function FinalCta() {
 export default function Welcome({ canLogin, canRegister, programs, stats }: WelcomeProps) {
     return (
         <>
-            <Head title="PojokSantri — Belajar Al-Qur'an & Studi Islam dari Ustadz Terverifikasi" />
+            <AppHead
+                title="Belajar Al-Qur'an & Studi Islam dari Ustadz Terverifikasi"
+                description="Platform belajar mengaji online berbasis batch. Temukan program Al-Qur'an dan studi Islam dengan jadwal, kuota, dan harga transparan dari ustadz terverifikasi."
+            />
             <div className="min-h-screen bg-brand-surface">
                 <PlatformNavbar canLogin={canLogin} canRegister={canRegister} />
                 <main>

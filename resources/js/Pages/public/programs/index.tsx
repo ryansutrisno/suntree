@@ -1,6 +1,7 @@
 import { Link, useForm } from '@inertiajs/react';
 import { useEffect  } from 'react';
 import type {FormEvent} from 'react';
+import AppHead from '@/Components/AppHead';
 
 type Program = {
     id: number;
@@ -250,6 +251,10 @@ export default function PublicProgramsIndex({
 
     return (
         <div className="min-h-screen bg-[#f8f5ef] px-4 py-8 sm:px-6 lg:px-8 text-slate-900">
+            <AppHead
+                title="Program Ngaji Online"
+                description="Kumpulan program pembelajaran Al-Qur'an dan studi Islam dari ustadz terverifikasi. Cari berdasarkan kategori, level, dan jadwal batch."
+            />
             <div className="mx-auto max-w-7xl space-y-8">
                 {/* Header */}
                 <div className="text-center space-y-3">

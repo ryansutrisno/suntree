@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import SantriLayout from '@/Layouts/santri-layout';
 
 interface BatchProgram {
@@ -89,6 +90,11 @@ export default function SantriDashboard({ enrollments }: SantriDashboardProps) {
             title="Dashboard"
             description="Selamat datang di panel santri."
         >
+            <AppHead
+                title="Dashboard Santri"
+                description="Ringkasan pendaftaran batch kamu: status pembayaran, jadwal, dan program yang sedang diikuti."
+                noindex
+            />
             <section className="rounded-3xl border border-[#eadcc8] bg-white p-6 shadow-sm">
                 <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold text-slate-900">Enrollment Saya</h3>

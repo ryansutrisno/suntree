@@ -1,3 +1,5 @@
+import AppHead from '@/Components/AppHead';
+
 type Program = {
     id: number;
     title: string;
@@ -26,8 +28,13 @@ type PublicProgramDetailProps = {
 };
 
 export default function PublicProgramDetailShow({ program, ustadz, batches }: PublicProgramDetailProps) {
+    const metaDescription = program.description
+        ? `${program.description.replace(/\s+/g, ' ').trim().slice(0, 157)}${program.description.length > 157 ? '…' : ''}`
+        : undefined;
+
     return (
         <div className="min-h-screen bg-[#f8f5ef] px-6 py-12 text-slate-900">
+            <AppHead title={`${program.title}`} description={metaDescription} type="article" />
             <div className="mx-auto max-w-5xl space-y-8">
                 <section className="rounded-3xl border border-[#eadcc8] bg-white p-8 shadow-sm">
                     <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0f766e]">

@@ -1,6 +1,7 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
 import type { FormEventHandler } from 'react';
 import { store as loginStore } from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
+import AppHead from '@/Components/AppHead';
 import { register } from '@/routes';
 import { request as passwordRequest } from '@/routes/password';
 
@@ -208,7 +209,11 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
     return (
         <>
-            <Head title="Masuk" />
+            <AppHead
+                noindex
+                title="Masuk"
+                description="Masuk ke akun PojokSantri untuk melanjutkan belajar, mengelola program, atau melihat status pendaftaran batch."
+            />
 
             <main className="grid min-h-screen grid-cols-1 bg-brand-surface lg:h-dvh lg:grid-cols-[1.05fr_0.95fr] lg:overflow-hidden">
                 <MarketingPanel />

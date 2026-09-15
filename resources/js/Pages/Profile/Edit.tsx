@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import AppHead from '@/Components/AppHead';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import type { PageProps } from '@/types';
 import DeleteUserForm from './Partials/DeleteUserForm';
@@ -17,7 +17,11 @@ export default function Edit({
                 </h2>
             }
         >
-            <Head title="Profile" />
+            <AppHead
+                noindex
+                title="Profil"
+                description="Kelola nama, email, dan password akun PojokSantri kamu."
+            />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
