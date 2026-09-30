@@ -1,10 +1,10 @@
-# PojokSantri.ID — Tech Stack & Architecture Document
+# Suntree — Tech Stack & Architecture Document
 
 > **Version:** v1.0  
 > **Date:** Maret 2026  
 > **Status:** DRAFT  
 > **Author:** Engineering Team  
-> **Referensi:** Lampiran teknis dari PRD PojokSantri.ID v1.0
+> **Referensi:** Lampiran teknis dari PRD Suntree v1.0
 
 ---
 
@@ -25,7 +25,7 @@
 
 ## 1. Prinsip Pemilihan Tech Stack
 
-Setiap pilihan teknologi dipilih berdasarkan tiga prinsip utama yang sesuai kondisi PojokSantri.ID sebagai startup early-stage:
+Setiap pilihan teknologi dipilih berdasarkan tiga prinsip utama yang sesuai kondisi Suntree sebagai startup early-stage:
 
 1. **SPEED TO MARKET** — Teknologi dengan ekosistem mature, dokumentasi lengkap, dan developer pool besar di Indonesia. Prioritas bisa launch MVP dalam 4 bulan.
 2. **COST EFFICIENCY** — Utamakan open-source, serverless, atau layanan dengan free tier yang cukup untuk tahap awal. Hindari vendor lock-in mahal sebelum product-market fit.
@@ -37,7 +37,7 @@ Setiap pilihan teknologi dipilih berdasarkan tiga prinsip utama yang sesuai kond
 
 ### 2.1 High-Level Architecture
 
-PojokSantri.ID menggunakan arsitektur **Monolith Modular** untuk MVP — lebih mudah develop dan deploy dibanding microservices, tapi dengan struktur modul yang jelas sehingga bisa dipecah ke microservices di masa depan.
+Suntree menggunakan arsitektur **Monolith Modular** untuk MVP — lebih mudah develop dan deploy dibanding microservices, tapi dengan struktur modul yang jelas sehingga bisa dipecah ke microservices di masa depan.
 
 \`\`\`
 ┌─────────────────────────────────────────────────────────────┐
@@ -217,7 +217,7 @@ WebSocket via NestJS Gateway untuk:
 |---|---|
 | **Cloudflare R2** (via AWS SDK v3) | Object storage: foto profil, materi PDF, sertifikat PDF, rekaman sesi |
 | **PDFKit v0.14** | Generate PDF sertifikat di server: layout custom, embed font, logo, QR code |
-| **qrcode v1.5** | Generate QR code verifikasi untuk sertifikat: \`https://pojoksantri.id/verify/{id}\` |
+| **qrcode v1.5** | Generate QR code verifikasi untuk sertifikat: \`https://suntree.id/verify/{id}\` |
 
 ### 4.7 Testing Backend
 
@@ -260,7 +260,7 @@ class MayarGateway    implements PaymentGateway { ... }
 | Webhook URL | Set di Midtrans Dashboard → Settings → Payment Notification URL |
 | Webhook Endpoint | \`POST /api/payments/midtrans/webhook\` |
 | Webhook Validation | \`SHA512(order_id + status_code + gross_amount + server_key)\` → compare dengan \`signature_key\` di payload |
-| Finish Redirect URL | \`https://pojoksantri.id/enrollment/success?order={id}\` |
+| Finish Redirect URL | \`https://suntree.id/enrollment/success?order={id}\` |
 | Expiry | \`custom_expiry: { order_time, expiry_duration: 1440, unit: "minute" }\` |
 | Refund | \`POST /v2/{order_id}/refund\` — dipanggil saat batch dibatalkan ustadz |
 
@@ -310,7 +310,7 @@ const response = await fetch('https://api.mayar.id/hl/v1/payment/create', {
     email: user.email,
     amount: totalAmount,
     mobile: user.phone,
-    redirectUrl: \`https://pojoksantri.id/enrollment/success?order=\${enrollmentId}\`,
+    redirectUrl: \`https://suntree.id/enrollment/success?order=\${enrollmentId}\`,
     description: \`Enrollment: \${programTitle} - Batch \${batchName}\`,
     expiredAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
   }),
@@ -497,8 +497,8 @@ Semua konfigurasi sensitif disimpan sebagai environment variables — **tidak pe
 | Variable | Contoh Nilai | Dipakai di | Keterangan |
 |---|---|---|---|
 | \`NODE_ENV\` | \`production\` | Backend | \`development\` \| \`staging\` \| \`production\` |
-| \`APP_URL\` | \`https://pojoksantri.id\` | Backend | URL frontend untuk CORS dan redirect |
-| \`API_URL\` | \`https://api.pojoksantri.id\` | Frontend | URL backend API |
+| \`APP_URL\` | \`https://suntree.id\` | Backend | URL frontend untuk CORS dan redirect |
+| \`API_URL\` | \`https://api.suntree.id\` | Frontend | URL backend API |
 | \`DATABASE_URL\` | \`postgresql://user:pass@host/db\` | Backend (Prisma) | Connection string PostgreSQL (Supabase) |
 | \`REDIS_URL\` | \`rediss://user:pass@host:6379\` | Backend (BullMQ) | Connection string Redis (Upstash) |
 | \`JWT_SECRET\` | \`random-64-char-string\` | Backend | Secret untuk sign JWT access token |
@@ -516,7 +516,7 @@ Semua konfigurasi sensitif disimpan sebagai environment variables — **tidak pe
 | \`R2_ACCESS_KEY_ID\` | \`xxx\` | Backend | R2 Access Key ID |
 | \`R2_SECRET_ACCESS_KEY\` | \`xxx\` | Backend | R2 Secret Access Key |
 | \`R2_BUCKET_NAME\` | \`santriid-storage\` | Backend | Nama bucket R2 |
-| \`R2_PUBLIC_URL\` | \`https://storage.pojoksantri.id\` | Backend + Frontend | Public URL file (custom domain R2) |
+| \`R2_PUBLIC_URL\` | \`https://storage.suntree.id\` | Backend + Frontend | Public URL file (custom domain R2) |
 | \`SENTRY_DSN\` | \`https://xxx@sentry.io/xxx\` | Frontend + Backend | DSN Sentry untuk error tracking |
 
 ---
@@ -566,4 +566,4 @@ Semua konfigurasi sensitif disimpan sebagai environment variables — **tidak pe
 
 > **Catatan:** Dokumen ini adalah living document yang akan diupdate seiring perkembangan technical decision. Setiap perubahan stack harus didiskusikan dan didokumentasikan dengan alasan yang jelas.
 
-*Pojoksantri.ID Tech Stack v1.0 · Maret 2026 · Confidential*
+*Suntree Tech Stack v1.0 · Maret 2026 · Confidential*  

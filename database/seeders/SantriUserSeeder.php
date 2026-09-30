@@ -21,7 +21,7 @@ class SantriUserSeeder extends Seeder
      */
     private const DEMO = [
         'name' => 'Santri Demo',
-        'email' => 'santri@pojoksantri.id',
+        'email' => 'santri@suntree.id',
     ];
 
     public function run(): void

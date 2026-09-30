@@ -6,8 +6,8 @@ Setiap fitur atau task Phase 2 wajib punya file Markdown sendiri di folder ini, 
 
 Referensi desain untuk Phase 2 tidak hanya dari PRD/TechStack, tetapi juga dari:
 
-- `../mockup/pojok-santri-id-mockup.html`
-- `../mockup/pojok-santri-id-userflow.html`
+- `../mockup/suntree-mockup.html`
+- `../mockup/suntree-userflow.html`
 
 Catatan penting: mockup yang tersedia lebih banyak menggambarkan **public marketplace** dan **ustad dashboard shell**, belum admin dashboard final. Jadi Phase 2 harus mengambil **bahasa desain dan struktur layout-nya**, bukan menyalin isi menu ustad mentah-mentah ke area admin.
 

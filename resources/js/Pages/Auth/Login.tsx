@@ -17,9 +17,9 @@ type DemoAccount = {
 };
 
 const DEMO_ACCOUNTS: DemoAccount[] = [
-    { role: 'Admin', email: 'admin@pojoksantri.id', initial: 'A' },
-    { role: 'Ustadz', email: 'ustadz@pojoksantri.id', initial: 'U' },
-    { role: 'Santri', email: 'santri@pojoksantri.id', initial: 'S' },
+    { role: 'Admin', email: 'admin@suntree.id', initial: 'A' },
+    { role: 'Ustadz', email: 'ustadz@suntree.id', initial: 'U' },
+    { role: 'Santri', email: 'santri@suntree.id', initial: 'S' },
 ];
 
 function MarketingPanel() {
@@ -61,7 +61,7 @@ function MarketingPanel() {
                         </svg>
                     </span>
                     <span className="font-display text-[22px] font-black tracking-tight text-white">
-                        Pojok<span className="text-brand-gold">Santri</span>
+                        Suntree
                     </span>
                 </Link>
             </div>
@@ -81,7 +81,7 @@ function MarketingPanel() {
                 </h2>
 
                 <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-white/75">
-                    PojokSantri menyatukan santri dan ustadz terverifikasi dalam
+                    Suntree menyatukan santri dan ustadz terverifikasi dalam
                     batch kecil — pribadi, terstruktur, dan transparan.
                 </p>
             </div>
@@ -144,7 +144,7 @@ function MobileBrandMark() {
                 </svg>
             </span>
             <span className="font-display text-[20px] font-black tracking-tight text-brand-teal-dark">
-                Pojok<span className="text-brand-gold">Santri</span>
+                Suntree
             </span>
         </Link>
     );
@@ -212,7 +212,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
             <AppHead
                 noindex
                 title="Masuk"
-                description="Masuk ke akun PojokSantri untuk melanjutkan belajar, mengelola program, atau melihat status pendaftaran batch."
+                description="Masuk ke akun Suntree untuk melanjutkan belajar, mengelola program, atau melihat status pendaftaran batch."
             />
 
             <main className="grid min-h-screen grid-cols-1 bg-brand-surface lg:h-dvh lg:grid-cols-[1.05fr_0.95fr] lg:overflow-hidden">
@@ -266,7 +266,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                                         autoComplete="username"
                                         autoFocus
                                         onChange={(event) => setData('email', event.target.value)}
-                                        placeholder="nama@pojoksantri.id"
+                                        placeholder="nama@suntree.id"
                                         className={inputClass}
                                     />
                                     {errors.email && (

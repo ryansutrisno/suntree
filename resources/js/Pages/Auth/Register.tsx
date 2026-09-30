@@ -43,7 +43,7 @@ function MarketingPanel() {
                         </svg>
                     </span>
                     <span className="font-display text-[22px] font-black tracking-tight text-white">
-                        Pojok<span className="text-brand-gold">Santri</span>
+                        Suntree
                     </span>
                 </Link>
             </div>
@@ -52,7 +52,7 @@ function MarketingPanel() {
             <div className="relative max-w-md">
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80 backdrop-blur">
                     <span className="h-1 w-4 bg-brand-gold" />
-                    Gabung dengan PojokSantri
+                    Gabung dengan Suntree
                 </span>
 
                 <h2 className="mt-6 font-display text-[40px] font-bold leading-[1.15] tracking-tight text-white xl:text-[48px]">
@@ -125,7 +125,7 @@ function MobileBrandMark() {
                 </svg>
             </span>
             <span className="font-display text-[20px] font-black tracking-tight text-brand-teal-dark">
-                Pojok<span className="text-brand-gold">Santri</span>
+                Suntree
             </span>
         </Link>
     );
@@ -154,7 +154,7 @@ export default function Register() {
             <AppHead
                 noindex
                 title="Daftar"
-                description="Buat akun PojokSantri sebagai santri atau ustadz untuk mulai belajar dan mengajar mengaji online."
+                description="Buat akun Suntree sebagai santri atau ustadz untuk mulai belajar dan mengajar mengaji online."
             />
 
             <main className="grid min-h-screen grid-cols-1 bg-brand-surface lg:h-dvh lg:grid-cols-[1.05fr_0.95fr] lg:overflow-hidden">
@@ -182,7 +182,7 @@ export default function Register() {
                         <div className="animate-fade-up rounded-2xl border border-brand-border bg-white p-6 shadow-[0_8px_40px_rgba(10,74,69,0.06)] sm:p-7 lg:max-h-[calc(100dvh-3rem)] lg:overflow-y-auto">
                             <div className="mb-5 lg:mb-4">
                                 <h1 className="font-display text-[26px] font-bold leading-tight tracking-tight text-brand-dark sm:text-[30px] lg:text-[26px]">
-                                    Buat akun PojokSantri
+                                    Buat akun Suntree
                                 </h1>
                                 <p className="mt-2 text-[13.5px] leading-relaxed text-brand-mid">
                                     Sudah siap mulai ngaji? Isi data dasar kamu di bawah ini.
@@ -224,7 +224,7 @@ export default function Register() {
                                         value={data.email}
                                         autoComplete="username"
                                         onChange={(event) => setData('email', event.target.value)}
-                                        placeholder="nama@pojoksantri.id"
+                                        placeholder="nama@suntree.id"
                                         required
                                         className={inputClass}
                                     />

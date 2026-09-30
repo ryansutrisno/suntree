@@ -17,7 +17,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
         ],
     },
     {
-        title: 'PojokSantri',
+        title: 'Suntree',
         links: [
             { label: 'Tentang Kami', href: '/#tentang' },
             { label: 'Cara Kerja', href: '/#cara-kerja' },
@@ -46,7 +46,7 @@ function BrandMark() {
                 </svg>
             </span>
             <span className="font-display text-xl font-black tracking-tight text-white">
-                Pojok<span className="text-brand-gold">Santri</span>
+                Suntree
             </span>
         </span>
     );
@@ -90,14 +90,14 @@ export function PlatformFooter() {
                             Hubungi Kami
                         </h3>
                         <ul className="mt-4 space-y-2.5 text-sm text-white/70">
-                            <li>halo@pojoksantri.id</li>
+                            <li>halo@suntree.id</li>
                             <li className="text-white/40">Senin–Jumat, 09.00–17.00 WIB</li>
                         </ul>
                     </div>
                 </div>
 
                 <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row sm:items-center">
-                    <p>© {new Date().getFullYear()} PojokSantri. Dibuat untuk santri Indonesia.</p>
+                    <p>© {new Date().getFullYear()} Suntree. Dibuat untuk santri Indonesia.</p>
                     <p className="flex items-center gap-1.5">
                         <span className="h-1.5 w-1.5 rounded-full bg-brand-teal" />
                         Belajar Al-Qur'an dengan tenang, sukses dunia akhirat.

@@ -20,7 +20,7 @@ class UstadzUserSeeder extends Seeder
      */
     private const DEMO = [
         'name' => 'Ustadz Demo',
-        'email' => 'ustadz@pojoksantri.id',
+        'email' => 'ustadz@suntree.id',
     ];
 
     public function run(): void

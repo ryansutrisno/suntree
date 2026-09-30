@@ -38,8 +38,8 @@ sudah ada.
 
 ## Referensi PRD/TechStack
 
-- `../PojokSantriID-PRD-v1.1.md` — F-10, F-11, F-14, serta model enrollment.
-- `../PojokSantriID-TechStack-v1.1.md` — ownership ustadz dan arsitektur Inertia.
+- `../Suntree-PRD-v1.1.md` — F-10, F-11, F-14, serta model enrollment.
+- `../Suntree-TechStack-v1.1.md` — ownership ustadz dan arsitektur Inertia.
 - `../_task-template.md` — struktur dan workflow task.
 
 ## Workflow Wajib Sebelum Mulai

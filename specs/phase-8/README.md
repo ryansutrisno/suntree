@@ -1,6 +1,6 @@
 # Phase 8 — Verification
 
-PRD reference: `specs/PojokSantriID-TechStack-v1.1.md` section 11 (Testing & Verification).
+PRD reference: `specs/Suntree-TechStack-v1.1.md` section 11 (Testing & Verification).
 
 Phase 8 is the final verification phase (not a feature phase). Scope covers Pest test scope audit, Pint formatting, manual UI smoke check, and any regression fixes found during audit.
 

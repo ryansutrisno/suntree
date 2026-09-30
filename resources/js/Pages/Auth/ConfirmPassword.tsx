@@ -42,7 +42,7 @@ function MarketingPanel() {
                         </svg>
                     </span>
                     <span className="font-display text-[22px] font-black tracking-tight text-white">
-                        Pojok<span className="text-brand-gold">Santri</span>
+                        Suntree
                     </span>
                 </Link>
             </div>
@@ -123,7 +123,7 @@ function MobileBrandMark() {
                 </svg>
             </span>
             <span className="font-display text-[20px] font-black tracking-tight text-brand-teal-dark">
-                Pojok<span className="text-brand-gold">Santri</span>
+                Suntree
             </span>
         </Link>
     );

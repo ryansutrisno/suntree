@@ -30,7 +30,7 @@ describe('Payment Instruction Page', function () {
                 ->has('bankInstructions')
                 ->where('bankInstructions.bank_name', 'Bank Syariah Indonesia (BSI)')
                 ->where('bankInstructions.account_number', '7123456789')
-                ->where('bankInstructions.account_holder', 'Yayasan PojokSantri')
+                ->where('bankInstructions.account_holder', 'Yayasan Suntree')
             );
     });
 

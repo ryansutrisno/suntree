@@ -43,7 +43,7 @@ function MarketingPanel() {
                         </svg>
                     </span>
                     <span className="font-display text-[22px] font-black tracking-tight text-white">
-                        Pojok<span className="text-brand-gold">Santri</span>
+                        Suntree
                     </span>
                 </Link>
             </div>
@@ -124,7 +124,7 @@ function MobileBrandMark() {
                 </svg>
             </span>
             <span className="font-display text-[20px] font-black tracking-tight text-brand-teal-dark">
-                Pojok<span className="text-brand-gold">Santri</span>
+                Suntree
             </span>
         </Link>
     );
@@ -153,7 +153,7 @@ export default function ResetPassword({ token, email }: { token: string; email: 
             <AppHead
                 noindex
                 title="Atur Ulang Password"
-                description="Tetapkan password baru untuk akun PojokSantri kamu."
+                description="Tetapkan password baru untuk akun Suntree kamu."
             />
 
             <main className="grid min-h-screen grid-cols-1 bg-brand-surface lg:h-dvh lg:grid-cols-[1.05fr_0.95fr] lg:overflow-hidden">
@@ -200,7 +200,7 @@ export default function ResetPassword({ token, email }: { token: string; email: 
                                         value={data.email}
                                         autoComplete="username"
                                         onChange={(event) => setData('email', event.target.value)}
-                                        placeholder="nama@pojoksantri.id"
+                                        placeholder="nama@suntree.id"
                                         className={inputClass}
                                     />
                                     {errors.email && (

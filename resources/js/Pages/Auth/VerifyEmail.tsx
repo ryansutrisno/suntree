@@ -43,7 +43,7 @@ function MarketingPanel() {
                         </svg>
                     </span>
                     <span className="font-display text-[22px] font-black tracking-tight text-white">
-                        Pojok<span className="text-brand-gold">Santri</span>
+                        Suntree
                     </span>
                 </Link>
             </div>
@@ -125,7 +125,7 @@ function MobileBrandMark() {
                 </svg>
             </span>
             <span className="font-display text-[20px] font-black tracking-tight text-brand-teal-dark">
-                Pojok<span className="text-brand-gold">Santri</span>
+                Suntree
             </span>
         </Link>
     );
@@ -144,7 +144,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
             <AppHead
                 noindex
                 title="Verifikasi Email"
-                description="Periksa kotak masuk kamu dan klik tautan verifikasi untuk mengaktifkan akun PojokSantri."
+                description="Periksa kotak masuk kamu dan klik tautan verifikasi untuk mengaktifkan akun Suntree."
             />
 
             <main className="grid min-h-screen grid-cols-1 bg-brand-surface lg:h-dvh lg:grid-cols-[1.05fr_0.95fr] lg:overflow-hidden">

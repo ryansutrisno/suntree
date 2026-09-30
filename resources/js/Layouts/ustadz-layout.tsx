@@ -42,7 +42,7 @@ export default function UstadzLayout({
                 <aside className="flex flex-col rounded-3xl border border-[#d6c3a5] bg-[#0f766e] p-6 text-white shadow-sm">
                     <div className="space-y-2 border-b border-white/15 pb-6">
                         <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#f7d27a]">
-                            PojokSantri.ID
+                            Suntree
                         </p>
                         <h1 className="text-2xl font-semibold">Ustadz Panel</h1>
                         <p className="text-sm leading-6 text-white/80">

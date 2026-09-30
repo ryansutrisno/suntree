@@ -1,4 +1,4 @@
-# PojokSantri.ID — Product Requirements Document (PRD)
+# Suntree — Product Requirements Document (PRD)
 
 > **Version:** v1.1  
 > **Date:** Juni 2026  
@@ -45,9 +45,9 @@ Perubahan utama:
 
 ### 1.1 Ringkasan Produk
 
-PojokSantri.ID adalah platform marketplace **cohort-based** untuk belajar mengaji online di Indonesia. Platform ini menghubungkan **Ustadz** dengan **Santri** melalui program pembelajaran berbasis batch/angkatan yang memiliki jadwal, kapasitas, harga, dan status pendaftaran yang jelas.
+Suntree adalah platform marketplace **cohort-based** untuk belajar mengaji online di Indonesia. Platform ini menghubungkan **Ustadz** dengan **Santri** melalui program pembelajaran berbasis batch/angkatan yang memiliki jadwal, kapasitas, harga, dan status pendaftaran yang jelas.
 
-> **One-liner:** PojokSantri.ID membantu santri menemukan dan mendaftar program ngaji online dari ustadz terverifikasi melalui marketplace sederhana dengan sistem batch dan konfirmasi pembayaran manual.
+> **One-liner:** Suntree membantu santri menemukan dan mendaftar program ngaji online dari ustadz terverifikasi melalui marketplace sederhana dengan sistem batch dan konfirmasi pembayaran manual.
 
 ### 1.2 Problem Statement
 
@@ -66,7 +66,7 @@ PojokSantri.ID adalah platform marketplace **cohort-based** untuk belajar mengaj
 
 ### 1.3 Proposed Solution MVP
 
-MVP PojokSantri.ID menyelesaikan masalah dengan marketplace sederhana:
+MVP Suntree menyelesaikan masalah dengan marketplace sederhana:
 
 | Fitur Utama | Manfaat untuk Santri | Manfaat untuk Ustadz/Admin |
 |---|---|---|
@@ -546,10 +546,10 @@ MVP menggunakan **Laravel web routes + Inertia pages**, bukan API-first REST/JWT
 - PRD v1.0 — Arsip brainstorming awal.
 - Tech Stack v1.0 — Arsip stack awal Next.js/NestJS.
 - Tech Stack v1.1 — Source of truth teknis untuk Phase 1.
-- UI Mockup — `specs/mockup/pojok-santri-id-mockup.html`.
-- User Flow — `specs/mockup/pojok-santri-id-userflow.html`.
+- UI Mockup — `specs/mockup/suntree-mockup.html`.
+- User Flow — `specs/mockup/suntree-userflow.html`.
 
 ---
 
-*PojokSantri.ID PRD v1.1 · Juni 2026 · Confidential*  
+*Suntree PRD v1.1 · Juni 2026 · Confidential*  
 *Dokumen ini adalah living document dan menjadi acuan implementasi Phase 1.*

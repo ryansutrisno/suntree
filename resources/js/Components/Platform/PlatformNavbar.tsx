@@ -18,7 +18,7 @@ function BrandMark() {
         <Link
             href="/"
             className="group flex items-center gap-2"
-            aria-label="PojokSantri — kembali ke beranda"
+            aria-label="Suntree — kembali ke beranda"
         >
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-teal text-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5">
                 <svg
@@ -36,7 +36,7 @@ function BrandMark() {
                 </svg>
             </span>
             <span className="font-display text-[22px] font-black leading-none tracking-tight text-brand-teal-dark">
-                Pojok<span className="text-brand-gold">Santri</span>
+                Suntree
             </span>
         </Link>
     );

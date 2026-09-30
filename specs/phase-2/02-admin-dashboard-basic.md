@@ -4,7 +4,7 @@
 
 Membangun landing page dashboard admin yang menampilkan ringkasan operasional awal agar admin bisa melihat kondisi platform secara cepat.
 
-Dashboard ini perlu mengikuti bahasa visual mockup (`specs/mockup/pojok-santri-id-mockup.html`) seperti **summary cards**, **clean spacing**, dan **section hierarchy**, tetapi isi metriknya mengikuti kebutuhan admin dari PRD.
+Dashboard ini perlu mengikuti bahasa visual mockup (`specs/mockup/suntree-mockup.html`) seperti **summary cards**, **clean spacing**, dan **section hierarchy**, tetapi isi metriknya mengikuti kebutuhan admin dari PRD.
 
 ## Tujuan
 

@@ -54,7 +54,7 @@ export default function UstadzOnboarding({ profile, status }: OnboardingProps) {
                         </h1>
                         <p className="mt-2 text-sm text-slate-600">
                             Silakan lengkapi data profil ustadz Anda untuk mulai
-                            mengajar di Pojok Santri ID.
+                            mengajar di Suntree.
                         </p>
                     </header>
 

@@ -13,7 +13,7 @@ export default function Dashboard() {
             <AppHead
                 noindex
                 title="Dashboard"
-                description="Ringkasan aktivitas akun PojokSantri kamu."
+                description="Ringkasan aktivitas akun Suntree kamu."
             />
 
             <div className="py-12">

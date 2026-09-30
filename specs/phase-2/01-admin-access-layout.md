@@ -4,7 +4,7 @@
 
 Menyiapkan pondasi area admin berupa route group, proteksi akses admin, dan layout dashboard yang akan dipakai task-task Phase 2 berikutnya.
 
-Task ini harus mengambil referensi visual dari `specs/mockup/pojok-santri-id-mockup.html`, terutama pola **sidebar dashboard**, **content header**, dan ritme section/card, sambil tetap menyesuaikan kebutuhan actor admin.
+Task ini harus mengambil referensi visual dari `specs/mockup/suntree-mockup.html`, terutama pola **sidebar dashboard**, **content header**, dan ritme section/card, sambil tetap menyesuaikan kebutuhan actor admin.
 
 ## Tujuan
 

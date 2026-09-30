@@ -20,7 +20,7 @@ export default function Edit({
             <AppHead
                 noindex
                 title="Profil"
-                description="Kelola nama, email, dan password akun PojokSantri kamu."
+                description="Kelola nama, email, dan password akun Suntree kamu."
             />
 
             <div className="py-12">

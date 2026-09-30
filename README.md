@@ -1,4 +1,4 @@
-# PojokSantri.ID
+# Suntree
 
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.4.1%2B-777BB4?logo=php&logoColor=white)](https://www.php.net)
@@ -6,9 +6,9 @@
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=black)](https://react.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-PojokSantri.ID adalah marketplace cohort-based untuk pembelajaran ngaji online di Indonesia. Platform ini menghubungkan santri dengan ustadz terverifikasi melalui program berbasis batch, jadwal, kapasitas, harga, pendaftaran, dan konfirmasi pembayaran manual.
+Suntree adalah marketplace cohort-based untuk pembelajaran ngaji online di Indonesia. Platform ini menghubungkan santri dengan ustadz terverifikasi melalui program berbasis batch, jadwal, kapasitas, harga, pendaftaran, dan konfirmasi pembayaran manual.
 
-Status proyek: **Phase 1 MVP Alignment**. Sumber kebenaran produk dan teknis saat ini berada di `specs/PojokSantriID-PRD-v1.1.md` dan `specs/PojokSantriID-TechStack-v1.1.md`.
+Status proyek: **Phase 1 MVP Alignment**. Sumber kebenaran produk dan teknis saat ini berada di `specs/Suntree-PRD-v1.1.md` dan `specs/Suntree-TechStack-v1.1.md`.
 
 ## Daftar Isi
 
@@ -112,7 +112,7 @@ Untuk mengikuti target MVP, gunakan MySQL:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=pojoksantri
+DB_DATABASE=suntree
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -175,7 +175,7 @@ Script ini menjalankan server Laravel, queue listener, Laravel Pail, dan Vite se
 │   ├── css/                # CSS aplikasi
 │   └── js/                 # Inertia React pages, layouts, components
 ├── routes/                 # Web, console, auth routes
-├── specs/                  # PRD dan dokumen tech stack PojokSantri.ID
+├── specs/                  # PRD dan dokumen tech stack Suntree
 ├── tests/                  # Pest tests
 ├── .github/workflows/      # CI, lint, dan release workflow
 ├── composer.json           # Dependency dan script PHP/Laravel
@@ -184,7 +184,7 @@ Script ini menjalankan server Laravel, queue listener, Laravel Pail, dan Vite se
 
 ## Arsitektur Aplikasi
 
-PojokSantri.ID menggunakan **Laravel modular monolith** dengan Inertia React. Pendekatan ini dipilih agar MVP cepat dibangun tanpa kompleksitas API-first, microservice, Redis, WebSocket, atau monorepo.
+Suntree menggunakan **Laravel modular monolith** dengan Inertia React. Pendekatan ini dipilih agar MVP cepat dibangun tanpa kompleksitas API-first, microservice, Redis, WebSocket, atau monorepo.
 
 ```text
 Browser
@@ -457,5 +457,5 @@ Project ini menggunakan lisensi MIT. Lihat file [LICENSE](LICENSE).
 
 ## Credits
 
-- Product & Engineering: PojokSantri.ID Team.
+- Product & Engineering: Suntree Team.
 - Maintainer: Ryan Sutrisno.

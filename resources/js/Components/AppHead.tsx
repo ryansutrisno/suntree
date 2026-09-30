@@ -31,7 +31,7 @@ type AppHeadProps = {
     children?: ReactNode;
 };
 
-const APP_NAME = 'PojokSantri';
+const APP_NAME = 'Suntree';
 
 export default function AppHead({
     title,

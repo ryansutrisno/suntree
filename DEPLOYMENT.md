@@ -1,4 +1,4 @@
-# Deployment & Troubleshooting — PojokSantri.ID
+# Deployment & Troubleshooting — Suntree
 
 Dokumen ini mencatat cara aplikasi ini di-deploy di production, plus penyebab dan solusi insiden build/deploy yang sudah pernah terjadi. Tujuannya supaya investigasi tidak perlu diulang dari nol.
 
@@ -187,8 +187,8 @@ Environment variable berikut **opsional**, dipakai hanya kalau ingin mengganti k
 
 | Variabel | Dipakai oleh | Default |
 | --- | --- | --- |
-| `ADMIN_SEED_EMAIL` | `AdminUserSeeder` | `admin@pojoksantri.id` |
-| `ADMIN_SEED_NAME` | `AdminUserSeeder` | `PojokSantri Admin` |
+| `ADMIN_SEED_EMAIL` | `AdminUserSeeder` | `admin@suntree.id` |
+| `ADMIN_SEED_NAME` | `AdminUserSeeder` | `Suntree Admin` |
 | `ADMIN_SEED_PASSWORD` | `AdminUserSeeder` | `password` |
 | `DEMO_SEED_PASSWORD` | `UstadzUserSeeder`, `SantriUserSeeder` | `password` |
 
@@ -200,7 +200,7 @@ sudo docker exec -w /app <APP_CONTAINER> php artisan db:seed --force
 
 Kalau ingin mengganti password demo, set `ADMIN_SEED_PASSWORD` dan `DEMO_SEED_PASSWORD` di Dokploy **lalu redeploy aplikasi** sebelum menjalankan seeder.
 
-Seeder membuat: admin terverifikasi, satu ustadz demo (`ustadz@pojoksantri.id`) dengan profil terverifikasi, satu program untuk setiap kombinasi kategori × level beserta satu batch-nya, dan satu santri demo (`santri@pojoksantri.id`) yang langsung ter-enroll ke batch terakhir.
+Seeder membuat: admin terverifikasi, satu ustadz demo (`ustadz@suntree.id`) dengan profil terverifikasi, satu program untuk setiap kombinasi kategori × level beserta satu batch-nya, dan satu santri demo (`santri@suntree.id`) yang langsung ter-enroll ke batch terakhir.
 
 > **Catatan config cache**: entrypoint container menjalankan `config:cache`. Environment variable baru **tidak** terbaca sampai config di-cache ulang — karena itu setiap perubahan env butuh redeploy (atau jalankan `php artisan config:clear` sebelum seeder).
 

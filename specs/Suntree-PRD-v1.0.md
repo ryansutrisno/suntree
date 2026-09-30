@@ -1,4 +1,4 @@
-# PojokSantri.ID — Product Requirements Document (PRD)
+# Suntree — Product Requirements Document (PRD)
 
 > **Version:** v1.0  
 > **Date:** Maret 2026  
@@ -26,9 +26,9 @@
 
 ### 1.1 Ringkasan Produk
 
-PojokSantri.ID adalah platform marketplace **cohort-based** untuk belajar mengaji secara online di Indonesia. Platform ini menghubungkan **Ustadz** (pengajar Al-Quran) dengan **Santri** (pelajar dewasa) melalui sistem "Paket Program" yang terstruktur, transparan, dan berbasis batch/angkatan.
+Suntree adalah platform marketplace **cohort-based** untuk belajar mengaji secara online di Indonesia. Platform ini menghubungkan **Ustadz** (pengajar Al-Quran) dengan **Santri** (pelajar dewasa) melalui sistem "Paket Program" yang terstruktur, transparan, dan berbasis batch/angkatan.
 
-> **One-liner:** PojokSantri.ID memungkinkan siapa saja menemukan, membandingkan, dan mendaftar program ngaji online dari ustadz terverifikasi — dengan sistem batch berkapasitas terbatas yang memastikan kualitas pembelajaran dan akuntabilitas ustadz.
+> **One-liner:** Suntree memungkinkan siapa saja menemukan, membandingkan, dan mendaftar program ngaji online dari ustadz terverifikasi — dengan sistem batch berkapasitas terbatas yang memastikan kualitas pembelajaran dan akuntabilitas ustadz.
 
 ---
 
@@ -52,7 +52,7 @@ PojokSantri.ID adalah platform marketplace **cohort-based** untuk belajar mengaj
 
 ### 1.3 Proposed Solution
 
-PojokSantri.ID menyelesaikan masalah dengan model marketplace cohort-based:
+Suntree menyelesaikan masalah dengan model marketplace cohort-based:
 
 | Fitur Utama | Manfaat untuk Santri | Manfaat untuk Ustadz |
 |---|---|---|
@@ -328,12 +328,12 @@ Flow integrasi:
 - Nama program dan level
 - Nama dan foto ustadz
 - Tanggal mulai dan selesai batch
-- Unique verification code + QR code → link ke halaman verifikasi publik: `https://pojoksantri.id/verify/{certificate_id}`
-- Logo PojokSantri.ID dan nomor sertifikat
+- Unique verification code + QR code → link ke halaman verifikasi publik: `https://suntree.id/verify/{certificate_id}`
+- Logo Suntree dan nomor sertifikat
 
 **Acceptance Criteria:**
 - Sertifikat diterbitkan dalam < 24 jam setelah ustadz konfirmasi kelulusan
-- Format: PDF A4 dengan desain profesional dan brand PojokSantri.ID
+- Format: PDF A4 dengan desain profesional dan brand Suntree
 - QR code dapat di-scan siapa saja untuk verifikasi keaslian
 - Santri bisa download PDF, share ke LinkedIn (OpenBadge), atau share gambar ke Instagram
 
@@ -532,7 +532,7 @@ Flow integrasi:
 
 | # | Pertanyaan | Owner | Deadline |
 |---|---|---|---|
-| OQ-01 | Apakah platform menggunakan brand "PojokSantri.ID" atau nama lain? Cek ketersediaan domain. | Founder | Sebelum Sprint 1 |
+| OQ-01 | Brand platform ditetapkan sebagai **Suntree** dengan domain utama `suntree.id`. | Founder | Resolved sebelum Sprint 1 |
 | OQ-02 | Berapa take rate yang optimal? 10% standar, atau ada tier (8% untuk ustad baru, 10% untuk yang sudah establish)? | Product + Bisnis | Sebelum Sprint 2 |
 | OQ-02b | Pilih Mayar saja untuk seluruh fase, atau dual-gateway Mayar (alpha) + Midtrans (production)? Perlu hitung MDR aktual dari keduanya. | Engineering + Bisnis | Sebelum Sprint 2 |
 | OQ-03 | Apakah video call menggunakan Jitsi self-hosted atau meet.jit.si gratis? Tergantung budget server. | Engineering | Sebelum Sprint 3 |
@@ -569,14 +569,14 @@ Tidak termasuk dalam scope v1:
 |---|---|
 | **Batch** | Satu "angkatan" santri yang mengikuti sebuah program secara bersamaan dalam periode waktu tertentu |
 | **Cohort** | Kelompok santri yang belajar bersama — sinonim dengan Batch dalam konteks ini |
-| **Ustadz** | Pengajar ngaji yang terdaftar dan terverifikasi di platform PojokSantri.ID |
-| **Santri** | Pelajar yang mendaftar dan mengikuti program ngaji di platform PojokSantri.ID |
+| **Ustadz** | Pengajar ngaji yang terdaftar dan terverifikasi di platform Suntree |
+| **Santri** | Pelajar yang mendaftar dan mengikuti program ngaji di platform Suntree |
 | **Take Rate** | Persentase komisi yang diambil platform dari setiap transaksi (default: 10%) |
 | **Payout** | Transfer pendapatan dari platform ke rekening bank ustadz setelah batch selesai |
 | **Enrollment** | Proses seorang santri mendaftarkan diri ke sebuah batch, termasuk pembayaran |
 | **Slot** | Satu tempat tersedia dalam sebuah batch — jumlah slot = `max_capacity` |
 | **Waitlist** | Daftar tunggu santri yang ingin masuk batch yang sudah penuh |
-| **Webhook** | HTTP callback dari payment gateway (Midtrans atau Mayar) ke server PojokSantri.ID untuk mengkomunikasikan status pembayaran secara real-time |
+| **Webhook** | HTTP callback dari payment gateway (Midtrans atau Mayar) ke server Suntree untuk mengkomunikasikan status pembayaran secara real-time |
 | **Midtrans Snap** | Hosted checkout UI dari Midtrans — muncul sebagai popup di atas halaman platform tanpa perlu redirect |
 | **Mayar Payment Link** | Model checkout Mayar — API mengembalikan URL link yang dibuka santri untuk menyelesaikan pembayaran |
 | **MDR** | Merchant Discount Rate — persentase biaya yang dikenakan gateway per transaksi (biasanya 0.7%–2%) |
@@ -585,15 +585,15 @@ Tidak termasuk dalam scope v1:
 
 ### 9.2 Referensi Dokumen
 
-- Business Strategy Document — PojokSantri.ID v1.0 (Maret 2026)
-- Tech Stack & Architecture Document — PojokSantri.ID v1.0 (Maret 2026)
-- User Flow Diagram — PojokSantri.ID Interactive (`pojok-santri-id-userflow.html`)
-- UI Mockup — PojokSantri.ID Interactive Prototype (`-pojok-santri-id-mockup.html`)
+- Business Strategy Document — Suntree v1.0 (Maret 2026)
+- Tech Stack & Architecture Document — Suntree v1.0 (Maret 2026)
+- User Flow Diagram — Suntree Interactive (`suntree-userflow.html`)
+- UI Mockup — Suntree Interactive Prototype (`suntree-mockup.html`)
 - Midtrans Documentation — <https://docs.midtrans.com> (Snap & Webhook)
 - Mayar API Documentation — <https://docs.mayar.id/api-reference/introduction>
 - Jitsi Meet External API — <https://jitsi.github.io/handbook/docs/dev-guide/dev-guide-iframe>
 
 ---
 
-*PojokSantri.ID PRD v1.0 · Maret 2026 · Confidential*  
+*Suntree PRD v1.0 · Maret 2026 · Confidential*  
 *Dokumen ini adalah living document — akan diupdate seiring perkembangan produk.*

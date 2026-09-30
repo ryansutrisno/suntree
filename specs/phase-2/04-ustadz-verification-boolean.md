@@ -4,7 +4,7 @@
 
 Membangun flow approval/revoke ustadz berbasis boolean oleh admin sesuai scope MVP v1.1.
 
-Flow ini harus tetap konsisten dengan userflow `specs/mockup/pojok-santri-id-userflow.html`, khususnya titik ketika ustadz menjadi verified dan boleh melanjutkan ke flow program/batch berikutnya.
+Flow ini harus tetap konsisten dengan userflow `specs/mockup/suntree-userflow.html`, khususnya titik ketika ustadz menjadi verified dan boleh melanjutkan ke flow program/batch berikutnya.
 
 ## Tujuan
 

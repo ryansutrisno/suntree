@@ -14,10 +14,10 @@ Scope besar Phase 5 mengacu ke PRD v1.1:
 
 ## Referensi Utama
 
-- `../PojokSantriID-PRD-v1.1.md`
-- `../PojokSantriID-TechStack-v1.1.md`
-- `../mockup/pojok-santri-id-mockup.html`
-- `../mockup/pojok-santri-id-userflow.html`
+- `../Suntree-PRD-v1.1.md`
+- `../Suntree-TechStack-v1.1.md`
+- `../mockup/suntree-mockup.html`
+- `../mockup/suntree-userflow.html`
 - `../_task-template.md`
 
 ## Workflow Phase

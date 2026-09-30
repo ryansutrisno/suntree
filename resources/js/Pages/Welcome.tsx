@@ -454,7 +454,7 @@ function ProgramHighlights({ programs }: { programs: ProgramHighlight[] }) {
     );
 }
 
-/* ───────────────────────── WHY POJOKSANTRI ──────────────────── */
+/* ───────────────────────── WHY SUNTREE ──────────────────────── */
 
 type Reason = {
     title: string;
@@ -505,13 +505,13 @@ const REASONS: Reason[] = [
     },
 ];
 
-function WhyPojokSantri() {
+function WhySuntree() {
     return (
         <section id="tentang" className="px-5 py-20 sm:px-8 sm:py-28">
             <div className="mx-auto max-w-[1200px]">
                 <SectionHeading
                     align="center"
-                    eyebrow="Kenapa PojokSantri"
+                    eyebrow="Kenapa Suntree"
                     title={
                         <>
                             Belajar Al-Qur'an seharusnya{' '}
@@ -579,7 +579,7 @@ function FinalCta() {
                     </h2>
                     <p className="mt-4 text-[15px] leading-relaxed text-white/80">
                         Daftar sebagai santri untuk mengikuti program, atau jadi ustadz untuk mulai
-                        mengajar di PojokSantri.
+                        mengajar di Suntree.
                     </p>
                     <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                         <Link
@@ -626,7 +626,7 @@ export default function Welcome({ canLogin, canRegister, programs, stats }: Welc
                     <SearchTeaser />
                     <ProgramHighlights programs={programs} />
                     <HowItWorks />
-                    <WhyPojokSantri />
+                    <WhySuntree />
                     <FinalCta />
                 </main>
                 <PlatformFooter />

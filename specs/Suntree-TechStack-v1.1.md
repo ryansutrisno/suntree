@@ -1,10 +1,10 @@
-# PojokSantri.ID — Tech Stack & Architecture Document
+# Suntree — Tech Stack & Architecture Document
 
 > **Version:** v1.1  
 > **Date:** Juni 2026  
 > **Status:** APPROVED — Phase 1 MVP Alignment  
 > **Author:** Engineering Team  
-> **Referensi:** Lampiran teknis dari PRD PojokSantri.ID v1.1
+> **Referensi:** Lampiran teknis dari PRD Suntree v1.1
 
 ---
 
@@ -462,7 +462,7 @@ Actual paths can be adjusted to match existing project conventions during implem
 ### 10.1 Laravel + MySQL MVP
 
 ```env
-APP_NAME="PojokSantri.ID"
+APP_NAME="Suntree"
 APP_ENV=local
 APP_KEY=base64:...
 APP_DEBUG=true
@@ -471,7 +471,7 @@ APP_URL=http://suntree.test
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=pojoksantri
+DB_DATABASE=suntree
 DB_USERNAME=root
 DB_PASSWORD=
 
@@ -488,8 +488,8 @@ MAIL_HOST=127.0.0.1
 MAIL_PORT=2525
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
-MAIL_FROM_ADDRESS="hello@pojoksantri.id"
-MAIL_FROM_NAME="PojokSantri.ID"
+MAIL_FROM_ADDRESS="hello@suntree.id"
+MAIL_FROM_NAME="Suntree"
 ```
 
 ### 10.3 Future Mayar Variables
@@ -593,5 +593,5 @@ These technologies are intentionally deferred until product validation demands t
 
 ---
 
-*PojokSantri.ID Tech Stack v1.1 · Juni 2026 · Confidential*  
+*Suntree Tech Stack v1.1 · Juni 2026 · Confidential*  
 *Dokumen ini adalah source of truth teknis untuk Phase 1 MVP.*

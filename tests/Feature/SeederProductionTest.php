@@ -17,8 +17,8 @@ it('seeds demo data in production without any extra configuration', function () 
 
     expect($admin)->not->toBeNull()
         ->and($admin?->role)->toBe(UserRole::Admin)
-        ->and(User::where('email', 'ustadz@pojoksantri.id')->exists())->toBeTrue()
-        ->and(User::where('email', 'santri@pojoksantri.id')->exists())->toBeTrue()
+        ->and(User::where('email', 'ustadz@suntree.id')->exists())->toBeTrue()
+        ->and(User::where('email', 'santri@suntree.id')->exists())->toBeTrue()
         ->and(Program::count())->toBeGreaterThan(0)
         ->and(Batch::count())->toBeGreaterThan(0)
         ->and(Enrollment::count())->toBeGreaterThan(0);
@@ -35,7 +35,7 @@ it('honours the seed password environment overrides', function () {
     app(DatabaseSeeder::class)->run();
 
     $admin = User::where('email', config('auth.admin_seed.email'))->first();
-    $ustadz = User::where('email', 'ustadz@pojoksantri.id')->first();
+    $ustadz = User::where('email', 'ustadz@suntree.id')->first();
 
     expect($admin)->not->toBeNull()
         ->and(Hash::check('super-secret-admin-password', $admin->password))->toBeTrue()
@@ -51,7 +51,7 @@ it('keeps the seeded demo users idempotent', function () {
 
     expect(User::whereIn('email', [
         config('auth.admin_seed.email'),
-        'ustadz@pojoksantri.id',
-        'santri@pojoksantri.id',
+        'ustadz@suntree.id',
+        'santri@suntree.id',
     ])->count())->toBe(3);
 });

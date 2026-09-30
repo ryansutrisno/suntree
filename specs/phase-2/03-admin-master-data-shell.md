@@ -4,7 +4,7 @@
 
 Menyiapkan shell halaman admin untuk data utama marketplace agar Phase 2 punya struktur operasional awal sebelum CRUD penuh di fase berikutnya.
 
-Task ini juga harus menyelaraskan struktur navigasi dengan userflow di `specs/mockup/pojok-santri-id-userflow.html`, terutama area yang nanti menyentuh ustadz, batch, enrollment, dan payment queue.
+Task ini juga harus menyelaraskan struktur navigasi dengan userflow di `specs/mockup/suntree-userflow.html`, terutama area yang nanti menyentuh ustadz, batch, enrollment, dan payment queue.
 
 ## Tujuan
 

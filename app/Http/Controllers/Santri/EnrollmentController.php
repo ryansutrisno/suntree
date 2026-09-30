@@ -99,7 +99,7 @@ class EnrollmentController extends Controller
         return [
             'bank_name' => 'Bank Syariah Indonesia (BSI)',
             'account_number' => '7123456789',
-            'account_holder' => 'Yayasan PojokSantri',
+            'account_holder' => 'Yayasan Suntree',
         ];
     }
 }

@@ -23,7 +23,7 @@ export default function PublicUstadzProfileShow({ ustadz, programs }: PublicUsta
         <div className="min-h-screen bg-[#f8f5ef] px-6 py-12 text-slate-900">
             <AppHead
                 title={`Ustadz ${ustadz.display_name}`}
-                description="Profil ustadz terverifikasi PojokSantri: program yang diajar, batch aktif, dan latar belakang mengajar."
+                description="Profil ustadz terverifikasi Suntree: program yang diajar, batch aktif, dan latar belakang mengajar."
             />
             <div className="mx-auto max-w-5xl space-y-8">
                 <section className="rounded-3xl border border-[#eadcc8] bg-white p-8 shadow-sm">

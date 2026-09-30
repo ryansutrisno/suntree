@@ -111,21 +111,21 @@
 
 ### ✨ Features
 
-* **auth:** redesign ResetPassword, VerifyEmail, and ConfirmPassword with PojokSantri branding ([2c2f071](https://github.com/ryansutrisno/suntree/commit/2c2f071433035d990f35ebd645d459cbf1e71afe))
+* **auth:** redesign ResetPassword, VerifyEmail, and ConfirmPassword with Suntree branding ([2c2f071](https://github.com/ryansutrisno/suntree/commit/2c2f071433035d990f35ebd645d459cbf1e71afe))
 
 ## [1.11.0](https://github.com/ryansutrisno/suntree/compare/v1.10.0...v1.11.0) (2026-07-25)
 
 
 ### ✨ Features
 
-* **auth:** redesign Register and ForgotPassword with PojokSantri branding ([e0c53ce](https://github.com/ryansutrisno/suntree/commit/e0c53ce036c12a3a6d77cd4b07cb2c9d8cf7d9bb))
+* **auth:** redesign Register and ForgotPassword with Suntree branding ([e0c53ce](https://github.com/ryansutrisno/suntree/commit/e0c53ce036c12a3a6d77cd4b07cb2c9d8cf7d9bb))
 
 ## [1.10.0](https://github.com/ryansutrisno/suntree/compare/v1.9.0...v1.10.0) (2026-07-22)
 
 
 ### ✨ Features
 
-* **auth:** redesign Login page with PojokSantri branding ([9219885](https://github.com/ryansutrisno/suntree/commit/92198850d1b751f229fa24bb4ab1c5022aaee3ed))
+* **auth:** redesign Login page with Suntree branding ([9219885](https://github.com/ryansutrisno/suntree/commit/92198850d1b751f229fa24bb4ab1c5022aaee3ed))
 
 
 ### 🐛 Bug Fixes
@@ -139,7 +139,7 @@
 
 ### ✨ Features
 
-* **landing:** adapt mock home screen into PojokSantri landing page ([86f08bd](https://github.com/ryansutrisno/suntree/commit/86f08bdc565d2041ee4edba109c5b42669053dd4))
+* **landing:** adapt mock home screen into Suntree landing page ([86f08bd](https://github.com/ryansutrisno/suntree/commit/86f08bdc565d2041ee4edba109c5b42669053dd4))
 
 ## [1.8.0](https://github.com/ryansutrisno/suntree/compare/v1.7.1...v1.8.0) (2026-07-20)
 
@@ -291,7 +291,7 @@
 
 ### 📚 Documentation
 
-* **specs:** add all PojokSantri.ID v1.1 and archived v1 specs ([3866c4e](https://github.com/ryansutrisno/suntree/commit/3866c4eac82d0d8be3741f4964cc95a95889b826))
+* **specs:** add all Suntree v1.1 and archived v1 specs ([3866c4e](https://github.com/ryansutrisno/suntree/commit/3866c4eac82d0d8be3741f4964cc95a95889b826))
 
 
 ### 🔧 Chores
@@ -308,6 +308,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### 📚 Documentation
 
-- Add initial project README for PojokSantri.ID MVP alignment.
+- Add initial project README for Suntree MVP alignment.
 - Add MIT license.
 - Add Semantic Release configuration and GitHub Actions release workflow.
