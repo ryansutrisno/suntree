@@ -1,3 +1,15 @@
+## [1.19.0](https://github.com/ryansutrisno/suntree/compare/v1.18.0...v1.19.0) (2026-10-01)
+
+
+### ✨ Features
+
+* add mobile sidebar drawer for all panel layouts ([3c8a201](https://github.com/ryansutrisno/suntree/commit/3c8a201b44164479e487dc203cf1cef28a5a03f6))
+
+
+### 🔧 Chores
+
+* rebrand project from PojokSantri to Suntree ([bd182db](https://github.com/ryansutrisno/suntree/commit/bd182db5fe6496006c613dbcf22e5a0bca0e5802))
+
 ## [1.18.0](https://github.com/ryansutrisno/suntree/compare/v1.17.0...v1.18.0) (2026-09-15)
 
 
