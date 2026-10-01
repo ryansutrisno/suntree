@@ -1,6 +1,8 @@
 import { Link, usePage } from '@inertiajs/react';
-import type { PropsWithChildren } from 'react';
+import { useEffect, useState } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
 import { logout } from '@/routes';
+import MobileSidebarDrawer from '@/Components/MobileSidebarDrawer';
 
 type UstadzLayoutProps = PropsWithChildren<{
     title: string;
@@ -34,67 +36,112 @@ export default function UstadzLayout({
     description,
     children,
 }: UstadzLayoutProps) {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const currentUrl = usePage().url;
+
+    useEffect(() => {
+        setIsSidebarOpen(false);
+    }, [currentUrl]);
+
+    const sidebarContent: ReactNode = (
+        <>
+            <div className="space-y-2 border-b border-white/15 pb-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#f7d27a]">
+                    Suntree
+                </p>
+                <h1 className="text-2xl font-semibold">Ustadz Panel</h1>
+                <p className="text-sm leading-6 text-white/80">
+                    Panel ustadz untuk mengelola program, batch, dan enrollment.
+                </p>
+            </div>
+
+            <nav className="mt-6 space-y-2" aria-label="Ustadz panel navigation">
+                {navigationItems.map((item) => {
+                    const isActive = isNavigationItemActive(item.href, currentUrl);
+
+                    return (
+                        <Link
+                            key={item.label}
+                            href={item.href}
+                            aria-current={isActive ? 'page' : undefined}
+                            className={`flex items-center gap-3 rounded-2xl border-l-4 px-4 py-3 text-sm font-medium transition ${
+                                isActive
+                                    ? 'border-l-[#f7d27a] bg-white/10 text-white'
+                                    : 'border-l-transparent text-white/90 hover:bg-white/10 hover:text-white'
+                            }`}
+                        >
+                            <span>{item.label}</span>
+                        </Link>
+                    );
+                })}
+            </nav>
+
+            <div className="mt-auto border-t border-white/15 pt-6">
+                <Link
+                    href={logout.url()}
+                    method="post"
+                    as="button"
+                    className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-[#f7d27a]"
+                >
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="h-4 w-4 shrink-0"
+                        aria-hidden="true"
+                    >
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <path d="M16 17l5-5-5-5" />
+                        <path d="M21 12H9" />
+                    </svg>
+                    <span>Keluar</span>
+                </Link>
+            </div>
+        </>
+    );
 
     return (
         <div className="min-h-screen bg-[#f8f3eb] text-slate-900">
-            <div className="mx-auto grid min-h-screen max-w-7xl gap-6 px-4 py-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:px-6">
-                <aside className="flex flex-col rounded-3xl border border-[#d6c3a5] bg-[#0f766e] p-6 text-white shadow-sm">
-                    <div className="space-y-2 border-b border-white/15 pb-6">
-                        <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#f7d27a]">
+            <header className="sticky top-0 z-40 border-b border-[#d6c3a5] bg-[#0f766e] text-white shadow-sm lg:hidden">
+                <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
+                    <div className="min-w-0">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-[#f7d27a]">
                             Suntree
                         </p>
-                        <h1 className="text-2xl font-semibold">Ustadz Panel</h1>
-                        <p className="text-sm leading-6 text-white/80">
-                            Panel ustadz untuk mengelola program, batch, dan enrollment.
+                        <p className="truncate text-sm font-semibold leading-5">
+                            Ustadz Panel
                         </p>
                     </div>
-
-                    <nav className="mt-6 space-y-2" aria-label="Ustadz panel navigation">
-                        {navigationItems.map((item) => {
-                            const isActive = isNavigationItemActive(item.href, currentUrl);
-
-                            return (
-                                <Link
-                                    key={item.label}
-                                    href={item.href}
-                                    aria-current={isActive ? 'page' : undefined}
-                                    className={`flex items-center gap-3 rounded-2xl border-l-4 px-4 py-3 text-sm font-medium transition ${
-                                        isActive
-                                            ? 'border-l-[#f7d27a] bg-white/10 text-white'
-                                            : 'border-l-transparent text-white/90 hover:bg-white/10 hover:text-white'
-                                    }`}
-                                >
-                                    <span>{item.label}</span>
-                                </Link>
-                            );
-                        })}
-                    </nav>
-
-                    <div className="mt-auto border-t border-white/15 pt-6">
-                        <Link
-                            href={logout.url()}
-                            method="post"
-                            as="button"
-                            className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-[#f7d27a]"
+                    <button
+                        type="button"
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="inline-flex items-center justify-center rounded-2xl p-2.5 text-white/90 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f7d27a]"
+                        aria-label="Buka menu navigasi"
+                        aria-expanded={isSidebarOpen}
+                        aria-controls="ustadz-mobile-sidebar"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-5 w-5"
+                            aria-hidden="true"
                         >
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="h-4 w-4 shrink-0"
-                                aria-hidden="true"
-                            >
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                                <path d="M16 17l5-5-5-5" />
-                                <path d="M21 12H9" />
-                            </svg>
-                            <span>Keluar</span>
-                        </Link>
-                    </div>
+                            <path d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <div className="mx-auto grid min-h-screen max-w-7xl gap-6 px-4 py-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:px-6">
+                <aside className="hidden flex-col rounded-3xl border border-[#d6c3a5] bg-[#0f766e] p-6 text-white shadow-sm lg:flex">
+                    {sidebarContent}
                 </aside>
 
                 <main className="space-y-6">
@@ -113,6 +160,14 @@ export default function UstadzLayout({
                     {children}
                 </main>
             </div>
+
+            <MobileSidebarDrawer
+                show={isSidebarOpen}
+                onClose={() => setIsSidebarOpen(false)}
+                panelId="ustadz-mobile-sidebar"
+            >
+                {sidebarContent}
+            </MobileSidebarDrawer>
         </div>
     );
 }
