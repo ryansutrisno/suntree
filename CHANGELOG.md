@@ -1,3 +1,15 @@
+## [1.20.0](https://github.com/ryansutrisno/suntree/compare/v1.19.0...v1.20.0) (2026-10-06)
+
+
+### ✨ Features
+
+* **phase-6:** add santri dashboard stat cards ([69b3c32](https://github.com/ryansutrisno/suntree/commit/69b3c323082d5fd8bdc550f3fe791bd46e75029e))
+
+
+### 🐛 Bug Fixes
+
+* **auth:** redirect santri to santri dashboard after login ([f35236d](https://github.com/ryansutrisno/suntree/commit/f35236d6230799f64490d7fe81b7bf871bbde983))
+
 ## [1.19.0](https://github.com/ryansutrisno/suntree/compare/v1.18.0...v1.19.0) (2026-10-01)
 
 
