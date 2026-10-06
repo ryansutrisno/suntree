@@ -19,6 +19,7 @@ Fase ini mengimplementasikan fitur enrollment santri ke batch terbuka, termasuk 
 | 3 | Santri Dashboard | Done | [03-santri-dashboard.md](03-santri-dashboard.md) |
 | 4 | Enroll Batch Flow | Done | [04-enroll-batch.md](04-enroll-batch.md) |
 | 5 | Payment Instruction Page | Done | [05-payment-instruction.md](05-payment-instruction.md) |
+| 6 | Santri Dashboard Stat Cards | Done | [06-santri-dashboard-stat-cards.md](06-santri-dashboard-stat-cards.md) |
 
 ## Verification
 

@@ -24,6 +24,11 @@ class DashboardController extends Controller
 
         return Inertia::render('santri/dashboard', [
             'enrollments' => $enrollments,
+            'stats' => [
+                'total_enrollments' => $enrollments->count(),
+                'pending_payments' => $enrollments->where('payment_status', 'pending')->count(),
+                'confirmed_enrollments' => $enrollments->where('payment_status', 'paid')->count(),
+            ],
         ]);
     }
 }

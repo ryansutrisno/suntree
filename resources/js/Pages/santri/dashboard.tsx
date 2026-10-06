@@ -31,8 +31,15 @@ interface Enrollment {
     batch: Batch;
 }
 
+interface DashboardStats {
+    total_enrollments: number;
+    pending_payments: number;
+    confirmed_enrollments: number;
+}
+
 type SantriDashboardProps = {
     enrollments: Enrollment[];
+    stats: DashboardStats;
 };
 
 const paymentStatusColors: Record<string, string> = {
@@ -84,7 +91,7 @@ function formatDate(dateString: string): string {
     });
 }
 
-export default function SantriDashboard({ enrollments }: SantriDashboardProps) {
+export default function SantriDashboard({ enrollments, stats }: SantriDashboardProps) {
     return (
         <SantriLayout
             title="Dashboard"
@@ -95,6 +102,23 @@ export default function SantriDashboard({ enrollments }: SantriDashboardProps) {
                 description="Ringkasan pendaftaran batch kamu: status pembayaran, jadwal, dan program yang sedang diikuti."
                 noindex
             />
+            <section className="grid gap-4 md:grid-cols-3">
+                {[
+                    { label: 'Total Enrollment', value: stats.total_enrollments },
+                    { label: 'Menunggu Pembayaran', value: stats.pending_payments },
+                    { label: 'Terkonfirmasi', value: stats.confirmed_enrollments },
+                ].map((card) => (
+                    <article
+                        key={card.label}
+                        className="rounded-3xl border border-[#eadcc8] bg-white p-5 shadow-sm"
+                    >
+                        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0f766e]">
+                            {card.label}
+                        </p>
+                        <p className="mt-3 text-3xl font-semibold text-slate-900">{card.value}</p>
+                    </article>
+                ))}
+            </section>
             <section className="rounded-3xl border border-[#eadcc8] bg-white p-6 shadow-sm">
                 <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold text-slate-900">Enrollment Saya</h3>
