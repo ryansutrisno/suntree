@@ -39,7 +39,7 @@ class AuthenticatedSessionController extends Controller
         $redirectUrl = match ($user->role) {
             UserRole::Admin => '/admin',
             UserRole::Ustadz => '/ustadz/dashboard',
-            UserRole::Santri => route('dashboard', absolute: false),
+            UserRole::Santri => route('santri.dashboard.index', absolute: false),
             default => route('dashboard', absolute: false),
         };
 

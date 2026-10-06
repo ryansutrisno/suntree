@@ -1,14 +1,16 @@
 # Task 03: Santri Dashboard
 
-## Status: Planned
+## Status: Done
 
 ## Scope
 
-- [ ] Create `SantriLayout` React layout (follow `UstadzLayout` pattern, green/emerald theme)
-- [ ] Create `Santri/DashboardController` with `index()` method
-- [ ] Display santri's enrollments with: program title, batch name, status, payment status, amount, enrollment date
-- [ ] Link to payment instruction for pending payment enrollments
-- [ ] Link to enroll batch page
+- [x] Create `SantriLayout` React layout (follow `UstadzLayout` pattern, green/emerald theme)
+- [x] Create `Santri/DashboardController` with `index()` method
+- [x] Display santri's enrollments with: program title, batch name, status, payment status, amount, enrollment date
+- [x] Link to payment instruction for pending payment enrollments
+- [x] Link to enroll batch page
+
+> Catatan: blok stat cards ringkasan ditambahkan terpisah pada Task 06 ([06-santri-dashboard-stat-cards.md](06-santri-dashboard-stat-cards.md)).
 
 ## Out of Scope
 

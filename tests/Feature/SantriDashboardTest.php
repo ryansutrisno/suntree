@@ -57,6 +57,40 @@ test('dashboard shows user enrollments', function () {
             ->where('enrollments.0.batch.id', $batch->id)
             ->where('enrollments.0.batch.program.id', $program->id)
             ->where('enrollments.0.batch.program.title', $program->title)
+            ->where('stats.total_enrollments', 1)
+            ->where('stats.pending_payments', 1)
+            ->where('stats.confirmed_enrollments', 0)
+        );
+});
+
+test('dashboard stats reflect payment statuses', function () {
+    $santri = User::factory()->santri()->create();
+
+    $program = Program::factory()->create([
+        'status' => ProgramStatus::Published,
+    ]);
+
+    foreach (['pending', 'paid', 'rejected'] as $paymentStatus) {
+        $batch = Batch::factory()->for($program)->create([
+            'status' => BatchStatus::Open,
+        ]);
+
+        Enrollment::factory()
+            ->for($santri, 'user')
+            ->for($batch)
+            ->create([
+                'payment_status' => $paymentStatus,
+            ]);
+    }
+
+    $this->actingAs($santri)
+        ->get('/santri/dashboard')
+        ->assertSuccessful()
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('santri/dashboard')
+            ->where('stats.total_enrollments', 3)
+            ->where('stats.pending_payments', 1)
+            ->where('stats.confirmed_enrollments', 1)
         );
 });
 
