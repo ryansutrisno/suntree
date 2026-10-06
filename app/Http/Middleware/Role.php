@@ -40,7 +40,7 @@ class Role
         return match ($user->role) {
             UserRole::Admin => Redirect::to('/admin'),
             UserRole::Ustadz => Redirect::to('/ustadz/dashboard'),
-            UserRole::Santri => Redirect::route('dashboard'),
+            UserRole::Santri => Redirect::route('santri.dashboard.index'),
             default => Redirect::route('login'),
         };
     }

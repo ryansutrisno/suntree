@@ -12,8 +12,8 @@ test('login screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
-test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+test('santri users are redirected to the santri dashboard after login', function () {
+    $user = User::factory()->santri()->create();
 
     $response = $this->post('/login', [
         'email' => $user->email,
@@ -21,7 +21,31 @@ test('users can authenticate using the login screen', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $response->assertRedirect(route('santri.dashboard.index', absolute: false));
+});
+
+test('ustadz users are redirected to the ustadz dashboard after login', function () {
+    $user = User::factory()->ustadz()->create();
+
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertAuthenticated();
+    $response->assertRedirect('/ustadz/dashboard');
+});
+
+test('admin users are redirected to the admin dashboard after login', function () {
+    $user = User::factory()->admin()->create();
+
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertAuthenticated();
+    $response->assertRedirect('/admin');
 });
 
 test('users can not authenticate with invalid password', function () {

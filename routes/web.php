@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ShellController;
@@ -23,7 +24,14 @@ use Inertia\Inertia;
 Route::get('/', HomeController::class)->name('home');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $user = request()->user();
+
+    return match ($user?->role) {
+        UserRole::Admin => redirect('/admin'),
+        UserRole::Ustadz => redirect('/ustadz/dashboard'),
+        UserRole::Santri => redirect()->route('santri.dashboard.index'),
+        default => Inertia::render('Dashboard'),
+    };
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
