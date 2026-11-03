@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react';
 import AppHead from '@/Components/AppHead';
 
 type Program = {
@@ -27,22 +28,41 @@ type PublicProgramDetailProps = {
     batches: Batch[];
 };
 
-export default function PublicProgramDetailShow({ program, ustadz, batches }: PublicProgramDetailProps) {
+export default function PublicProgramDetailShow({
+    program,
+    ustadz,
+    batches,
+}: PublicProgramDetailProps) {
     const metaDescription = program.description
         ? `${program.description.replace(/\s+/g, ' ').trim().slice(0, 157)}${program.description.length > 157 ? '…' : ''}`
         : undefined;
 
     return (
         <div className="min-h-screen bg-[#f8f5ef] px-6 py-12 text-slate-900">
-            <AppHead title={`${program.title}`} description={metaDescription} type="article" />
+            <AppHead
+                title={`${program.title}`}
+                description={metaDescription}
+                type="article"
+            />
             <div className="mx-auto max-w-5xl space-y-8">
+                <Link
+                    href="/"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-[#0f766e] focus-visible:ring-2 focus-visible:ring-[#0f766e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f8f5ef] focus-visible:outline-none"
+                >
+                    <span aria-hidden="true">←</span>
+                    Kembali ke Beranda
+                </Link>
+
                 <section className="rounded-3xl border border-[#eadcc8] bg-white p-8 shadow-sm">
-                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0f766e]">
+                    <p className="text-xs font-semibold tracking-[0.24em] text-[#0f766e] uppercase">
                         Detail Program
                     </p>
-                    <h1 className="mt-3 text-4xl font-semibold">{program.title}</h1>
+                    <h1 className="mt-3 text-4xl font-semibold">
+                        {program.title}
+                    </h1>
                     <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-                        {program.description ?? 'Deskripsi program akan ditambahkan kemudian.'}
+                        {program.description ??
+                            'Deskripsi program akan ditambahkan kemudian.'}
                     </p>
                     <p className="mt-6 text-sm font-semibold text-[#0f766e]">
                         Rp {program.price.toLocaleString('id-ID')}
@@ -51,33 +71,41 @@ export default function PublicProgramDetailShow({ program, ustadz, batches }: Pu
 
                 <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                     <article className="rounded-3xl border border-[#eadcc8] bg-white p-6 shadow-sm">
-                        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0f766e]">
+                        <p className="text-xs font-semibold tracking-[0.24em] text-[#0f766e] uppercase">
                             Ustadz Pengampu
                         </p>
-                        <h2 className="mt-3 text-2xl font-semibold">{ustadz.display_name}</h2>
+                        <h2 className="mt-3 text-2xl font-semibold">
+                            {ustadz.display_name}
+                        </h2>
                         <p className="mt-4 text-sm leading-6 text-slate-600">
-                            {ustadz.bio ?? 'Profil ustadz ini belum memiliki bio publik.'}
+                            {ustadz.bio ??
+                                'Profil ustadz ini belum memiliki bio publik.'}
                         </p>
                     </article>
 
                     <article className="rounded-3xl border border-[#eadcc8] bg-white p-6 shadow-sm">
-                        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0f766e]">
+                        <p className="text-xs font-semibold tracking-[0.24em] text-[#0f766e] uppercase">
                             Langkah Berikutnya
                         </p>
-                        <h2 className="mt-3 text-2xl font-semibold">Pendaftaran akan dibuka berikutnya</h2>
+                        <h2 className="mt-3 text-2xl font-semibold">
+                            Pendaftaran akan dibuka berikutnya
+                        </h2>
                         <p className="mt-4 text-sm leading-6 text-slate-600">
-                            Flow enrollment publik akan disambungkan pada task berikutnya. Untuk saat ini,
-                            gunakan halaman ini sebagai referensi detail program.
+                            Flow enrollment publik akan disambungkan pada task
+                            berikutnya. Untuk saat ini, gunakan halaman ini
+                            sebagai referensi detail program.
                         </p>
                     </article>
                 </section>
 
                 <section className="space-y-4">
                     <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#0f766e]">
+                        <p className="text-xs font-semibold tracking-[0.24em] text-[#0f766e] uppercase">
                             Batch Tersedia
                         </p>
-                        <h2 className="mt-2 text-2xl font-semibold">Ringkasan batch program</h2>
+                        <h2 className="mt-2 text-2xl font-semibold">
+                            Ringkasan batch program
+                        </h2>
                     </div>
 
                     <div className="grid gap-4 md:grid-cols-2">
@@ -86,12 +114,15 @@ export default function PublicProgramDetailShow({ program, ustadz, batches }: Pu
                                 key={batch.id}
                                 className="rounded-3xl border border-[#eadcc8] bg-white p-6 shadow-sm"
                             >
-                                <h3 className="text-xl font-semibold">{batch.name}</h3>
+                                <h3 className="text-xl font-semibold">
+                                    {batch.name}
+                                </h3>
                                 <p className="mt-3 text-sm leading-6 text-slate-600">
                                     Kapasitas {batch.capacity} santri
                                 </p>
                                 <p className="mt-2 text-sm text-slate-500">
-                                    {batch.starts_at ?? '-'} — {batch.ends_at ?? '-'}
+                                    {batch.starts_at ?? '-'} —{' '}
+                                    {batch.ends_at ?? '-'}
                                 </p>
                             </article>
                         ))}
