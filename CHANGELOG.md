@@ -1,3 +1,10 @@
+## [1.21.0](https://github.com/ryansutrisno/suntree/compare/v1.20.0...v1.21.0) (2026-11-03)
+
+
+### ✨ Features
+
+* **programs:** add back-to-home link on public program pages ([6845329](https://github.com/ryansutrisno/suntree/commit/6845329cb175dc78f290ed2643013941e7ddcdf6))
+
 ## [1.20.0](https://github.com/ryansutrisno/suntree/compare/v1.19.0...v1.20.0) (2026-10-06)
 
 
