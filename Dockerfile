@@ -30,11 +30,16 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
+# Production builds keep dev dependencies out. Demo/staging builds pass
+# INSTALL_DEV_DEPS=true so fakerphp/faker (used by the factory-based seeders)
+# is available inside the container.
+ARG INSTALL_DEV_DEPS=false
+
 # composer.lock must be named explicitly: the previous "composer*.json" glob
 # never matched it, so the build resolved dependencies from scratch.
 COPY composer.json composer.lock ./
 RUN composer install \
-    --no-dev \
+    $( [ "$INSTALL_DEV_DEPS" = "true" ] && echo "--dev" || echo "--no-dev" ) \
     --no-interaction \
     --no-plugins \
     --no-scripts \
@@ -128,9 +133,13 @@ COPY --chown=www-data:www-data . .
 COPY --from=node-builder --chown=www-data:www-data /app/public/build ./public/build
 COPY --from=php-builder --chown=www-data:www-data /app/vendor ./vendor
 
+# Must match the ARG in the php-builder stage: pass INSTALL_DEV_DEPS=true to
+# keep dev dependencies in the final image.
+ARG INSTALL_DEV_DEPS=false
+
 # Optimize Composer Autoload
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-RUN composer dump-autoload --no-dev --classmap-authoritative
+RUN composer dump-autoload $( [ "$INSTALL_DEV_DEPS" = "true" ] && echo "--dev" || echo "--no-dev" ) --classmap-authoritative
 
 # Ensure storage and bootstrap/cache directories are writable
 RUN mkdir -p storage/framework/{sessions,views,caches} \
