@@ -30,10 +30,14 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
-# Production builds keep dev dependencies out. Demo/staging builds pass
-# INSTALL_DEV_DEPS=true so fakerphp/faker (used by the factory-based seeders)
-# is available inside the container.
-ARG INSTALL_DEV_DEPS=false
+# The factory-based seeders call fake(), which Laravel only declares when
+# fakerphp/faker (a require-dev package) is installed. This image is also used
+# for demo data seeding, so dev dependencies are installed by default. Pass
+# INSTALL_DEV_DEPS=false to build a slim production-only image.
+ARG INSTALL_DEV_DEPS=true
+
+# Visible in the Dokploy build log, so the effective value is never a guess.
+RUN echo "php-builder INSTALL_DEV_DEPS=${INSTALL_DEV_DEPS}"
 
 # composer.lock must be named explicitly: the previous "composer*.json" glob
 # never matched it, so the build resolved dependencies from scratch.
@@ -133,13 +137,14 @@ COPY --chown=www-data:www-data . .
 COPY --from=node-builder --chown=www-data:www-data /app/public/build ./public/build
 COPY --from=php-builder --chown=www-data:www-data /app/vendor ./vendor
 
-# Must match the ARG in the php-builder stage: pass INSTALL_DEV_DEPS=true to
-# keep dev dependencies in the final image.
-ARG INSTALL_DEV_DEPS=false
+# Must match the ARG in the php-builder stage: pass INSTALL_DEV_DEPS=false to
+# build a slim production-only image.
+ARG INSTALL_DEV_DEPS=true
 
 # Optimize Composer Autoload
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-RUN composer dump-autoload $( [ "$INSTALL_DEV_DEPS" = "true" ] && echo "--dev" || echo "--no-dev" ) --classmap-authoritative
+RUN echo "runtime INSTALL_DEV_DEPS=${INSTALL_DEV_DEPS}" \
+    && composer dump-autoload $( [ "$INSTALL_DEV_DEPS" = "true" ] || echo "--no-dev" ) --classmap-authoritative
 
 # Ensure storage and bootstrap/cache directories are writable
 RUN mkdir -p storage/framework/{sessions,views,caches} \
